@@ -1,0 +1,42 @@
+﻿@model PIMS.Entities.School
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>School</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Church.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Church.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolAddress)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SchoolId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

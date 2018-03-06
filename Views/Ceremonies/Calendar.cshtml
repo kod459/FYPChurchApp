@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p style="margin-top: 100px;"></p>
+
+<div id="calender"></div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var events = [];
+            $.ajax({
+                type: "GET",
+                url: "/home/GetEvents",
+                success: function (data) {
+                    $.each(data, function (i, v) {
+                        events.push({
+                            details: v.TypeOfCeremony,
+                            date: moment(v.DateOfCeremony),
+                            church: v.Church.Name,
+                            parishAdmin: v.Admins.AdministratorName
+                        });
+
+                    })
+                    GenerateCalender(events);
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+
+           
+
+            function GenerateCalender(events) {
+                $('#calender').fullCalendar('destroy');
+                $('#calender').fullCalendar({
+                    contentHeight: 400,
+                    defaultDate: new Date(),
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay,agenda'
+                    },
+                    timeFormat: 'HH:mm',
+                    eventLimit: true,
+                    eventColor: '#378006',
+                    events: events,
+                    ceremonies: ceremonies,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        $('#myModal #details').text(calEvent.details);
+                        var $details = $('<div/>');
+
+                        $details.append($('<p/>').html('<b>Date of Ceremony : </b>' + calEvent.date.format("DD-MMM-YYYY HH:mm a")));
+                        if (calEvent.end != null) {
+                            $details.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                        }
+                        $details.append($('<p/>').html('<b>Ceremony : </b>' + calEvent.ceremony));
+                        $details.append($('<p/>').html('<b>Church : </b>' + calEvent.church));
+                        $details.append($('<p/>').html('<b>Parish Admin : </b>' + calEvent.parishAdmin));
+                        
+                        $('#myModal #pDetails').empty().html($details);
+
+                        $('#myModal').modal();
+                    }
+                })
+            }
+        })
+    </script>
+}
+
+
+
+

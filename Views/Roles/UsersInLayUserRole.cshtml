@@ -1,0 +1,83 @@
+﻿@model IEnumerable<PIMS.Entities.UserAndRoles>
+
+
+@{
+    ViewBag.Title = "List Of Lay People";
+}
+
+<h2>List of Users</h2>
+    @using (Html.BeginForm("SearchUserInUserRoles", "Roles", FormMethod.Get))
+{
+    <div>
+        <fieldset>
+            <legend>Lay user</legend>
+            <table style="border:none">
+                <tr>
+                <td><label class="editor-label">Find by User Name:</label></td>
+                <td id="searchBar1">@Html.TextBox("SearchStringName")</td>
+            </tr>
+        </table>
+            <div>
+                    <input type="submit" value="Search" />
+                    <input type="button" value="Clear Search" id="backL" />
+                    @if (TempData["Error"] != null) {
+                        <div style="color:red">@TempData["Error"]</div>     
+                    }
+            </div>
+    
+            </fieldset>
+        </div>
+}
+
+<table class ="tftable">
+    @if ((Model != null) && (TempData["Error"] == null))
+    {
+    <tr>
+        @if(Request.IsAuthenticated && User.IsInRole("Administrator"))
+        {
+       <th>
+            View Details and Add Role
+        </th>
+        }
+       <th>
+            Username
+        </th>
+        </tr>
+            foreach (var item in Model)
+            {
+            <tr>
+                @if(Request.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                <td>
+                   @Html.ActionLink(" View Details and Add Role", "UserDetails", new { id = item.UserId }) 
+                </td>
+                }
+               <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+               </td>
+            </tr>
+    }
+    }
+        </table>
+
+      <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+<script>
+    //$(document).ready(function () {
+    //    $('#clearSearchButton').click(function () {
+    //        $('#resultsTable').hide();
+    //    });
+    //});
+
+    //$(document).ready(function () {
+    //    $('#clearSearchButton').click(function () {
+    //        $('#resultsTable').hide();
+    //        $('#searchBar1').value = "";
+    //        $('#searchBar2').value = "";
+    //    });
+    //});
+
+    function RedirectToDetails(id) {
+        window.location.assign("Details/" + id)
+    }
+</script>

@@ -1,0 +1,192 @@
+﻿@model IEnumerable<PIMS.Entities.PhotocopierDetails>
+@{
+    ViewBag.Title = "PhotocopiersAddedBetweenDates";
+}
+
+<h2>Photocopiers Added Between Dates</h2>
+
+    @*@using (Html.BeginForm("ExportPhotocopiersAddedBetweenDates", "Reports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+         {
+        <table>
+         <tr><td></td><td><input  type="submit" name="Export" id="Export" value="Export"/></td></tr>
+        
+        </table>
+         }*@
+
+
+
+@using (Html.BeginForm("PhotocopiersAddedBetweenDates", "Reports", FormMethod.Get))
+{
+    <div>
+        <fieldset>
+            <legend>Photocopier</legend>
+            <table style="border:none">
+                <tr>
+                <td><label class="editor-label">Start Date:</label></td>
+                <td>@Html.TextBox("StartDate")</td>
+                    @*<td>@Html.TextBox("StartDate"), new { @class = "date-picker" })</td>*@
+            </tr>
+                <tr>
+                    <td><label class="editor-label">End Date:</label></td>
+                <td>@Html.TextBox("EndDate")</td>
+                </tr>
+                <tr>
+                    <td><label class="editor-label">Supplier Company Name</label></td>
+                    <td>@Html.TextBox("Company")</td>
+                </tr>
+            </table>
+                <div>
+                    <input type="submit" value="Search" id="inputButton"/>
+                    @if (TempData["Error"] != null)
+                    {
+                        <div style="color:red">@TempData["Error"]</div>     
+                    }
+                    
+            </div>
+    
+            </fieldset>
+        </div>
+}
+
+
+
+
+@if (Model != null)
+{
+    using (Html.BeginForm("ExportPhotocopiersAddedBetweenDates", "Reports", FormMethod.Get))
+    {
+    <div>
+        <fieldset>
+            <legend>Photocopier</legend>
+            <table style="border:none">
+                <tr>
+                <td><label class="editor-label">Start Date:</label></td>
+                <td>@Html.TextBox("StartDate", "", new { @readonly = "readonly" })</td>
+                    @*<td>@Html.TextBox("StartDate"), new { @class = "date-picker" })</td>*@
+            </tr>
+                <tr>
+                    <td><label class="editor-label">End Date:</label></td>
+                <td>@Html.TextBox("EndDate", "", new { @readonly = "readonly" })</td>
+                </tr>
+                <tr>
+                    <td><label class="editor-label">Supplier Company Name</label></td>
+                    <td>@Html.TextBox("Company","", new { @readonly = "readonly" })</td>
+                </tr>
+            </table>
+               
+            <div>
+                <input  type="submit" formaction ="ExportPhotocopiersAddedBetweenDates"  value ="Export" />
+            </div>
+    
+            </fieldset>
+        </div>
+    }
+    <div><b>Total Number of Photocopiers Found: </b>@Model.Count() </div>
+}
+<table id="resultsTable" class ="tftable">
+    @if ((Model != null) && (TempData["Error"] == null))
+    {
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AreaLocation) 
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.CostCentre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastReading) 
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.Make) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress) 
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfSupply)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Company) 
+        </th>
+        
+    </tr>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostCentre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastReading)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfSupply)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+@*############################  DatePicker Scripts for IE Web browser  ###########################*@
+<!-- jQuery UI CSS Reference -->
+<script type="text/javascript">
+    var datefield=document.createElement("input")
+    datefield.setAttribute("type", "date")
+    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n') 
+    }
+</script>
+
+    <!-- Code to wire up DatePicker -->
+<script>
+if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
+    jQuery(function ($) { //on document.ready
+            
+        var d = new Date();
+        //var datestring = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+        $('#StartDate').datepicker({ dateFormat: 'd/m/yy', maxDate: 0 }).val();
+        $('#EndDate').datepicker({ dateFormat: 'd/m/yy', maxDate: 0 }).val();
+        $('#StartDate1').datepicker({ dateFormat: 'd/m/yy', maxDate: 0 }).val();
+        $('#EndDate1').datepicker({ dateFormat: 'd/m/yy', maxDate: 0 }).val();
+    })
+}
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#inputButton').click(function () {
+            $('#resultsTable').show();
+        });
+
+
+    });
+
+</script>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PIMS.Entities.PhotocopierDetails>
+@{
+    ViewBag.Title = "PhotocopiersWithoutLastReading";
+}
+
+<h2>PhotocopiersWithoutLastReading</h2>
+<fieldset>
+    <legend>Photocopiers Without Last Reading</legend>
+    <div>
+        <!--additional summary is displayed here-->
+        <div><b>Total Number of Photocopiers Without Last Reading: </b>@Model.Count() </div>
+    </div>
+
+    @using (Html.BeginForm("ExportPhotocopiersWithoutLastReading", "Reports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+         {
+            <div>
+            <input  type="submit" name="Export" id="Export" value="Export"/>
+        
+            </div>
+         }
+    <table id="resultsTable" class="tftable">
+        @if ((Model != null) && (TempData["Error"] == null))
+        {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SerialNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AreaLocation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CostCentre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastReading)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Make)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfSupply)
+                </th>
+            </tr>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AreaLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CostCentre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastReading)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Make)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfSupply)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</fieldset>
+
+ <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+

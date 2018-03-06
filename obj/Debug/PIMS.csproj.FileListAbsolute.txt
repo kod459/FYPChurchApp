@@ -1,0 +1,403 @@
+C:\SCS_Project\PIMS\obj\Debug\PIMS.csproj.App.config
+C:\SCS_Project\PIMS\bin\PhotocopierInformationManagementServices.dll.config
+C:\SCS_Project\PIMS\bin\PhotocopierInformationManagementServices.dll
+C:\SCS_Project\PIMS\bin\PhotocopierInformationManagementServices.pdb
+C:\SCS_Project\PIMS\bin\ClosedXML.dll
+C:\SCS_Project\PIMS\bin\DocumentFormat.OpenXml.dll
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.AspNet.dll
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.Core.dll
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OAuth.dll
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OpenId.dll
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\SCS_Project\PIMS\bin\EntityFramework.dll
+C:\SCS_Project\PIMS\bin\EntityFramework.SqlServer.dll
+C:\SCS_Project\PIMS\bin\Microsoft.Web.Infrastructure.dll
+C:\SCS_Project\PIMS\bin\Microsoft.Web.WebPages.OAuth.dll
+C:\SCS_Project\PIMS\bin\Newtonsoft.Json.dll
+C:\SCS_Project\PIMS\bin\System.Linq.Dynamic.dll
+C:\SCS_Project\PIMS\bin\System.Net.Http.Extensions.dll
+C:\SCS_Project\PIMS\bin\System.Net.Http.Formatting.dll
+C:\SCS_Project\PIMS\bin\System.Net.Http.Primitives.dll
+C:\SCS_Project\PIMS\bin\System.Spatial.dll
+C:\SCS_Project\PIMS\bin\System.Web.Helpers.dll
+C:\SCS_Project\PIMS\bin\System.Web.Http.dll
+C:\SCS_Project\PIMS\bin\System.Web.Http.OData.dll
+C:\SCS_Project\PIMS\bin\System.Web.Http.WebHost.dll
+C:\SCS_Project\PIMS\bin\System.Web.Mvc.dll
+C:\SCS_Project\PIMS\bin\System.Web.Optimization.dll
+C:\SCS_Project\PIMS\bin\System.Web.Razor.dll
+C:\SCS_Project\PIMS\bin\System.Web.WebPages.Deployment.dll
+C:\SCS_Project\PIMS\bin\System.Web.WebPages.dll
+C:\SCS_Project\PIMS\bin\System.Web.WebPages.Razor.dll
+C:\SCS_Project\PIMS\bin\WebGrease.dll
+C:\SCS_Project\PIMS\bin\WebMatrix.Data.dll
+C:\SCS_Project\PIMS\bin\WebMatrix.WebData.dll
+C:\SCS_Project\PIMS\bin\Org.Mentalis.Security.Cryptography.dll
+C:\SCS_Project\PIMS\bin\Mono.Math.dll
+C:\SCS_Project\PIMS\bin\ClosedXML.pdb
+C:\SCS_Project\PIMS\bin\ClosedXML.xml
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.AspNet.xml
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.Core.xml
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OAuth.xml
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OpenId.xml
+C:\SCS_Project\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\SCS_Project\PIMS\bin\EntityFramework.xml
+C:\SCS_Project\PIMS\bin\EntityFramework.SqlServer.xml
+C:\SCS_Project\PIMS\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\SCS_Project\PIMS\bin\Newtonsoft.Json.xml
+C:\SCS_Project\PIMS\bin\System.Net.Http.Extensions.xml
+C:\SCS_Project\PIMS\bin\System.Net.Http.Formatting.xml
+C:\SCS_Project\PIMS\bin\System.Net.Http.Primitives.xml
+C:\SCS_Project\PIMS\bin\System.Spatial.xml
+C:\SCS_Project\PIMS\bin\System.Web.Helpers.xml
+C:\SCS_Project\PIMS\bin\System.Web.Http.xml
+C:\SCS_Project\PIMS\bin\System.Web.Http.OData.xml
+C:\SCS_Project\PIMS\bin\System.Web.Http.WebHost.xml
+C:\SCS_Project\PIMS\bin\System.Web.Mvc.xml
+C:\SCS_Project\PIMS\bin\System.Web.Optimization.xml
+C:\SCS_Project\PIMS\bin\System.Web.Razor.xml
+C:\SCS_Project\PIMS\bin\System.Web.WebPages.xml
+C:\SCS_Project\PIMS\bin\System.Web.WebPages.Deployment.xml
+C:\SCS_Project\PIMS\bin\System.Web.WebPages.Razor.xml
+C:\SCS_Project\PIMS\bin\WebMatrix.Data.xml
+C:\SCS_Project\PIMS\bin\WebMatrix.WebData.xml
+C:\SCS_Project\PIMS\bin\Org.Mentalis.Security.Cryptography.xml
+C:\SCS_Project\PIMS\bin\Mono.Math.xml
+C:\SCS_Project\PIMS\bin\de\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\es\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\fr\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\it\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\ja\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\ko\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\ru\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\zh-Hans\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\bin\zh-Hant\System.Spatial.resources.dll
+C:\SCS_Project\PIMS\obj\Debug\PhotocopierInformationManagementServices.dll
+C:\SCS_Project\PIMS\obj\Debug\PhotocopierInformationManagementServices.pdb
+C:\SCS_Project\PIMS\obj\Debug\PIMS.csprojResolveAssemblyReference.cache
+C:\College Stuff\PIMS\obj\Debug\PIMS.csproj.App.config
+C:\College Stuff\PIMS\obj\Debug\PIMS.csprojResolveAssemblyReference.cache
+C:\College Stuff\PIMS\obj\Debug\PIMS.Migrations.testingagain.resources
+C:\College Stuff\PIMS\obj\Debug\PIMS.Migrations.testingagain1.resources
+C:\College Stuff\PIMS\obj\Debug\PIMS.csproj.GenerateResource.Cache
+C:\College Stuff\PIMS\obj\Debug\PIMS.csproj.CoreCompileInputs.cache
+C:\College Stuff\PIMS\bin\client_secret.json
+C:\College Stuff\PIMS\bin\PhotocopierInformationManagementServices.dll.config
+C:\College Stuff\PIMS\bin\PhotocopierInformationManagementServices.dll
+C:\College Stuff\PIMS\bin\PhotocopierInformationManagementServices.pdb
+C:\College Stuff\PIMS\bin\ClosedXML.dll
+C:\College Stuff\PIMS\bin\DocumentFormat.OpenXml.dll
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.AspNet.dll
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.Core.dll
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OAuth.dll
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OpenId.dll
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\College Stuff\PIMS\bin\EntityFramework.dll
+C:\College Stuff\PIMS\bin\EntityFramework.SqlServer.dll
+C:\College Stuff\PIMS\bin\Google.Apis.Analytics.v3.dll
+C:\College Stuff\PIMS\bin\Google.Apis.Auth.dll
+C:\College Stuff\PIMS\bin\Google.Apis.Auth.PlatformServices.dll
+C:\College Stuff\PIMS\bin\Google.Apis.Calendar.v3.dll
+C:\College Stuff\PIMS\bin\Google.Apis.Core.dll
+C:\College Stuff\PIMS\bin\Google.Apis.dll
+C:\College Stuff\PIMS\bin\Google.Apis.PlatformServices.dll
+C:\College Stuff\PIMS\bin\Microsoft.AspNet.Identity.Core.dll
+C:\College Stuff\PIMS\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\College Stuff\PIMS\bin\Microsoft.Owin.dll
+C:\College Stuff\PIMS\bin\Microsoft.Web.Infrastructure.dll
+C:\College Stuff\PIMS\bin\Microsoft.Web.WebPages.OAuth.dll
+C:\College Stuff\PIMS\bin\Newtonsoft.Json.dll
+C:\College Stuff\PIMS\bin\Owin.dll
+C:\College Stuff\PIMS\bin\System.Linq.Dynamic.dll
+C:\College Stuff\PIMS\bin\System.Net.Http.Extensions.dll
+C:\College Stuff\PIMS\bin\System.Net.Http.Formatting.dll
+C:\College Stuff\PIMS\bin\System.Net.Http.Primitives.dll
+C:\College Stuff\PIMS\bin\System.Spatial.dll
+C:\College Stuff\PIMS\bin\System.Web.Helpers.dll
+C:\College Stuff\PIMS\bin\System.Web.Http.dll
+C:\College Stuff\PIMS\bin\System.Web.Http.OData.dll
+C:\College Stuff\PIMS\bin\System.Web.Http.WebHost.dll
+C:\College Stuff\PIMS\bin\System.Web.Mvc.dll
+C:\College Stuff\PIMS\bin\System.Web.Optimization.dll
+C:\College Stuff\PIMS\bin\System.Web.Razor.dll
+C:\College Stuff\PIMS\bin\System.Web.WebPages.Deployment.dll
+C:\College Stuff\PIMS\bin\System.Web.WebPages.dll
+C:\College Stuff\PIMS\bin\System.Web.WebPages.Razor.dll
+C:\College Stuff\PIMS\bin\WebGrease.dll
+C:\College Stuff\PIMS\bin\WebMatrix.Data.dll
+C:\College Stuff\PIMS\bin\WebMatrix.WebData.dll
+C:\College Stuff\PIMS\bin\Org.Mentalis.Security.Cryptography.dll
+C:\College Stuff\PIMS\bin\Mono.Math.dll
+C:\College Stuff\PIMS\bin\ClosedXML.pdb
+C:\College Stuff\PIMS\bin\ClosedXML.xml
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.AspNet.xml
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.Core.xml
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OAuth.xml
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OpenId.xml
+C:\College Stuff\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\College Stuff\PIMS\bin\EntityFramework.xml
+C:\College Stuff\PIMS\bin\EntityFramework.SqlServer.xml
+C:\College Stuff\PIMS\bin\Google.Apis.xml
+C:\College Stuff\PIMS\bin\Google.Apis.Analytics.v3.xml
+C:\College Stuff\PIMS\bin\Google.Apis.Auth.xml
+C:\College Stuff\PIMS\bin\Google.Apis.Calendar.v3.xml
+C:\College Stuff\PIMS\bin\Google.Apis.Core.xml
+C:\College Stuff\PIMS\bin\Microsoft.AspNet.Identity.Core.xml
+C:\College Stuff\PIMS\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\College Stuff\PIMS\bin\Microsoft.Owin.xml
+C:\College Stuff\PIMS\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\College Stuff\PIMS\bin\Newtonsoft.Json.xml
+C:\College Stuff\PIMS\bin\System.Net.Http.Extensions.xml
+C:\College Stuff\PIMS\bin\System.Net.Http.Formatting.xml
+C:\College Stuff\PIMS\bin\System.Net.Http.Primitives.xml
+C:\College Stuff\PIMS\bin\System.Spatial.xml
+C:\College Stuff\PIMS\bin\System.Web.Helpers.xml
+C:\College Stuff\PIMS\bin\System.Web.Http.xml
+C:\College Stuff\PIMS\bin\System.Web.Http.OData.xml
+C:\College Stuff\PIMS\bin\System.Web.Http.WebHost.xml
+C:\College Stuff\PIMS\bin\System.Web.Mvc.xml
+C:\College Stuff\PIMS\bin\System.Web.Optimization.xml
+C:\College Stuff\PIMS\bin\System.Web.Razor.xml
+C:\College Stuff\PIMS\bin\System.Web.WebPages.xml
+C:\College Stuff\PIMS\bin\System.Web.WebPages.Deployment.xml
+C:\College Stuff\PIMS\bin\System.Web.WebPages.Razor.xml
+C:\College Stuff\PIMS\bin\WebMatrix.Data.xml
+C:\College Stuff\PIMS\bin\WebMatrix.WebData.xml
+C:\College Stuff\PIMS\bin\Org.Mentalis.Security.Cryptography.xml
+C:\College Stuff\PIMS\bin\Mono.Math.xml
+C:\College Stuff\PIMS\bin\de\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\es\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\fr\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\it\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\ja\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\ko\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\ru\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\zh-Hans\System.Spatial.resources.dll
+C:\College Stuff\PIMS\bin\zh-Hant\System.Spatial.resources.dll
+C:\College Stuff\PIMS\obj\Debug\PhotocopierInformationManagementServices.dll
+C:\College Stuff\PIMS\obj\Debug\PhotocopierInformationManagementServices.pdb
+C:\College Stuff\PIMS\obj\Debug\PIMS.Migrations.addAppointments.resources
+C:\College Stuff\PIMS\obj\Debug\PIMS.Migrations.fixthis.resources
+C:\College Stuff\PIMS\obj\Debug\PIMS.Migrations.addedTimeToAppointment.resources
+C:\CollegeStuff\PIMS\bin\client_secret.json
+C:\CollegeStuff\PIMS\bin\PhotocopierInformationManagementServices.dll.config
+C:\CollegeStuff\PIMS\bin\PhotocopierInformationManagementServices.dll
+C:\CollegeStuff\PIMS\bin\PhotocopierInformationManagementServices.pdb
+C:\CollegeStuff\PIMS\bin\ClosedXML.dll
+C:\CollegeStuff\PIMS\bin\DocumentFormat.OpenXml.dll
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.AspNet.dll
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.Core.dll
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OAuth.dll
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OpenId.dll
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\CollegeStuff\PIMS\bin\EntityFramework.dll
+C:\CollegeStuff\PIMS\bin\EntityFramework.SqlServer.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.Analytics.v3.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.Auth.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.Auth.PlatformServices.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.Calendar.v3.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.Core.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.Drive.v3.dll
+C:\CollegeStuff\PIMS\bin\Google.Apis.PlatformServices.dll
+C:\CollegeStuff\PIMS\bin\Microsoft.AspNet.Identity.Core.dll
+C:\CollegeStuff\PIMS\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\CollegeStuff\PIMS\bin\Microsoft.Owin.dll
+C:\CollegeStuff\PIMS\bin\Microsoft.Web.Infrastructure.dll
+C:\CollegeStuff\PIMS\bin\Microsoft.Web.WebPages.OAuth.dll
+C:\CollegeStuff\PIMS\bin\Mvc.Mailer.dll
+C:\CollegeStuff\PIMS\bin\Newtonsoft.Json.dll
+C:\CollegeStuff\PIMS\bin\Owin.dll
+C:\CollegeStuff\PIMS\bin\System.Linq.Dynamic.dll
+C:\CollegeStuff\PIMS\bin\System.Net.Http.Extensions.dll
+C:\CollegeStuff\PIMS\bin\System.Net.Http.Formatting.dll
+C:\CollegeStuff\PIMS\bin\System.Net.Http.Primitives.dll
+C:\CollegeStuff\PIMS\bin\System.Spatial.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Helpers.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Http.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Http.OData.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Http.WebHost.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Mvc.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Optimization.dll
+C:\CollegeStuff\PIMS\bin\System.Web.Razor.dll
+C:\CollegeStuff\PIMS\bin\System.Web.WebPages.Deployment.dll
+C:\CollegeStuff\PIMS\bin\System.Web.WebPages.dll
+C:\CollegeStuff\PIMS\bin\System.Web.WebPages.Razor.dll
+C:\CollegeStuff\PIMS\bin\WebGrease.dll
+C:\CollegeStuff\PIMS\bin\WebMatrix.Data.dll
+C:\CollegeStuff\PIMS\bin\WebMatrix.WebData.dll
+C:\CollegeStuff\PIMS\bin\Org.Mentalis.Security.Cryptography.dll
+C:\CollegeStuff\PIMS\bin\Mono.Math.dll
+C:\CollegeStuff\PIMS\bin\ClosedXML.pdb
+C:\CollegeStuff\PIMS\bin\ClosedXML.xml
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.AspNet.xml
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.Core.xml
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OAuth.xml
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OpenId.xml
+C:\CollegeStuff\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\CollegeStuff\PIMS\bin\EntityFramework.xml
+C:\CollegeStuff\PIMS\bin\EntityFramework.SqlServer.xml
+C:\CollegeStuff\PIMS\bin\Google.Apis.xml
+C:\CollegeStuff\PIMS\bin\Google.Apis.Analytics.v3.xml
+C:\CollegeStuff\PIMS\bin\Google.Apis.Auth.xml
+C:\CollegeStuff\PIMS\bin\Google.Apis.Calendar.v3.xml
+C:\CollegeStuff\PIMS\bin\Google.Apis.Core.xml
+C:\CollegeStuff\PIMS\bin\Google.Apis.Drive.v3.xml
+C:\CollegeStuff\PIMS\bin\Microsoft.AspNet.Identity.Core.xml
+C:\CollegeStuff\PIMS\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\CollegeStuff\PIMS\bin\Microsoft.Owin.xml
+C:\CollegeStuff\PIMS\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\CollegeStuff\PIMS\bin\Newtonsoft.Json.xml
+C:\CollegeStuff\PIMS\bin\System.Net.Http.Extensions.xml
+C:\CollegeStuff\PIMS\bin\System.Net.Http.Formatting.xml
+C:\CollegeStuff\PIMS\bin\System.Net.Http.Primitives.xml
+C:\CollegeStuff\PIMS\bin\System.Spatial.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Helpers.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Http.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Http.OData.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Http.WebHost.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Mvc.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Optimization.xml
+C:\CollegeStuff\PIMS\bin\System.Web.Razor.xml
+C:\CollegeStuff\PIMS\bin\System.Web.WebPages.xml
+C:\CollegeStuff\PIMS\bin\System.Web.WebPages.Deployment.xml
+C:\CollegeStuff\PIMS\bin\System.Web.WebPages.Razor.xml
+C:\CollegeStuff\PIMS\bin\WebMatrix.Data.xml
+C:\CollegeStuff\PIMS\bin\WebMatrix.WebData.xml
+C:\CollegeStuff\PIMS\bin\Org.Mentalis.Security.Cryptography.xml
+C:\CollegeStuff\PIMS\bin\Mono.Math.xml
+C:\CollegeStuff\PIMS\bin\de\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\es\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\fr\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\it\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\ja\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\ko\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\ru\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\zh-Hans\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\bin\zh-Hant\System.Spatial.resources.dll
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.csproj.App.config
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.Migrations.tryingfix.resources
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.Migrations.tryingfix1.resources
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.Migrations.seeThis.resources
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.Migrations.plzWork.resources
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.Migrations.usernameToVolunteer.resources
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.csproj.GenerateResource.Cache
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.csproj.CoreCompileInputs.cache
+C:\CollegeStuff\PIMS\obj\Debug\PhotocopierInformationManagementServices.dll
+C:\CollegeStuff\PIMS\obj\Debug\PhotocopierInformationManagementServices.pdb
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.csprojResolveAssemblyReference.cache
+C:\CollegeStuff\PIMS\obj\Debug\PIMS.Migrations.willitwork.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\client_secret.json
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\PhotocopierInformationManagementServices.dll.config
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\PhotocopierInformationManagementServices.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\PhotocopierInformationManagementServices.pdb
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\ClosedXML.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DocumentFormat.OpenXml.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.AspNet.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.Core.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OAuth.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OpenId.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\EntityFramework.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\EntityFramework.SqlServer.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Analytics.v3.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Auth.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Auth.PlatformServices.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Calendar.v3.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Core.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Drive.v3.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.PlatformServices.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.Owin.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.Web.WebPages.OAuth.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Mvc.Mailer.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Newtonsoft.Json.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Owin.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Linq.Dynamic.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Net.Http.Extensions.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Net.Http.Formatting.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Net.Http.Primitives.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Spatial.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Helpers.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Http.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Http.OData.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Http.WebHost.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Mvc.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Optimization.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Razor.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.WebPages.Deployment.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.WebPages.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.WebPages.Razor.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\WebGrease.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\WebMatrix.Data.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\WebMatrix.WebData.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Org.Mentalis.Security.Cryptography.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Mono.Math.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\ClosedXML.pdb
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\ClosedXML.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.AspNet.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.Core.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OAuth.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OpenId.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\EntityFramework.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\EntityFramework.SqlServer.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Analytics.v3.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Auth.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Calendar.v3.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Core.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Google.Apis.Drive.v3.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.Owin.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Newtonsoft.Json.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Net.Http.Extensions.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Net.Http.Formatting.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Net.Http.Primitives.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Spatial.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Helpers.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Http.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Http.OData.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Http.WebHost.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Mvc.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Optimization.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.Razor.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.WebPages.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.WebPages.Deployment.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\System.Web.WebPages.Razor.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\WebMatrix.Data.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\WebMatrix.WebData.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Org.Mentalis.Security.Cryptography.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\Mono.Math.xml
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\de\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\es\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\fr\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\it\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\ja\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\ko\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\ru\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\zh-Hans\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.csproj.App.config
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.csproj.CoreCompileInputs.cache
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PhotocopierInformationManagementServices.dll
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PhotocopierInformationManagementServices.pdb
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.csprojResolveAssemblyReference.cache
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.fixingTings.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.csproj.GenerateResource.Cache
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.fixingTings1.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.fixingTingsplllllzzzz.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.plzwork.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.plzwork1.resources

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PIMS.Entities.Ceremony>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List Of Ceremonies</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="tftable">
+    <tr>
+        <th>
+            @Html.DisplayName("Ceremony Type")
+        </th>
+        <th>
+            @Html.DisplayName("Church Name")
+        </th>
+        <th>
+            @Html.DisplayName("Parish Admin")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfCeremony)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Church.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CeremonyId }) |
+            @Html.ActionLink("View Details", "Details", new { id=item.CeremonyId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CeremonyId })
+        </td>
+    </tr>
+}
+
+</table>

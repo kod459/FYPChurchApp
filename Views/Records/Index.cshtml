@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PIMS.Entities.Record>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Records</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="tftable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.AdministratorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Document)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Document)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RecordId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RecordId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RecordId })
+        </td>
+    </tr>
+}
+
+</table>

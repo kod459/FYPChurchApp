@@ -1,0 +1,57 @@
+﻿@model PIMS.Entities.Administration
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Administrator: @Html.DisplayFor(model => model.AdministratorName)</h2>
+
+<table class="tftable">
+    <tr>
+        <th>
+            @Html.DisplayName("Admin Name")
+        </th>
+        <th>
+            @Html.DisplayName("Admin Username")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayName("Church Name")
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.AdministratorName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AdminUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AdminChurch.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=Model.AdministrationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=Model.AdministrationId })
+        </td>
+    </tr>
+
+</table>

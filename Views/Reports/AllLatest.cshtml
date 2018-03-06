@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PIMS.Entities.MeterReading>
+@{
+    ViewBag.Title = "All Latest";
+}
+
+<h2>AllLatest</h2>
+<fieldset>
+    <legend>All Readings</legend>
+
+    <table>
+        @if (Model != null)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.photocopierDetails.SerialNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reading)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfReading)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhotocopierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MeterReadingId)
+                </th>
+            </tr>
+
+            foreach (var item in Model){
+                if (item != null)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.photocopierDetails.SerialNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Reading)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfReading)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhotocopierId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MeterReadingId)
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table> 
+            
+
+</fieldset>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>

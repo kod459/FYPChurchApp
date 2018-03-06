@@ -1,0 +1,149 @@
+﻿@model PIMS.Entities.Appointments
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Appointments</h4>
+        <hr />
+        @Html.HiddenFor(model => model.AppointmentId)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DetailsOfAppointment, "Appointment Details", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DetailsOfAppointment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DetailsOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoomType, "Room Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RoomType", ViewBag.Rooms as SelectList, new { @class = "form-data" })
+                @Html.ValidationMessageFor(model => model.RoomType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfAppointment, "Date of Appointment", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfAppointment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Confirmed, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Confirmed)
+                        @Html.ValidationMessageFor(model => model.Confirmed, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameOfApplicant, "Name of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfApplicant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicantEmail, "Email of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicantEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ApplicantEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicantPhoneNumber, "Phone Number of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicantPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ApplicantPhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Administrator")
+            <div class="col-md-10">
+                @Html.DropDownList("AdministrationId", ViewBag.AdminId as SelectList, new { @class = "form-data" })
+                @Html.ValidationMessageFor(model => model.AdministrationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Church Name")
+            <div class="col-md-10">
+                @Html.DropDownList("ChurchId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ChurchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update Appointment" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@*############################  DatePicker Scripts for IE Web browser  ###########################
+    <div>
+        <!-- jQuery UI CSS Reference -->
+        <script type="text/javascript">
+            var datefield=document.createElement("input")
+            datefield.setAttribute("type", "date")
+            if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+                document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+                document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+                document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+            }
+        </script>
+        <!-- Code to wire up DatePicker -->
+        <script>
+        if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
+            jQuery(function ($) { //on document.ready
+                $('#DateOfAppointment').datepicker({ dateFormat: 'd/m/yy', minDate: 0}).val();
+            })
+            }
+        </script>
+*@
+
+
+<script src="https://xdsoft.net/cache/903cd11f82fad90c9e8c4c45801eb6f2.js"></script>
+
+<script src="https://xdsoft.net/scripts/datetimepicker/build/jquery.datetimepicker.min.js"></script>
+
+<link href="https://xdsoft.net/scripts/datetimepicker/build/jquery.datetimepicker.min.css" rel="stylesheet" />
+
+ <div>   
+
+    <script>
+        $('#DateOfAppointment').datetimepicker({
+            format: 'd/m/Y H:i',
+            minDate: 0,
+            inline: false,
+            allowTimes: ['9:00', '9:30', '11:30', '12:00', '12:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
+        });
+    </script>
+
+</div>

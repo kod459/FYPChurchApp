@@ -1,0 +1,149 @@
+﻿
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <!--<title>@ViewBag.Title - My ASP.NET MVC Application</title> -->
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="center">
+                <b><p class="site-title">Our Church </p> </b>
+            </div>
+
+            <p class="site-title">
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    @*@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("User") || HttpContext.Current.User.IsInRole("SuperUser")))
+                                {
+                                    <nav>
+                                        <ul id="menu">
+
+                                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                                                <div class="dropdown">
+                                                    <li>@Html.DisplayName("Reports Associated with PIMS")</li>
+
+                                                    <div class="dropdown-content" style="left:0;">
+                                                        <ul>@Html.ActionLink("1. Photocopiers Over 5 Years Old", "PhotocopierOver5YearsOld", "Reports")</ul>
+                                                        <ul>@Html.ActionLink("2. Photocopiers Added Between Dates", "PhotocopiersAddedBetweenDates", "Reports")</ul>
+                                                        <ul>@Html.ActionLink("3. Photocopiers with unregistered Serial no.", "PhotocopiersWithoutSerialNo", "Reports")</ul>
+                                                        <ul>@Html.ActionLink("4. Photocopiers That Are Obsolete.", "PhotocopiersThatAreObsolete", "Reports")</ul>
+                                                        <ul>@Html.ActionLink("5. Photocopiers Without Last Reading.", "PhotocopiersWithoutLastReading", "Reports")</ul>
+                                                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperUser"))
+                                                        {
+                                                            <ul>@Html.ActionLink("6. Generate report For Suppliers", "ReportForSupplier", "Reports")</ul>
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                            @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                                            {
+                                                <div class="dropdown">
+
+                                                    <li>@Html.DisplayName("Photocopier Details Maintenance")</li>
+                                                    <div class="dropdown-content" style="left:0">
+                                                        <ul>@Html.ActionLink("View/Edit Photocopier Details", "SearchPhotocopiers", "PhotocopierDetails")</ul>
+                                                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperUser"))
+                                                        {
+                                                            <ul>@Html.ActionLink("Add a New Photocopier", "Create", "PhotocopierDetails")</ul>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                            <li>@Html.ActionLink("Change Password", "Manage", "Account")</li>
+                                            @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                                            {
+                                                <div class="dropdown">
+                                                    <li>@Html.DisplayName("Admin")</li>
+
+                                                    <div class="dropdown-content" style="right:0;">
+
+                                                        <ul>@Html.ActionLink("Registered Users Not yet Authorised", "UsersNoRoles", "Roles")</ul>
+                                                        <ul>@Html.ActionLink("List All Authorised Users", "UsersInUserRole", "Roles")</ul>
+                                                        <ul>@Html.ActionLink("List All Administrator Users", "UsersInAdmin", "Roles")</ul>
+                                                        @if (HttpContext.Current.User.IsInRole("SuperUser"))
+                                                        {
+                                                            <ul>@Html.ActionLink("List all SuperUsers", "UsersInSuperUser", "Roles")</ul>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </ul>
+                                    </nav>
+                                }
+                            </div>
+                        </div>*@
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+
+                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Parish Admin") || Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Priest") || Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                                            {
+                                                <div class="dropdown">
+                                                    <li>@Html.DisplayName("Appointments")</li>
+
+                                                    <div class="dropdown-content" style="right:0;">
+
+                                                        <ul>@Html.ActionLink("Create Appointment", "Create", "Appointments")</ul>
+                                                        <ul>@Html.ActionLink("Create Ceremony", "CreateCeremony", "Appointments")</ul>
+                                                        <ul>@Html.ActionLink("List all Appointments", "Index", "Appointments")</ul>
+                                                        <ul>@Html.ActionLink("List all Ceremonies", "IndexOfCeremonies", "Appointments")</ul>
+                                                        <ul>@Html.ActionLink("Calendar", "Calendar", "Appointments")</ul>
+                                                    </div>
+                                                </div>
+                        }
+                        else if(Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Volunteer"))
+                        {
+                            <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
+                            <li>@Html.ActionLink("Volunteers", "VolunteerHub", "Volunteers")</li>
+                        }
+                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                        {
+                            <li>@Html.ActionLink("Administrations", "Index", "Administrations")</li>
+                            <li>@Html.ActionLink("Volunteers", "Index", "Volunteers")</li>
+                            <li>@Html.ActionLink("Records", "Index", "Records")</li>
+                            @*<li>@Html.ActionLink("Donations", "Index", "Donations")</li>*@
+                            <li>@Html.ActionLink("Priest Leave", "Index", "PriestLeaves")</li>
+                            <li>@Html.ActionLink("Roles", "UsersInLayUserRole", "Roles")</li>
+                        }
+
+                    </ul>
+                </nav>
+        </div>
+</div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Our Church</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

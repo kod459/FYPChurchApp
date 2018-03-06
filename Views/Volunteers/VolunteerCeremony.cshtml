@@ -1,0 +1,86 @@
+﻿@model PIMS.Entities.Volunteer
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<h2>Apply for Ceremony</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.VolunteerId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VolunteerRole, "Volunteer Role", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VolunteerRole, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.VolunteerRole)
+                
+            </div>
+        </div>
+        </div>
+
+       
+
+        <div class="row">
+            
+            <div class="col-md-2">&nbsp;</div>
+            <div class="form-group col-md-4">
+                <label class="control-label">Assigned Ceremonies</label>
+                @Html.ListBox("selectedOptions", (MultiSelectList)ViewBag.SelectedCeremonies, new { @class = "form-control" })
+            </div>
+           
+            <div class="form-group col-md-1" style="text-align:center">
+                <div class="form-group">
+                    <button type="button" id="btnRight" class="btn btn-warning btn-lg">
+                        <span class="glyphicon glyphicon-arrow-right"></span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="btnLeft" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
+                    <div></div>
+                </div>
+            </div>
+           
+            <div class="form-group col-md-4">
+                <label class="control-label">Available Ceremonies</label>
+                @Html.ListBox("availOptions", (MultiSelectList)ViewBag.AvailCeremonies, new { @class = "form-control" })
+                
+            </div>
+
+            <input type="submit" id="btnSubmit" value="Save" class="btn btn-default" />
+            
+            
+        </div>
+        <div style="text-align:center;">
+            
+        </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/multisel")
+}

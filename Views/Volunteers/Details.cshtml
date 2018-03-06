@@ -1,0 +1,57 @@
+﻿@model PIMS.Entities.Volunteer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<table class="tftable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayName("Garda Vetted")
+        </th>
+        <th>
+            @Html.DisplayName("Volunteer Role")
+        </th>
+        <th>
+            @Html.DisplayName("Phone Number")
+        </th>
+        <th>
+            @Html.DisplayName("Email Address")
+        </th>
+        <th>
+            @Html.DisplayName("Assoicaited Church")
+        </th>
+        <th></th>
+    </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.GardaVetted)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.VolunteerRole)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.VolunteerPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Church.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Ceremony", "VolunteerCeremony", new { id = Model.VolunteerId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = Model.VolunteerId })
+            </td>
+        </tr>
+
+</table>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PIMS.Entities.Volunteer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List Of Volunteers</h2>
+
+<table class="tftable">
+    <tr>   
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayName("Garda Vetted")
+        </th>
+        <th>
+            @Html.DisplayName("Volunteer Role")
+        </th>
+        <th>
+            @Html.DisplayName("Associated Church")
+        </th>
+        <th>@Html.DisplayName("Upcoming Ceremonies")</th>
+        <th></th>
+    </tr>
+  
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @if (item.GardaVetted == false)
+            {
+                @Html.DisplayName("Not Garda Vetted")
+            }
+            else
+            {
+                @Html.DisplayName("Garda Vetted Confirmed")
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerRole)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Church.Name)
+        </td>
+        <td>
+            @{
+                foreach (var v in item.Appointments)
+                {
+                    if (v.DateOfAppointment > DateTime.Now)
+                    {
+                    @:  @v.DetailsOfAppointment on @v.DateOfAppointment <br />
+                    }
+                }
+            }
+        </td>
+        <td>
+            @if(item.GardaVetted == true)
+            {
+                @Html.ActionLink("Join Ceremony", "VolunteerCeremony", new { id = item.VolunteerId })
+            }
+            else
+            {
+                @Html.DisplayName("Garda Vetting Required")
+            }
+            
+            
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.VolunteerId })
+            
+        </td>
+    </tr>
+}
+</table>

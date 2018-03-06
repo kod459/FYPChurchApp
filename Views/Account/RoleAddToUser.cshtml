@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Add User to Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="spacerBody">
+    <p>&nbsp;</p>
+
+    <!--<input type="button" value="Back to Admin" id="bAdmin" />-->
+    @if(Request.IsAuthenticated && (User.IsInRole("SuperUser")))
+    {
+    <input type="button" value="Create New Role" id="crRole" />
+    }
+        
+<h2>Add User to Role</h2>
+
+@using(Html.BeginForm("RoleAddToUser", "Account")){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="message-success">@ViewBag.ResultMessage</div>
+    <p>
+       <label class="editor-label">Username:</label> @Html.TextBox("UserName")
+        <label class="editor-label">Role Name: @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)</label>
+        
+    </p>
+    
+    <input type="submit" value="Save" />
+}
+
+    
+
+<div class="hr"></div>
+@using (Html.BeginForm("GetRoles", "Account"))
+{
+    @Html.AntiForgeryToken()
+    <p><label class="editor-label">Username:</label> @Html.TextBox("UserName")
+        <input type="submit" value="Get Roles for this User" />
+    </p>
+}
+       
+@if (ViewBag.RolesForThisUser != null)
+{
+    <text>
+    <h3>Roles for this user </h3>
+    <ol>
+@foreach (string s in ViewBag.RolesForThisUser)
+{
+    <li>@s</li>   
+}
+                </ol>
+    </text>
+}
+        </div>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#bAdmin').click(function () {
+            location.href = '@Url.Action("RoleIndex", "Account")';
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#addRole').click(function () {
+            location.href = '@Url.Action("RoleAddToUser", "Account")';
+        });
+    });
+</script>

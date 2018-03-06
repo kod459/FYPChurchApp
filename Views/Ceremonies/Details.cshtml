@@ -1,0 +1,66 @@
+﻿@model PIMS.Entities.Ceremony
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ceremony</h4>
+    <hr />
+    <table class="tftable">
+        <tr>
+            <td>
+                @Html.DisplayName("Ceremony Type")
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.TypeOfCeremony)
+        </th>
+    </tr>
+        <tr>
+            <td>
+                @Html.DisplayName("Church Name")
+            </td>
+
+            <th>
+                @Html.DisplayFor(model => model.Church.Name)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayName("Ceremony Fee €")
+            </td>
+            <th>
+                @Html.DisplayFor(model => model.CeremonyFee)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayName("Volunteer")
+            </td>
+
+            <th>
+                @Html.DisplayFor(model => model.Volunteers.Name)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayName("Parish Admin")
+            </td>
+
+            <th>
+                @Html.DisplayFor(model => model.Admins.AdministratorName)
+            </th>
+        </tr>
+
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CeremonyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

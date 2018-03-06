@@ -1,0 +1,111 @@
+﻿@model PIMS.Entities.Appointments
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details of Appointment</h2>
+    @Html.AntiForgeryToken()
+    <table class="tftable">
+        <tr>
+            <th>
+                @Html.DisplayName("Church Name")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Church.Name)
+            </td>
+         </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Room")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.RoomType)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Date Of Appointment")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.DateOfAppointment)
+            </td>
+        </tr>
+        <tr>
+            <th>
+            @Html.DisplayName("Appointment Status")
+            </th>
+            @if (Model.Confirmed == false)
+            {
+            using (Html.BeginForm("ConfirmAppointment", "Appointments", FormMethod.Post))
+            {
+            <td>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Confirm Appointment" class="btn btn-default" />
+                        <input type="hidden" name="id" value="@Model.AppointmentId" />
+                    </div>
+                </div>
+
+
+            </td>
+                }
+            }
+            else if (Model.Confirmed == true)
+            {
+                <td>
+                    @Html.DisplayName("Appointment Confirmed")
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Parish Administrator")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Admins.AdministratorName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Appointment Description")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.DetailsOfAppointment)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Name Of Applicant")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.NameOfApplicant)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Phone Number Of Applicant")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.ApplicantPhoneNumber)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Email Of Applicant")
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.ApplicantEmail)
+            </td>
+        </tr>
+
+            <td>
+            </td>
+            <td>
+                    @Html.ActionLink("Update Appointment Details", "Edit", new { id = Model.AppointmentId })
+            </td>
+    </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

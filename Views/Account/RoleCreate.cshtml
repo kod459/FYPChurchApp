@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "RoleCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="spacerBody">
+    <p>&nbsp;</p>
+
+    <!--<input type="button" value="Back to Admin" id="bAdmin" />-->
+    <input type="button" value="Add User to Role" id="addRole" />
+    
+
+<h2>Role Create</h2>
+
+@using(Html.BeginForm()){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        @Html.TextBox("RoleName")
+    </p>
+    <input type="submit" value="Save" />
+}
+    </div>
+
+<table class="tftable">  
+@foreach (string s in Model)
+{
+    if (Request.IsAuthenticated && User.IsInRole("SuperUser"))
+    {
+    <tr>
+        <td>
+            @s
+        </td>
+    </tr>
+    }
+}
+        </table>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#bAdmin').click(function () {
+            location.href = '@Url.Action("RoleIndex", "Account")';
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#addRole').click(function () {
+            location.href = '@Url.Action("RoleAddToUser", "Account")';
+        });
+    });
+</script>

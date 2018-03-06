@@ -1,0 +1,44 @@
+﻿@model IList<PIMS.Entities.UserAndRoles>
+@{
+    ViewBag.Title = "Administrators";
+}
+
+<h2>List of Administrators</h2>
+
+<table class ="tftable">
+    @if ((Model != null) && (TempData["Error"] == null))
+    {
+    <tr>
+        @if(Request.IsAuthenticated && User.IsInRole("SuperUser"))
+        {
+       <th>
+            View Details and Add Role
+        </th>
+        }
+       <th>
+            Username
+        <th>
+            Parish Administrator Role
+        </th>
+
+        </tr>
+            foreach (var item in Model)
+            {
+            <tr>
+                @if(Request.IsAuthenticated && User.IsInRole("SuperUser"))
+                {
+                <td>
+                   @Html.ActionLink(" View Details and Add Role", "UserDetails", new { id = item.UserId }) 
+                </td>
+                }
+               <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+               </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.ParishAdminRole)
+               </td>
+            </tr>
+    }
+    }
+        </table>
+

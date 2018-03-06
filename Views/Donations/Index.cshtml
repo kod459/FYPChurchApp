@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PIMS.Entities.Donation>
+
+@{
+    ViewBag.Title = "Index";
+    decimal runningTotal = 0M;
+}
+
+<h2>List of Donations</h2>
+
+<p>
+    @Html.ActionLink("Add New Donation", "Create")
+</p>
+<table class="tftable">
+    <tr>
+        <th>
+            @Html.DisplayName("Church Name")
+        </th>
+        <th>
+            @Html.DisplayName("House Number")
+        </th>
+        <th>
+            @Html.DisplayName("Type of Donation")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    {
+        runningTotal += item.Amount;
+    }
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Church.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HouseId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfDonation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        
+    </tr>
+}
+   
+
+</table>
+
+<b>TOTAL: @runningTotal </b>

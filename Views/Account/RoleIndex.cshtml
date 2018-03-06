@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Role Listing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>&nbsp;</p>
+<div class="spacerBody">
+    <input type="button" value="Create New Role" id="crRole" />
+    <input type="button" value="Add Role to User" id="addRole" />
+<h2>Role Index</h2>
+    <div class="table">
+        
+    
+@foreach (string s in Model)
+{
+    <div class="tr">
+        <div class="td">
+            @s
+        </div>
+        <div class="td">
+            <span onclick="return confirm('Are you sure to delete?')">
+        @*<a href="/Account/RoleDelete?RoleName=@s" class="delLink"><img src="/images/deleteicon.gif" alt="Delete" class="imgBorder0" /> Delete</a>*@
+                           </span>
+        </div>
+    </div>
+}
+        </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#crRole').click(function () {
+            location.href = '@Url.Action("RoleCreate", "Account")';
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#addRole').click(function () {
+            location.href = '@Url.Action("RoleAddToUser", "Account")';
+        });
+    });
+</script>

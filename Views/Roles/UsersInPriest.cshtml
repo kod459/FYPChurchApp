@@ -1,0 +1,41 @@
+﻿@model IList<PIMS.Entities.UserAndRoles>
+@{
+    ViewBag.Title = "Priests";
+}
+
+<h2>List of Priests</h2>
+
+
+
+<table class ="tftable">
+    @if ((Model != null) && (TempData["Error"] == null))
+    {
+    <tr>
+        <th>
+            View Details and Add Role
+        </th>
+       <th>
+            Username
+        </th>
+        <th>
+            Priest Role
+        </th>
+
+        </tr>
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink(" View Details and Add Role", "UserDetails", new { id = item.UserId }) 
+                </td>
+               <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+               </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.PriestRole)
+               </td>
+            </tr>
+    }
+    }
+        </table>
+

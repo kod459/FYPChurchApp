@@ -1,0 +1,70 @@
+﻿@model PIMS.Entities.UserProfile
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2>User Details</h2>
+
+<fieldset>
+    <legend>User Details</legend>
+
+<table class ="tftable">
+    <tr>
+        <th>
+            @Html.DisplayName("User Name")
+        </th>
+    </tr>
+
+    <tr>
+
+        <td>
+          @Html.DisplayFor(model => model.UserName)   
+        </td>
+    </tr>
+
+</table>
+    @if(ViewBag.RolesForThisUser == null)
+    {
+        <h2>No Roles Available</h2>
+    }
+    else
+    {
+        <h2>Roles of this User</h2>
+    <table class ="tftable">
+    @foreach (var u in ViewBag.RolesForThisUser)
+        {
+        <td>
+                @u 
+        </td>
+        }
+    </table>
+    }
+
+
+    @if (ViewBag.Role == "Volunteer")
+    {
+
+    <h2> Assign Role to this Person</h2>
+        using (Html.BeginForm("UserDetails", "Roles"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="message-success">@ViewBag.ResultMessage</div>
+            <p>
+               <label class="editor-label">Username:</label> @Html.TextBoxFor(model => model.UserName, new { @readonly = "readonly" })
+               <label class="editor-label">Role Name:</label> @Html.TextBox("RoleName", (String)ViewBag.Role, new { @readonly = "readonly" })
+            </p>
+
+            <input type="submit" value="Save" />
+
+
+
+        }
+    }
+    else
+    {
+        <h3>HI</h3>
+    }
+
+</fieldset>

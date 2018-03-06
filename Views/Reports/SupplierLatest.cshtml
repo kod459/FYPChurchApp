@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PIMS.ReportModels.CurrentSupplierReadings>
+@{
+    ViewBag.Title = "SupplierLatest";
+}
+
+<h2>SupplierLatest</h2>
+
+<fieldset>
+    <legend>All Readings</legend>
+
+    <table>
+        @if (Model != null)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalCurrentReadings)
+                </th>
+            </tr>
+
+            foreach (var item in Model){
+                if (item != null)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Supplier)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCurrentReadings)
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table> 
+            
+
+</fieldset>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>

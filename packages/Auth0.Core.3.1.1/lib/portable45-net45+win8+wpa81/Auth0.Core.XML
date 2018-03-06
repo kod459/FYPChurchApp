@@ -1,0 +1,1283 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Auth0.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Auth0.Core.Collections.IPagedList`1">
+            <summary>
+            A list which contains paged data from the API.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Auth0.Core.Collections.PagedList`1">
+            <summary>
+            A list which contains paged data from the API.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Auth0.Core.Collections.PagedList`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Auth0.Core.Collections.PagedList`1"/> class that is empty and has the default initial capacity.
+            </summary>
+        </member>
+        <member name="M:Auth0.Core.Collections.PagedList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Auth0.Core.Collections.PagedList`1"/> class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied.
+            </summary>
+            <param name="collection">The collection whose elements are copied to the new list.</param><exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is null.</exception>
+        </member>
+        <member name="M:Auth0.Core.Collections.PagedList`1.#ctor(System.Collections.Generic.IEnumerable{`0},Auth0.Core.PagingInformation)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Auth0.Core.Collections.PagedList`1"/> class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied.
+            </summary>
+            <param name="collection">The collection whose elements are copied to the new list.</param>
+            <param name="paging">Information about the current page of information contained in the list.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is null.</exception>
+        </member>
+        <member name="M:Auth0.Core.Collections.PagedList`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.List`1"/> class that is empty and has the specified initial capacity.
+            </summary>
+            <param name="capacity">The number of elements that the new list can initially store.</param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="capacity"/> is less than 0. </exception>
+        </member>
+        <member name="P:Auth0.Core.Collections.PagedList`1.Paging">
+            <summary>
+            Contains information about the current page of data which is contained in the list.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Exceptions.ApiException">
+            <summary>
+            Represents errors that occur when making API calls.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Exceptions.ApiException.ApiError">
+            <summary>
+                The exception payload from the response
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Exceptions.ApiException.StatusCode">
+            <summary>
+                The HTTP status code associated with the repsonse
+            </summary>
+        </member>
+        <member name="M:Auth0.Core.Exceptions.ApiException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Auth0.Core.Exceptions.ApiException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Auth0.Core.Exceptions.ApiException.#ctor(System.Net.HttpStatusCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Auth0.Core.Exceptions.ApiException"/> class.
+            </summary>
+            <param name="statusCode">The HTTP status code.</param>
+        </member>
+        <member name="M:Auth0.Core.Exceptions.ApiException.#ctor(System.Net.HttpStatusCode,Auth0.Core.ApiError)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Auth0.Core.Exceptions.ApiException"/> class.
+            </summary>
+            <param name="statusCode">The status code.</param>
+            <param name="apiError">The API error.</param>
+        </member>
+        <member name="T:Auth0.Core.Http.DiagnosticsComponent">
+            <summary>
+            Represents information about a software component that's used for diagnostic purposes.
+            </summary>
+        </member>
+        <member name="M:Auth0.Core.Http.DiagnosticsComponent.#ctor(System.String,System.Object)">
+            <summary>
+            Creates a new instance with the specified name and version.
+            </summary>
+        </member>
+        <member name="M:Auth0.Core.Http.DiagnosticsComponent.#ctor(System.Reflection.AssemblyName)">
+            <summary>
+            Creates a new instance by examining the specified <see cref="T:System.Reflection.AssemblyName"/>.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Http.DiagnosticsComponent.Name">
+            <summary>
+            Gets the name of the component.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Http.DiagnosticsComponent.Version">
+            <summary>
+            Gets the version of the component.
+            </summary>
+        </member>
+        <member name="M:Auth0.Core.Http.Utils.CombineUriParts(System.String[])">
+            <summary>
+            Combines URI parts, taking care of trailing and starting slashes.
+            See http://stackoverflow.com/a/6704287
+            </summary>
+            <param name="uriParts">The URI parts to combine.</param>
+        </member>
+        <member name="T:Auth0.Core.Http.FileUploadParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Addons">
+            <summary>
+            Addons are extensions associated with an Application in Auth0. Usually, they are 3rd party APIs used by the app that Auth0 generates access tokens for 
+            (e.g. Salesforce, Azure Service Bus, Azure Mobile Services, SAP, etc).
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.AmazonWebServices">
+            <summary>
+            Settings for Amazon Web Services Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.AzureMobileServices">
+            <summary>
+            Settings for Azure Mobile Services Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.AzureServiceBus">
+            <summary>
+            Settings for Azure Service Bus Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.Box">
+            <summary>
+            Settings for Box Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.CloudBees">
+            <summary>
+            Settings for CloudBees Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.Concur">
+            <summary>
+            Settings for Concur Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.DropBox">
+            <summary>
+            Settings for Dropbox Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.EchoSign">
+            <summary>
+            Settings for EchoSign Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.Egnyte">
+            <summary>
+            Settings for Egnyte Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.FireBase">
+            <summary>
+            Settings for Firebase Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.NewRelic">
+            <summary>
+            Settings for New Relic Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.Office365">
+            <summary>
+            Settings for Office 365 Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SalesForce">
+            <summary>
+            Settings for Salesforce Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SalesForceApi">
+            <summary>
+            Settings for Salesforce API Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SalesForceSandboxApi">
+            <summary>
+            Settings for Salesforce Sandbox API Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SamlP">
+            <summary>
+            Settings for SAML2 Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SapApi">
+            <summary>
+            Settings for SAP API Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SharePoint">
+            <summary>
+            Settings for Sharepoint Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.SpringCM">
+            <summary>
+            Settings for SpringCM Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.WebApi">
+            <summary>
+            Settings for Web API Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.WsFed">
+            <summary>
+            Settings for WS-FED Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.Zendesk">
+            <summary>
+            Settings for Zendesk Addon
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Addons.Zoom">
+            <summary>
+            Settings for Zoom Addon
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.TenantSettingsBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantSettingsBase.ErrorPage">
+            <summary>
+            An <see cref="T:Auth0.Core.TenantErrorPage"/> object containing the settings for the error page.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantSettingsBase.FriendlyName">
+            <summary>
+            The friendly name of the tenant.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantSettingsBase.PictureUrl">
+            <summary>
+            The URL of the tenant logo (recommended size: 150x150).
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantSettingsBase.SupportEmail">
+            <summary>
+            User support email.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantSettingsBase.SupportUrl">
+            <summary>
+            User support URL.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.BlacklistedToken">
+            <summary>
+            Represents a blacklisted token.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.BlacklistedTokenBase">
+            <summary>
+            Base class for blacklisted tokens.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.BlacklistedTokenBase.Aud">
+            <summary>
+            Gets or sets the JWT's aud claim. The Client identifier of the client for which it was issued.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.BlacklistedTokenBase.Jti">
+            <summary>
+            Gets or sets the jti of the JWT to be blacklisted.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Client">
+            <summary>
+            Represents a client (App) in Auth0
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Client.ClientId">
+            <summary>
+            The id of the client.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Client.SigningKeys">
+            <summary>
+            Client signing keys.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.DelegatedIdToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DelegatedIdToken.IdToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.DelegatedRefreshToken">
+            <summary>
+            Represents a delegated refresh token.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DelegatedRefreshToken.RefreshToken">
+            <summary>
+            The refresh token.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.DelegatedTokenBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DelegatedTokenBase.TokenType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DelegatedTokenBase.ExpiresIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.ClientBase">
+            <summary>
+            Base class for clients.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.AddOns">
+            <summary>
+            Gets or sets the addons which are associated with the client.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.AllowedClients">
+            <summary>
+            Ids of clients that will be allowed to perform delegation requests. Clients that will be allowed to make delegation request.
+            </summary>
+            <remarks>
+            By default, all your clients will be allowed. This field allows you to specify specific clients.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.AllowedOrigins">
+            <summary>
+            A set of URLs that represents valid origins for CORS.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.Callbacks">
+            <summary>
+            A set of URLs that are valid to call back from Auth0 when authenticating users.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.ClientAliases">
+            <summary>
+            List of audiences for SAML protocol.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.ClientSecret">
+            <summary>
+            The secret used to sign tokens for the client.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.IsCustomLoginPageOn">
+            <summary>
+            True if the custom login page is to be used, false otherwise. Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.CustomLoginPage">
+            <summary>
+            The content (HTML, CSS, JS) of the custom login page.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.CustomLoginPagePreview">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.EncryptionKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.FormTemplate">
+            <summary>
+            Form template for WS-Federation protocol.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.JwtConfiguration">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.Mobile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.Name">
+            <summary>
+            The name of the client. Must contain at least one character. Does not allow '&lt;' or '&gt;'.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ClientBase.Sso">
+            <summary>
+            True to use Auth0 instead of the IdP to do Single Sign On, false otherwise.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Connection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Connection.Id">
+            <summary>
+            The connection's identifier
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Connection.Strategy">
+            <summary>
+            The type of the connection, related to the identity provider.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.ConnectionBase">
+            <summary>
+            Base class for connections.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ConnectionBase.Name">
+            <summary>
+            The name of the connection.
+            </summary>
+            <remarks>
+            Must start with an alphanumeric characters and can only contain alphanumeric characters and '-'. Max length 35.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.ConnectionBase.Options">
+            <summary>
+            The options for the connection.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ConnectionBase.EnabledClients">
+            <summary>
+            The identifiers of the clients for which the connection is to be enabled. If the array is empty or the property is not specified, no clients are enabled.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.DailyStatistics">
+             <summary>
+            vb
+             </summary>
+        </member>
+        <member name="P:Auth0.Core.DailyStatistics.Date">
+            <summary>
+            The date to which the stats belong.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DailyStatistics.Logins">
+            <summary>
+            The amount of logins on the date.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DailyStatistics.SignUps">
+            <summary>
+            The amount of signups on the date.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.EmailProviderCredentials">
+            <summary>
+            Credentials for an email provider.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderCredentials.ApiUser">
+            <summary>
+            Gets or sets the API User.
+            </summary>
+            <remarks>
+            Applicable only to the SendGrid provider.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderCredentials.ApiKey">
+            <summary>
+            Gets or sets the API Key.
+            </summary>
+            <remarks>
+            Applicable only to the SendGrid  and Mandrill providers.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderCredentials.AccessKeyId">
+            <summary>
+            Gets or sets the Access Key ID.
+            </summary>
+            <remarks>
+            Applicable only to the AWS provider.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderCredentials.SecretAccessKey">
+            <summary>
+            Gets or sets the Secret Access Key.
+            </summary>
+            <remarks>
+            Applicable only to the AWS provider.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderCredentials.Region">
+            <summary>
+            Gets or sets the default AWS region.
+            </summary>
+            <remarks>
+            Applicable only to the AWS provider.
+            </remarks>
+        </member>
+        <member name="T:Auth0.Core.DeviceCredential">
+            <summary>
+            Represents credentials for a device.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DeviceCredential.Id">
+            <summary>
+            Gets or sets the device's identifier.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.DeviceCredentialBase">
+            <summary>
+            Base class for device credentials.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DeviceCredentialBase.DeviceName">
+            <summary>
+            Gets or sets the device's name.
+            </summary>
+            <remarks>
+            This is a value that must be easily recognized by the device's owner.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.DeviceCredentialBase.DeviceId">
+            <summary>
+            Gets or sets a unique identifier for the device.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.DeviceCredentialBase.Type">
+            <summary>
+            Gets or sets the type of the credential.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.EmailProvider">
+            <summary>
+            Represents configuration for the email provider.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.EmailProviderBase">
+            <summary>
+            Base class for email provider.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderBase.Name">
+            <summary>
+            Gets or sets the name of the provider.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderBase.IsEnabled">
+            <summary>
+            Gets or sets whether using your own email provider is enabled.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderBase.Credentials">
+            <summary>
+            Gets or sets the name of the email provider.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EmailProviderBase.Settings">
+            <summary>
+            Gets or sets the settings of the email provider.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.ApiError">
+            <summary>
+            Contains information about an error returned from the API.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ApiError.Error">
+            <summary>
+            The error description for the HTTP Status Code
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ApiError.ErrorCode">
+            <summary>
+            The error code returned by the API
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ApiError.Message">
+            <summary>
+            The desription for the error.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ApiError.StatusCode">
+            <summary>
+            The HTTP Status code.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Identity">
+            <summary>
+            Describes a 3rd party account for a given <see cref="T:Auth0.Core.User"/>.
+            </summary>
+            <remarks>
+            A single <see cref="T:Auth0.Core.User"/> may be linked to multiple 3rd party accounts. This object defines the details of one of those accounts.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.Identity.AccessToken">
+            <summary>
+            The token that can be used to call the <see cref="P:Auth0.Core.Identity.Provider"/>'s API to get more information about the user.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Identity.Connection">
+            <summary>
+            The name of the connection for the identity.
+            </summary>
+            <remarks>
+            Sometimes, this is the same as the connection, but not always.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.Identity.IsSocial">
+            <summary>
+            Indicates whether this is a social identity.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Identity.Provider">
+            <summary>
+            The type of identity provider.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Identity.UserId">
+            <summary>
+            The user's identifier.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Job">
+            <summary>
+            Represents a background job.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Job.Status">
+            <summary>
+            The job's status.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Job.Type">
+            <summary>
+            The type of job.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Job.Id">
+            <summary>
+            The job's identifier. Useful to retrieve its status later on.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Job.Connection">
+            <summary>
+            The connection identifier of the connection to which users will be inserted.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.TenantErrorPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantErrorPage.Html">
+            <summary>
+            Replace default error page with a custom HTML (Liquid syntax is supported).
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantErrorPage.ShowLogLink">
+            <summary>
+            True to show link to log as part of the default error page, false otherwise (default: true).
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.TenantErrorPage.Url">
+            <summary>
+            Redirect to specified url instead of show the default error page.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.TenantSettings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Ticket">
+            <summary>
+            Represents a ticket. Tickets can be for either email verification or a password change.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Ticket.Value">
+            <summary>
+            The URL that represents the ticket.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Mobile">
+            <summary>
+            Represents configuration of mobile apps for a client.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Mobile.Android">
+            <summary>
+            Configuration related to Android native apps.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Mobile.Ios">
+            <summary>
+            Configuration related to iOS native apps
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Mobile.MobileAndroid">
+            <summary>
+            Represents Android configuration for a client.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Mobile.MobileAndroid.AppPackageName">
+            <summary>
+            The package name which uniquely identifies the Android app.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Mobile.MobileAndroid.KeystoreHash">
+            <summary>
+            Gets or sets the keystore hash for an Android app.
+            </summary>
+            <value>The keystore hash.</value>
+        </member>
+        <member name="T:Auth0.Core.Mobile.MobileIos">
+            <summary>
+            Represents iOS configuration for a client.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Mobile.MobileIos.AppBundleIdentifier">
+            <summary>
+            The Bundle identifier for the iOS app.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Mobile.MobileIos.TeamId">
+            <summary>
+            The iOS Developer Account Team identifier.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rule">
+            <summary>
+            Represents a rule. A rule is arbitrary JavaScript code that can be used to extend Auth0's default behavior when authenticating a user.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rule.Id">
+            <summary>
+            Gets or sets the identifier for the rule.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rule.Stage">
+            <summary>
+            Gets or sets the execution stage of the rule.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.RuleBase">
+            <summary>
+            Base class for rules.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.RuleBase.Name">
+            <summary>
+            Gets or sets the name of the rule.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.RuleBase.Enabled">
+            <summary>
+            Gets or sets whether the rule is enabled.        
+            </summary>
+            <remarks>
+            True if the connection is enabled, false otherwise.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.RuleBase.Script">
+            <summary>
+            Gets or sets the code to be executed when the rule runs.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.RuleBase.Order">
+            <summary>
+            Gets or sets the order of the rule in relation to other rules. A rule with a lower order than another rule executes first.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.CreatedAt">
+            <summary>
+            Gets or sets the date the user was created.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.Identities">
+            <summary>
+            An array of objects with information about the user's identities. More than one will exists in case accounts are linked
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.LastIpAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.LastLogin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.Locale">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Returned for the Facebook, Google, and Microsoft social providers.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.User.LoginsCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.PhoneVerified">
+            <summary>
+            Gets or sets whether the user's phone number is verified.
+            </summary>
+            <remarks>
+            True if the phone is verified, otherwise false.
+            
+            This is only valid for users from SMS connections.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.User.UpdatedAt">
+            <summary>
+            Gets or sets the date the user was last updated (modified).
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.UserId">
+            <summary>
+            A unique identifier of the user per identity provider, same for all apps (e.g.: google-oauth2|103547991597142817347). ALWAYS GENERATED
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.Blocked">
+            <summary>
+            Gets or sets whether the user is blocked. True if the user is blocked, otherwise false.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.ProviderAttributes">
+            <summary>
+            Contains a lists of all the extra provider specific user attributes over and above those contained in the <a href="https://auth0.com/docs/user-profile/normalized">normalized user profile</a>.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.User.Multifactor">
+            <summary>
+            Multifactor settings.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.UserBase">
+            <summary>
+            Contains common elements used for both constructing <see cref="T:Auth0.Core.User"/>-related requests, and comprising <see cref="T:Auth0.Core.User"/>-related responses.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.UserBase.AppMetadata">
+            <summary>
+            Contains user meta data. The user has read-only access to this.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.UserBase.Email">
+            <summary>
+            Gets or sets the user's email address.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.UserBase.EmailVerified">
+            <summary>
+            Gets or sets whether the user's email address is verified.
+            </summary>
+            <remarks>
+            True if the email address is verified, otherwise false.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.UserBase.PhoneNumber">
+            <summary>
+            Gets or sets the user's phone number.
+            </summary>
+            <remarks>
+            This is only valid for users from SMS connections.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.UserBase.UserMetadata">
+            <summary>
+            Contains user meta data. The user has read/write access to this.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.UserBase.UserName">
+            <summary>
+            Gets or sets the user' username.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.UserBase.NickName">
+            <summary>
+            The Nickname of the user.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.UserBase.FirstName">
+            <summary>
+            The first name of the user (if available).
+            </summary>
+            <remarks>
+            This is the given_name attribute supplied by the underlying API.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.UserBase.FullName">
+            <summary>
+            The full name of the user (e.g.: John Foo). ALWAYS GENERATED.
+            </summary>
+            <remarks>
+            This is the name attribute supplied by the underlying API.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.UserBase.LastName">
+            <summary>
+            The last name of the user (if available).
+            </summary>
+            <remarks>
+            This is the family_name attribute supplied by the underlying API.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.UserBase.Picture">
+            <summary>
+            URL pointing to the user picture (if not available, will use gravatar.com with the email). ALWAYS GENERATED
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.EncryptionKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EncryptionKey.PublicKey">
+            <summary>
+            Encryption public key
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.EncryptionKey.Certificate">
+            <summary>
+            Encryption certificate
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.JwtConfiguration">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.JwtConfiguration.IsSecretEncoded">
+            <summary>
+                True if the client secret is base64 encoded, false otherwise. Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.JwtConfiguration.LifetimeInSeconds">
+            <summary>
+                The amount of time (in seconds) that the token will be valid after being issued. (affects 'exp' claim)
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.JwtConfiguration.Scopes">
+            <summary>
+                The scopes for the JWT.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.JwtConfiguration.SigningAlgorithm">
+            <summary>
+                The algorithm used to sign the JsonWebToken. Possible values are 'HS256' or 'RS256'.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.LoginRequest">
+            <summary>
+            Represents details of the Login request from the app to Auth0, including QueryString and User Location.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequest.Body">
+            <summary>
+            The body of the POST request on login transactions used on oauth2-resource-owner or wstrust-usernamemixed protocols.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequest.Geography">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequest.IpAddress">
+            <summary>
+            The originating IP address of the user trying to log in.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequest.Query">
+            <summary>
+            The QueryString of the login transaction sent by the application.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequest.UserAgent">
+            <summary>
+            The user-agent of the client that is trying to log in.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.LoginRequestGeography">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.ContinentCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.CountryCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.CountryName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.Latitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.Longitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.ShortCountryCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestGeography.TimeZone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.LoginRequestQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestQuery.ClientId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestQuery.Connection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestQuery.Prompt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestQuery.RedirectUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.LoginRequestQuery.ResponseType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.RulesContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.ClientId">
+            <summary>
+            The client id of the application the user is logging in to.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.ClientName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.Connection">
+            <summary>
+            The name of the connection used to authenticate the user (e.g.: twitter or some-google-apps-domain)
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.ConnectionStrategy">
+            <summary>
+            The type of connection. 
+            </summary>
+            <remarks>
+            For social connection connectionStrategy === connection. For enterprise connections, the strategy will be waad (Windows Azure AD), 
+            ad (Active Directory/LDAP), auth0 (database connections), etc.
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.JwtConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.Protocol">
+            <summary>
+            The authentication protocol. 
+            </summary>
+            <remarks>
+            Possible values: oidc-basic-profile (most used, web based login), oidc-implicit-profile (used on mobile devices and single page apps), 
+            oauth2-resource-owner (user/password login typically used on database connections), samlp (SAML protocol used on SaaS apps), 
+            wsfed (WS-Federation used on Microsoft products like Office365), wstrust-usernamemixed (WS-trust user/password login used on CRM and Office365), 
+            and delegation (when calling the Delegation endpoint).
+            </remarks>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.LoginRequest">
+            <summary>
+            An object containing useful information of the request.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.SamlConfiguration">
+            <summary>
+            An object that controls the behavior of the SAML and WS-Fed endpoints. Useful for advanced claims mapping and token enrichment (only available for samlp and wsfed protocol).
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.SingleSignOn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContext.Stats">
+            <summary>
+            An object containing specific user stats, like stats.loginsCount.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.RulesContextSsoConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContextSsoConfiguration.CurrentClients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContextSsoConfiguration.WithAuth0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContextSsoConfiguration.WithDatabaseConnection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.RulesContextStats">
+            <summary>
+            An object containing specific user stats.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesContextStats.LoginCount">
+            <summary>
+            The number of times the User has logged in.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Rules.RulesRequest">
+            <summary>
+            Represents the root object POSTed from the Rules Engine, if you follow the example.
+            </summary>
+            <example>
+            //Add this to your Node.js Rule. Be sure to replace the secret token with a different value.
+            request.post({
+              url: 'http://YourWebApiEndpoint',
+              json: {
+                user: user,
+                context: context,
+                secret_token: "SOMESECRETTOKEN",
+              },
+              timeout: 15000
+            }, function(err, response, body){
+              user.persistent.your_variable = body.your_variable;
+              callback(null, user, context);
+            });
+            </example>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesRequest.User">
+            <summary>
+             The user object as it comes from the identity provider.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesRequest.Context">
+            <summary>
+            An object containing contextual information of the current authentication transaction.
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Rules.RulesRequest.SecretToken">
+            <summary>
+            A random string you specify to make sure the request is coming from your Auth0 Rule.
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.ScopeEntry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.ScopeEntry.Actions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.Scopes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Scopes.Users">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Scopes.UsersAppMetadata">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Scopes.Clients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Scopes.ClientKeys">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Scopes.Tokens">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.Scopes.Stats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Auth0.Core.SigningKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.SigningKey.Cert">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.SigningKey.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth0.Core.SigningKey.Pkcs7">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

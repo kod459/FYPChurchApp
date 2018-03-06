@@ -1,0 +1,36 @@
+﻿@model List<PIMS.Entities.UserProfile>
+@{
+    ViewBag.Title = "UsersNoRoles";
+}
+
+<h2>Users with No Roles</h2>
+
+<table class ="tftable">
+    @if ((Model != null) && (TempData["Error"] == null))
+    {
+    <tr>
+       <th>
+            View Details and Add Role
+       </th>
+       <th>
+            Username
+        </th>
+
+        </tr>
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink("View Details and Add Role", "UserDetails", new { id = item.UserId }) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName) 
+                </td>
+            </tr>
+    }
+    }
+        </table>
+        
+
+
+
