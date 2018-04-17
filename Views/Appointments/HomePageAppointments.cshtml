@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "HomePageAppointments";
+}
+
+<h2>Appointments Page</h2>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Please select an option from the list</p>
+
+    <ul>
+        <li>@Html.ActionLink("Create Appointment", "Create", "Appointments")</li>
+        <li>@Html.ActionLink("Create Ceremony", "CreateCeremony", "Appointments")</li>
+        <li>@Html.ActionLink("List all Appointments", "Index", "Appointments")</li>
+        <li>@Html.ActionLink("List all Ceremonies", "IndexOfCeremonies", "Appointments")</li>
+        <li>@Html.ActionLink("Calendar", "Calendar", "Appointments")</li>
+    </ul>
+
+</body>
+</html>
+
+

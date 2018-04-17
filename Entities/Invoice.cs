@@ -20,6 +20,12 @@ namespace PIMS.Entities
 
         public byte[] PictureOfInvoice { get; set; }
 
+        public string ImageFileName { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DateReceived { get; set; }
+
         [ForeignKey("Church")]
         public int ChurchId { get; set; }
 

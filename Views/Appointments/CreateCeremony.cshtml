@@ -77,19 +77,15 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <u>
+        @Html.ActionLink("Back to List", "Index")
+    </u>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
+<script src="~/Scripts/jquery.js"></script>
 
-<link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/Clean-jQuery-Date-Time-Picker-Plugin-datetimepicker/jquery.datetimepicker.css" />
-
-<script src="https://www.jqueryscript.net/demo/Clean-jQuery-Date-Time-Picker-Plugin-datetimepicker/jquery.js"></script>
-
-<script src="https://www.jqueryscript.net/demo/Clean-jQuery-Date-Time-Picker-Plugin-datetimepicker/jquery.datetimepicker.js"></script>
+<script src="~/Scripts/jquery.datetimepicker.js"></script>
 
 <script>
     $('#DateOfAppointment').datetimepicker({

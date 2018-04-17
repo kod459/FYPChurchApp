@@ -46,7 +46,9 @@
             @Html.DisplayFor(modelItem => item.NameOfApplicant)
         </td>
         <td>
-            @Html.ActionLink("View Ceremony", "DetailsOfCeremony", new { id = item.AppointmentId })
+            <u>
+                @Html.ActionLink("View Ceremony", "DetailsOfCeremony", new { id = item.AppointmentId })
+            </u>
         </td>
     </tr>
     }

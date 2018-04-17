@@ -9,41 +9,172 @@ using System.Web.Mvc;
 using PIMS.DataAccess;
 using PIMS.Entities;
 
+
 namespace PIMS.Controllers
 {
     public class DonationsController : Controller
     {
         private ChurchDBContext db = new ChurchDBContext();
-
+        
         // GET: Donations
-        public ActionResult Index()
+        public ActionResult Index(string SearchStringAddress, int? SearchStringHouseNumber, string sortOrder)
         {
-            var donations = db.Donations.Include(d => d.Church);
-            return View(donations.ToList());
-        }
 
-        public ActionResult SearchHouseNumber(string SearchStringAddress)
-        {
-            if (!String.IsNullOrEmpty(SearchStringAddress))
+            ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
+           
+            IQueryable<Donation> allDonations = (from d in db.Donations
+                                                 select d);
+
+            
+            if (!String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber != null)
             {
-                IQueryable<UserProfile> userProfile = (from u in db.UserProfiles
-                                                       where (u.UserName.Contains(SearchStringAddress))
-                                                       select u);
-
-                if (userProfile.Count() == 0)
+                IQueryable<Donation> donations = (from d in db.Donations
+                                                  where (d.House.AddressLine1.Equals(SearchStringAddress) && d.HouseId == SearchStringHouseNumber)
+                                                  select d);
+                switch (sortOrder)
                 {
-                    TempData["Error"] = "No matching users found";
+                    case "Date":
+                        donations = donations.OrderBy(s => s.DateRecieved);
+                        break;
+                    case "date_desc":
+                        donations = donations.OrderByDescending(s => s.DateRecieved);
+                        break;
+                    default:
+                        donations = donations.OrderBy(s => s.DateRecieved);
+                        break;
+                }
+
+                if (donations.Count() == 0)
+                {
+                    TempData["Error"] = "No donations found";
                     return View();
                 }
-                if (userProfile.Count() == 1)
-                {
-                    return RedirectToAction("UserDetails", new { id = userProfile.FirstOrDefault().UserId });
-                }
 
-                return View(userProfile.ToList());
+                return View(donations.ToList());
 
             }
-            return View();
+            else if (String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber != null)
+            {
+                IQueryable<Donation> donations = (from d in db.Donations
+                                                  where (d.HouseId == SearchStringHouseNumber)
+                                                  select d);
+
+                if (donations.Count() == 0)
+                {
+                    TempData["Error"] = "No matching houses found";
+                    return View();
+                }
+
+                switch (sortOrder)
+                {
+                    case "Date":
+                        donations = donations.OrderBy(s => s.DateRecieved);
+                        break;
+                    case "date_desc":
+                        donations = donations.OrderByDescending(s => s.DateRecieved);
+                        break;
+                    default:
+                        donations = donations.OrderBy(s => s.DateRecieved);
+                        break;
+                }
+
+                return View(donations.ToList());
+            }
+            else if (!String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber == null)
+            {
+                IQueryable<Donation> donations = (from d in db.Donations
+                                                  where (d.House.AddressLine1.Equals(SearchStringAddress))
+                                                  select d);
+                if (donations.Count() == 0)
+                {
+                    TempData["Error"] = "No matching houses found";
+                    return View();
+                }
+
+                switch (sortOrder)
+                {
+                    case "Date":
+                        donations = donations.OrderBy(s => s.DateRecieved);
+                        break;
+                    case "date_desc":
+                        donations = donations.OrderByDescending(s => s.DateRecieved);
+                        break;
+                    default:
+                        donations = donations.OrderBy(s => s.DateRecieved);
+                        break;
+                }
+
+                return View(donations.ToList());
+            }
+
+            else
+            {
+                switch (sortOrder)
+                {
+                    case "Date":
+                        allDonations = allDonations.OrderBy(s => s.DateRecieved);
+                        break;
+                    case "date_desc":
+                        allDonations = allDonations.OrderByDescending(s => s.DateRecieved);
+                        break;
+                    default:
+                        allDonations = allDonations.OrderBy(s => s.DateRecieved);
+                        break;
+                }
+                return View();
+            }
+
+        }
+
+        public ActionResult SearchHouse(string SearchStringAddress, int? SearchStringHouseNumber)
+        {
+            if (!String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber != null)
+            {
+                IQueryable<Donation> donations = (from d in db.Donations
+                                                  where (d.House.AddressLine1.Equals(SearchStringAddress) &&  d.HouseId == SearchStringHouseNumber)
+                                                  select d);
+
+                if (donations.Count() == 0)
+                {
+                    TempData["Error"] = "No matching houses found";
+                    return View();
+                }
+
+                return View(donations.ToList());
+
+            }
+            else if (String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber != null)
+            {
+                IQueryable<Donation> donations = (from d in db.Donations
+                                                  where (d.HouseId == SearchStringHouseNumber)
+                                                  select d);
+
+                if (donations.Count() == 0)
+                {
+                    TempData["Error"] = "No matching houses found";
+                    return View();
+                }
+
+                return View(donations.ToList());
+            }
+            else if(!String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber == null)
+            {
+                IQueryable<Donation> donations = (from d in db.Donations
+                                                  where (d.House.AddressLine1.Equals(SearchStringAddress))
+                                                  select d);
+                if (donations.Count() == 0)
+                {
+                    TempData["Error"] = "No matching houses found";
+                    return View();
+                }
+
+                return View(donations.ToList());
+            }
+
+            else
+            {
+                return View();
+            }
         }
 
         // GET: Donations/Details/5
@@ -65,6 +196,7 @@ namespace PIMS.Controllers
         public ActionResult Create()
         {
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
+            ViewBag.Type = new SelectList(new[] { "Envelope", "In Person", "Standing Order", "Direct Debit" });
             return View();
         }
 
@@ -73,7 +205,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DonationId,HouseId,TypeOfDonation,Amount,ChurchId")] Donation donation)
+        public ActionResult Create([Bind(Include = "DonationId,HouseId,TypeOfDonation,DateRecieved,Amount,ChurchId")] Donation donation)
         {
             if (ModelState.IsValid)
             {
@@ -83,6 +215,7 @@ namespace PIMS.Controllers
             }
 
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", donation.ChurchId);
+            ViewBag.Type = new SelectList(new[] { "Envelope", "In Person", "Standing Order", "Direct Debit" });
             return View(donation);
         }
 
@@ -90,7 +223,7 @@ namespace PIMS.Controllers
         {
             var items = db.Houses
                 .Where(x => x.AddressLine1.Contains(term))
-                .Select(x => new { Label = x.AddressLine1, Value = x.HouseId })
+                .Select(x => new { Label = x.AddressLine1, Value = x.AddressLine1, RealValue = x.HouseId })
                 .Take(10);
 
             return Json(items, JsonRequestBehavior.AllowGet);
@@ -117,7 +250,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DonationId,HouseId,TypeOfDonation,Amount,ChurchId")] Donation donation)
+        public ActionResult Edit([Bind(Include = "DonationId,HouseId,TypeOfDonation,DateRecievedAmount,ChurchId")] Donation donation)
         {
             if (ModelState.IsValid)
             {

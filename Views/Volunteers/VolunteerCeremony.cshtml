@@ -4,11 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+
 
 <h2>Apply for Ceremony</h2>
 
@@ -35,7 +31,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.VolunteerRole, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.VolunteerRole)
-                
             </div>
         </div>
         </div>
@@ -78,9 +73,4 @@
             
         </div>
 
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/multisel")
 }

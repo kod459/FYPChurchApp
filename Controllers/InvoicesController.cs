@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using PIMS.DataAccess;
 using PIMS.Entities;
+using PIMS.ViewModel;
+using System.IO;
 
 namespace PIMS.Controllers
 {
@@ -49,10 +51,16 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,ChurchId")] Invoice invoice)
+        public ActionResult Create([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,ChurchId")] Invoice invoice,HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
             {
+                if (File != null && File.ContentLength > 0)
+                {
+                    invoice.PictureOfInvoice = new byte[File.ContentLength];
+                    File.InputStream.Read(invoice.PictureOfInvoice, 0, File.ContentLength);
+                }
+
                 db.Invoices.Add(invoice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -69,13 +77,13 @@ namespace PIMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice invoice = db.Invoices.Find(id);
-            if (invoice == null)
+            Invoice oldInvoice = db.Invoices.Find(id);
+            if (oldInvoice == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", invoice.ChurchId);
-            return View(invoice);
+            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", oldInvoice.ChurchId);
+            return View(oldInvoice);
         }
 
         // POST: Invoices/Edit/5
@@ -83,11 +91,18 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,ChurchId")] Invoice invoice)
+        public ActionResult Edit([Bind(Include = "InvoiceId,Company,Description,Amount,ChurchId")] Invoice invoice, int? id)
         {
+
             if (ModelState.IsValid)
             {
-                db.Entry(invoice).State = EntityState.Modified;
+                Invoice oldInvoice = db.Invoices.Find(id);
+                oldInvoice.Amount = invoice.Amount;
+                oldInvoice.Company = invoice.Company;
+                oldInvoice.Description = invoice.Description;
+                oldInvoice.Amount = invoice.Amount;
+                oldInvoice.ChurchId = invoice.ChurchId;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

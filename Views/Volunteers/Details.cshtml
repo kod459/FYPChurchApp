@@ -49,8 +49,7 @@
                 @Html.DisplayFor(model => model.Church.Name)
             </td>
             <td>
-                @Html.ActionLink("Ceremony", "VolunteerCeremony", new { id = Model.VolunteerId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = Model.VolunteerId })
+                <u> @Html.ActionLink("Ceremony", "VolunteerCeremony", new { id = Model.VolunteerId })</u> 
             </td>
         </tr>
 

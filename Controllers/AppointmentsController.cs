@@ -13,11 +13,10 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Auth.OAuth2;
 using System.IO;
 using System.Threading;
-using Google.Apis.Util.Store;
-using Google.Apis.Services;
-using Google.Apis.Calendar.v3.Data;
 using PIMS.Mailers;
 using PIMS.ViewModel;
+using System.Web.Security;
+using System.Web.UI;
 
 namespace PIMS.Controllers
 {
@@ -30,8 +29,6 @@ namespace PIMS.Controllers
             set { _userMailer = value; }
         }
 
-        //static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
-        //static string ApplicationName = "ChurchWebApp";
         private ChurchDBContext db = new ChurchDBContext();
 
         // GET: Appointments
@@ -53,22 +50,52 @@ namespace PIMS.Controllers
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Calendar()
         {
+            string username = Membership.GetUser().UserName;
+
+            var getAdmin = (from a in db.Admins
+                            where username == a.AdminUsername
+                            select a.AdministrationId).SingleOrDefault();
+
+
+            var events = (from a in db.Appointments
+                          where getAdmin == a.AdministrationId
+                          select a).First();
+
             return View();
         }
 
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*", Location = OutputCacheLocation.None)]
         public JsonResult GetEvents()
         {
-            //var events = db.Appointments.ToList();
+            string username = Membership.GetUser().UserName;
 
-            //return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var getAdmin = (from a in db.Admins
+                            where username == a.AdminUsername
+                            select a.AdministrationId).SingleOrDefault();
 
-            using (var context = new ChurchDBContext())
-            {
-                context.Configuration.ProxyCreationEnabled = false;
-                return new JsonResult { Data = context.Appointments.ToList(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            }
+
+            var events = (from a in db.Appointments
+                          where getAdmin == a.AdministrationId
+                          select a).ToList();
+
+             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            
 
         }
+
+        public JsonResult UnAvailableSlots()
+        {
+            var events = (from a in db.Appointments
+                          select a).ToList();
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public ActionResult HomePageAppointments()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public JsonResult SaveVolunteerToAppointment(Appointments apps)
@@ -85,7 +112,6 @@ namespace PIMS.Controllers
                 {
                     v.DetailsOfAppointment = apps.DetailsOfAppointment;
                     v.DateOfAppointment = apps.DateOfAppointment;
-                    v.Admins.AdministratorName = apps.Admins.AdministratorName;
                 }
             }
             else
@@ -145,9 +171,6 @@ namespace PIMS.Controllers
         // GET: Appointments/Create
         public ActionResult Create()
         {
-
-            ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
-
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
 
             ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
@@ -166,9 +189,7 @@ namespace PIMS.Controllers
         {
             if (ModelState.IsValid)
             { 
-                //Pick Time
-                //Show Calender to Priest
-                //Pick slot to be not available
+             
 
                 bool checkUserLoggedIn = (System.Web.HttpContext.Current.User != null) 
                     && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
@@ -176,19 +197,10 @@ namespace PIMS.Controllers
 
                 appointments = ValidateEmail(appointments);
 
-                
-                //var currentBooking = db.Appointments
-                //    .Any(b => (appointments.TimeOfAppointment == b.TimeOfAppointment
-                //     && appointments.DateOfAppointment == b.DateOfAppointment
-                //     && appointments.AdministrationId == b.AdministrationId));
 
                 var currentBooking = db.Appointments
                     .Any(b => (appointments.DateOfAppointment == b.DateOfAppointment
                      && appointments.AdministrationId == b.AdministrationId));
-
-                //var checkCeremony = db.Ceremonies
-                //    .Any(b => (appointments.DateOfAppointment == b.DateOfCeremony
-                //    && appointments.AdministrationId == b.AdministrationId));
 
                 var checkPriestHolidays = db.PriestLeave
                     .Any(b => (appointments.DateOfAppointment >= b.StartDate && appointments.DateOfAppointment <= b.EndDate));
@@ -230,7 +242,15 @@ namespace PIMS.Controllers
                 }
             }
 
-            ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
+            if (appointments.DetailsOfAppointment.Equals("Confession"))
+            {
+                ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room" });
+            }
+
+            else if (appointments.DetailsOfAppointment.Equals("Baptism Meeting") || appointments.DetailsOfAppointment.Equals("Wedding Meeting") || appointments.DetailsOfAppointment.Equals("Personal Meeting"))
+            {
+                ViewBag.Rooms = new SelectList(new[] { "GP Room", "Parish Office" });
+            }
             ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
             ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);

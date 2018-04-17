@@ -28,7 +28,7 @@
                 @if(Request.IsAuthenticated && User.IsInRole("SuperUser"))
                 {
                 <td>
-                   @Html.ActionLink(" View Details and Add Role", "UserDetails", new { id = item.UserId }) 
+                    <u> @Html.ActionLink(" View Details and Add Role", "UserDetails", new { id = item.UserId }) </u>
                 </td>
                 }
                <td>

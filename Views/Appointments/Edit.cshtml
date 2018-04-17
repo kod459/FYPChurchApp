@@ -99,34 +99,11 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <u>
+        @Html.ActionLink("Back to List", "Index")
+    </u>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
-@*############################  DatePicker Scripts for IE Web browser  ###########################
-    <div>
-        <!-- jQuery UI CSS Reference -->
-        <script type="text/javascript">
-            var datefield=document.createElement("input")
-            datefield.setAttribute("type", "date")
-            if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
-                document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
-                document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
-                document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
-            }
-        </script>
-        <!-- Code to wire up DatePicker -->
-        <script>
-        if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
-            jQuery(function ($) { //on document.ready
-                $('#DateOfAppointment').datepicker({ dateFormat: 'd/m/yy', minDate: 0}).val();
-            })
-            }
-        </script>
-*@
 
 
 <script src="https://xdsoft.net/cache/903cd11f82fad90c9e8c4c45801eb6f2.js"></script>

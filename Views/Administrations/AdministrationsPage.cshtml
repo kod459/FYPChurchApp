@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "AdministrationsPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Administratons Page</h2>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Please select an option from the list</p>
+
+    <ul>
+        <li>@Html.ActionLink("Donations", "Index", "Donations")</li>
+        <li>@Html.ActionLink("Invoices", "Index", "Invoices")</li>
+    </ul>
+
+</body>
+</html>

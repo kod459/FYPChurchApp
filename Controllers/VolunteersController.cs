@@ -14,6 +14,7 @@ using PIMS.ViewModel;
 using System.Data.Entity.Infrastructure;
 using WebMatrix.WebData;
 using PIMS.Mailers;
+using System.Web.Security;
 
 namespace PIMS.Controllers
 {
@@ -31,9 +32,8 @@ namespace PIMS.Controllers
         public ActionResult Index()
         {
             var volunteers = db.Volunteers.Include(v => v.Church);
-            var test = this.User;
             return View(volunteers.ToList());
-            
+
         }
 
         public ActionResult VolunteerHub()
@@ -43,12 +43,89 @@ namespace PIMS.Controllers
 
         public JsonResult GetEvents()
         {
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteer = (from a in db.Volunteers
+                                where username == a.Username
+                                select a.VolunteerId).SingleOrDefault();
+
             var events = (from a in db.Appointments
                           where a.Fee != null
                           select a).ToList();
 
-            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            //var volunteersInCeremony = db.Appointments
+            //          .Where(c => c.CategoryId == categoryId)
+            //          .SelectMany(c => c.Products);
+
+            var vEvents = from a in db.Appointments
+                          where a.Volunteers.Any(c => c.VolunteerId == getVolunteer) && a.Fee != null
+                          select a;
+
+
+
+            //var events = (from a in db.Appointments
+            //              where a.Volunteers.Contains(getVolunteer) && a.Fee != null
+            //              select a).ToList();
+
+            //var events =
+            //    db.Appointments.Where(a =>
+            //    a.Volunteers.All(b =>
+            //    getVolunteer.Equals(b.VolunteerId)));
+
+            return new JsonResult { Data = vEvents, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        //[HttpPost]
+        //public JsonResult AddVolunteerToCeremony(Volunteer v, Appointments a)
+        //{
+        //    string username = Membership.GetUser().UserName;
+
+        //    var getVolunteer = (from vol in db.Volunteers
+        //                        where username == vol.Username
+        //                        select vol).SingleOrDefault();
+
+        //    v.Appointments = new List<Appointments>();
+
+        //    var status = false;
+        //    using (ChurchDBContext db = new ChurchDBContext())
+        //    {
+        //        if (a.AppointmentId > 0)
+        //        {
+        //            //Update the event
+        //            var getCeremonies = db.Appointments.Where(d => d.AppointmentId == a.AppointmentId).FirstOrDefault();
+        //            if (v != null)
+        //            {
+        //                v.Appointments.Add(getVolunteer);
+
+        //            }
+        //        }
+
+        //        db.SaveChanges();
+        //        status = true;
+        //    }
+        //    return new JsonResult { Data = new { status = status } };
+        //}
+
+        [HttpPost]
+        public JsonResult AddVolunteerToCeremony(Volunteer v, Appointments apps)
+        {
+            var status = false;
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteer = (from vol in db.Volunteers
+                                where username == vol.Username
+                                select vol).SingleOrDefault();
+
+            apps.Volunteers = new List<Volunteer>();
+
+            apps.Volunteers.Add(getVolunteer);
+            db.SaveChanges();
+            status = true;
+
+            return new JsonResult { Data = new { status = status } };
+
+        }
+
 
         // GET: Volunteers/Details/5
         public ActionResult Details(int? id)
@@ -57,6 +134,18 @@ namespace PIMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteerId = (from u in db.Volunteers
+                                  where username == u.Username
+                                  select u.VolunteerId).SingleOrDefault();
+
+            if (getVolunteerId == id)
+            {
+                id = getVolunteerId;
+            }
+
             Volunteer volunteer = db.Volunteers.Find(id);
             if (volunteer == null)
             {
@@ -101,6 +190,32 @@ namespace PIMS.Controllers
 
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", volunteer.ChurchId);
             return View(volunteer);
+        }
+
+        [HttpPost]
+        public JsonResult SaveEvent(Appointments appointments)
+        {
+            var status = false;
+            using (ChurchDBContext db = new ChurchDBContext())
+            {
+                if(appointments.AppointmentId > 0)
+                {
+                    var v = db.Appointments.Where(a => a.AppointmentId == appointments.AppointmentId).FirstOrDefault();
+                    if(v != null)
+                    {
+                        v.DetailsOfAppointment = appointments.DetailsOfAppointment;
+                        v.DateOfAppointment = appointments.DateOfAppointment;
+                    }
+                }
+                else
+                {
+                    db.Appointments.Add(appointments);
+                }
+                db.SaveChanges();
+                status = true;
+            }
+
+            return new JsonResult { Data = new { status = status } };
         }
 
         // GET: Volunteers/Edit/5
@@ -221,23 +336,20 @@ namespace PIMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            
-            string userName = string.Empty;
+
+            string username = Membership.GetUser().UserName;
 
             var getVolunteerId = (from u in db.Volunteers
-                                  where WebSecurity.CurrentUserName == u.Username
+                                  where username == u.Username
                                   select u.VolunteerId).SingleOrDefault();
 
+            if(getVolunteerId == id)
+            {
+                id = getVolunteerId;
+            }
 
-            //Volunteer v = (Volunteer)(from k in db.Volunteers
-            //               where getVolunteerId == k.VolunteerId
-            //               select k).SingleOrDefault();
 
-            
-            Volunteer v = db.Volunteers
-                .Include(p => p.Appointments)
-                .Where(i => i.VolunteerId == id)
-                .Single();
+            Volunteer v = db.Volunteers.Find(id);
 
 
             if (v == null)
@@ -245,30 +357,6 @@ namespace PIMS.Controllers
                 return HttpNotFound();
             }
             PopulateAssignedCeremonyData(v);
-
-
-            //var app = (from a in db.Appointments
-            //           where v.app.AppointmentId == a.AppointmentId
-            //           select a).FirstOrDefault();
-
-            //string churchName = (from c in db.Churches
-            //                     where c.ChurchId == v.Church.ChurchId
-            //                     select c.Name).FirstOrDefault();
-
-            //string volunteerName = (from a in db.Volunteers
-            //                    where a.VolunteerId == v.VolunteerId
-            //                    select a.Name).FirstOrDefault();
-
-            //string volunteerEmail = (from a in db.Volunteers
-            //                     where a.VolunteerId == v.VolunteerId
-            //                     select a.Email).FirstOrDefault();
-
-
-
-
-
-            //UserMailer.VolunteerCeremony(app, churchName, volunteerEmail).Send(); //Send() extension method: using Mvc.Mailer
-
             return View(v);
         }
 
@@ -285,19 +373,21 @@ namespace PIMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            string username = Membership.GetUser().UserName;
+
             var getVolunteerId = (from u in db.Volunteers
-                                  where WebSecurity.CurrentUserName == u.Username
+                                  where username == u.Username
                                   select u.VolunteerId).SingleOrDefault();
 
+            if (getVolunteerId == id)
+            {
+                id = getVolunteerId;
+            }
 
-            //var v = (Volunteer)(from k in db.Volunteers
-            //                          where getVolunteerId == k.VolunteerId
-            //                          select k).SingleOrDefault();
 
-            Volunteer v = db.Volunteers
-                .Include(p => p.Appointments)
-                .Where(i => i.VolunteerId == id)
-                .Single();
+            Volunteer v = (Volunteer)(from u in db.Volunteers
+                                      where id == u.VolunteerId
+                                      select u).Single();
 
             try
             {

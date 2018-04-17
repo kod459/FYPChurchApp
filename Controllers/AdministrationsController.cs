@@ -22,6 +22,11 @@ namespace PIMS.Controllers
             return View(admins.ToList());
         }
 
+        public ActionResult AdministrationsPage()
+        {
+            return View();
+        }
+
         // GET: Administrations/Details/5
         public ActionResult Details(int? id)
         {

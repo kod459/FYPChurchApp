@@ -57,12 +57,11 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <u>
+        @Html.ActionLink("Back to List", "Index")
+    </u>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
 
 <script src="https://xdsoft.net/cache/903cd11f82fad90c9e8c4c45801eb6f2.js"></script>
@@ -71,28 +70,6 @@
 
 <link href="https://xdsoft.net/scripts/datetimepicker/build/jquery.datetimepicker.min.css" rel="stylesheet" />
 
-@*<script>
-    jQuery(function () {
-        jQuery('#StartDate').datetimepicker({
-            format: 'd/m/Y',
-            onShow: function (ct) {
-                this.setOptions({
-                    maxDate: jQuery('#EndDate').val() ? jQuery('EndDate').val() : false
-                })
-            },
-            timepicker: false
-        });
-        jQuery('#StartDate').datetimepicker({
-            format: 'd/m/Y',
-            onShow: function (ct) {
-                this.setOptions({
-                    minDate: jQuery('#EndDate').val() ? jQuery('#EndDate').val() : false
-                })
-            },
-            timepicker: false
-        });
-    });
-</script>*@
 <script>
     $('#StartDate').datetimepicker({
         format: 'Y/m/d',

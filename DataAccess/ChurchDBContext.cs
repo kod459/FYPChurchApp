@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using PIMS.Entities;
+﻿using PIMS.Entities;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -23,17 +19,12 @@ namespace PIMS.DataAccess
         public DbSet<Appointments> Appointments { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<PriestLeave> PriestLeave { get; set; }
-        public DbSet<House>Houses { get; set; }
+        public DbSet<House> Houses { get; set; }
 
-
-
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-      modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-    }
-
-}
-        
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+    }    
 
 }

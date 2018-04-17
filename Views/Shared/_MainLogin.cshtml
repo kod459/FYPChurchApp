@@ -2,29 +2,46 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - PIMS</title>
+        <title>@ViewBag.Title - OurChurch</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/Site.css")
+        @Styles.Render("~/Content/jquery.datetimepicker.css")
         @Scripts.Render("~/bundles/modernizr")
-        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+        @Styles.Render("~/Content/fullcalendar.css")
+
+        <meta charset="utf-8" />
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-@*                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>*@
-                    <!--<a href='@Url.Action("Index", "Home")-->
-                    <!--</a>-->
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" @Html.ActionLink("OurChurch", "Index", "Home")</a>
+                        <div class="float-right">
+                            <ul class="nav navbar-nav navbar-right">
+                                @Html.Partial("_LoginPartial")
+                            </ul>
+
+                        </div>
                     </div>
-                </div>
+                    </div>
+               </nav>
+                    <div class="content-wrapper">
+                        <div class="float-left">
+                            @*                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>*@
+                            <!--<a href='@Url.Action("Index", "Home")-->
+                            <!--</a>-->
+                        </div>
+                        
+                    </div>
         </header>
+
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
@@ -40,7 +57,8 @@
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        @RenderSection("Scripts", false)
     </body>
 </html>
 

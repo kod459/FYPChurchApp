@@ -22,6 +22,12 @@ namespace PIMS.Entities
         [ForeignKey("House")]
         public int HouseId { get; set; }
 
+        public string AddressLine1 { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DateRecieved { get; set; }
+
         public virtual House House { get; set; }
         public virtual Church Church { get; set; }
 

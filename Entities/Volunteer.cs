@@ -32,8 +32,6 @@ namespace PIMS.Entities
 
         public virtual ICollection<Appointments> Appointments { get; set; }
 
-        //public virtual Appointments app { get; set; }
-
         public Volunteer()
         {
             this.Appointments = new HashSet<Appointments>();

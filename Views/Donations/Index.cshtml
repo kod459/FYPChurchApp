@@ -5,50 +5,162 @@
     decimal runningTotal = 0M;
 }
 
-<h2>List of Donations</h2>
+@using (Html.BeginForm("Index", "Donations", FormMethod.Get))
+{ <div>
+        <fieldset>
+            <table style="border:none">
+                <tr>
+                    <td><label class="editor-label">Search Address:</label></td>
+                    <td id="searchBar1">@Html.TextBox("SearchStringAddress")</td>
+                    <td><label class="editor-label">Search House ID:</label></td>
+                    <td></td>
+                    <td id="searchBar2">@Html.TextBox("SearchStringHouseNumber")</td>
+                    <td>
+                        <input type="submit" value="Search" />
+                        
+                    </td>
+                </tr>
+               </table>
+            @if (TempData["Error"] != null)
+            {
+                <div style="color:red">@TempData["Error"]</div>
+            }
 
-<p>
-    @Html.ActionLink("Add New Donation", "Create")
-</p>
-<table class="tftable">
-    <tr>
-        <th>
-            @Html.DisplayName("Church Name")
-        </th>
-        <th>
-            @Html.DisplayName("House Number")
-        </th>
-        <th>
-            @Html.DisplayName("Type of Donation")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-    </tr>
 
-@foreach (var item in Model)
-{
-    {
-        runningTotal += item.Amount;
-    }
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Church.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HouseId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeOfDonation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
+        </fieldset>
+    </div>
+
+        <h2>List of Donations</h2>
+
+        <p>
+            <u> @Html.ActionLink("Add New Donation", "Create")</u>
+        </p>
+        <table class="tftable" id="tftable">
+            <tr>
+                <th>
+                    @Html.DisplayName("Church Name")
+                </th>
+                <th>
+                    @Html.DisplayName("House ID")
+                </th>
+                <th>
+                    @Html.DisplayName("House Address")
+                </th>
+                <th>
+                    @Html.DisplayName("Type of Donation")
+                </th>
+                <th>
+                    <u>
+                        @Html.ActionLink("Date Recieved", "Index", new { sortOrder = ViewBag.DateSortParm })
+                    </u>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayName("TOTAL")
+                </th>
+               
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    {
+                        runningTotal += item.Amount;
+                    }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Church.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HouseId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.House.AddressLine1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeOfDonation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRecieved)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        
+
+                    </tr>
+                }
+            }
+
+
+        </table>
         
-    </tr>
+        
+        <b>TOTAL: @runningTotal </b>
 }
-   
 
-</table>
 
-<b>TOTAL: @runningTotal </b>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+
+
+<script>
+    $('#SearchStringAddress').autocomplete({
+        source: function (request, response) {
+        $.get('@Url.Action("GetAddress", "Donations")',
+            { term: request.term },
+            function(data) {
+                response($.map(data, function (item) {
+                    if (item.Label !=null && item.Value != null) {
+                        return {
+                            label: item.Label,
+                            value: item.Value,
+                            realValue: item.RealValue,
+                           
+
+                        }
+                    }
+                    else if (item.Label == "" || item.Value == "")
+                    {
+                        return
+                        {
+                            false;
+                        }
+                    }
+
+                }));
+            });
+        },
+        messages: {
+            noResults: '',
+            results: function () { }
+        },
+
+
+    select: function (event, ui) {
+
+        var houseId = $('#SearchStringHouseNumber');
+        houseId.val(ui.item.realValue);
+        console.log(ui.item.realValue);
+
+        
+    }
+    })
+
+    function myFunction() {
+        function myFunction() {
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = "NEW CELL1";
+            cell2.innerHTML = "NEW CELL2";
+        }
+    }
+</script>

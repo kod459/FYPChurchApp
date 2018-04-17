@@ -63,7 +63,9 @@
             @Html.DisplayFor(modelItem => item.NameOfApplicant)
         </td>
         <td>
-            @Html.ActionLink("Update Appointment", "Edit", new { id = item.AppointmentId })
+            <u>
+                @Html.ActionLink("Update Appointment", "Edit", new { id = item.AppointmentId })
+            </u>
            
         </td>
         @if (item.Confirmed == false && item.RoomType == null)
@@ -75,12 +77,18 @@
         }
         else if (item.RoomType != null && item.Confirmed == false)
         {
-            @Html.ActionLink("Confirm Appointment", "Details", new { id = item.AppointmentId })
+            <td>
+                <u>
+                    @Html.ActionLink("Confirm Appointment", "Details", new { id = item.AppointmentId })
+                </u>
+            </td>
         }
         else
         {
         <td>
-            @Html.ActionLink("View Appointment", "Details", new { id = item.AppointmentId })
+            <u>
+                @Html.ActionLink("View Appointment", "Details", new { id = item.AppointmentId })
+            </u>
         </td>
         }
         

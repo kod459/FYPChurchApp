@@ -22,37 +22,50 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
+            </li>
+            <li>
                 @Html.TextBoxFor(m => m.UserName)
             </li>
 
             <li>
                 @Html.LabelFor(m => m.Name)
+            </li>
+            <li>
                 @Html.TextBoxFor(m => m.Name)
             </li>
 
             <li>
                 @Html.LabelFor(m => m.PhoneNumber)
+            </li>
+            <li>
                 @Html.TextBoxFor(m => m.PhoneNumber)
             </li>
             <li>
                @Html.LabelFor(m => m.Email)
+            </li>
+            <li>
                @Html.TextBoxFor(m => m.Email)
                @if (TempData["ErrorEmail"] != null)
                {
                 <div style="color:red">@TempData["ErrorEmail"]</div>     
                }
-
-            </li>
+              </li>
             <li>
                @Html.LabelFor(m => m.ConfirmEmail)
+             </li>
+            <li>
                @Html.TextBoxFor(m => m.ConfirmEmail)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
+            </li>
+            <li>
                 @Html.PasswordFor(m => m.Password)
             </li>
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
+                </li>
+            <li>
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
