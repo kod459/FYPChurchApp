@@ -384,13 +384,13 @@ namespace PIMS.Controllers
 
             if (Roles.IsUserInRole(UserName, RoleName))
             {
-                ViewBag.ResultMessage = "This user already has the role specified !";
+                ViewBag.ResultMessage = "This user already has the role specified!";
             }
             else
             {
                 Roles.AddUserToRole(UserName, RoleName);
                 ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
-                ViewBag.ResultMessage = "Username added to the role succesfully !";
+                ViewBag.ResultMessage = "Username added to the role succesfully!";
 
                 
             }
@@ -400,6 +400,9 @@ namespace PIMS.Controllers
                 string name = userProfile.Name;
                 string phone = userProfile.PhoneNumber;
                 string username = userProfile.UserName;
+                Roles.RemoveUserFromRole(UserName, "Lay User");
+
+
                 return RedirectToAction("Create", "Volunteers", new { email = email, name = name, phone = phone, username = username });
             }
             else

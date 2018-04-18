@@ -24,6 +24,8 @@ namespace PIMS.Entities
 
         public string ApplicantEmail { get; set; }
 
+        public int Slots { get; set; }
+
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public DateTime DateOfAppointment { get; set; }

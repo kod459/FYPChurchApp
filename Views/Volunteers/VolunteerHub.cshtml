@@ -103,9 +103,12 @@
                     header: {
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'month,basicWeek,basicDay'
+                        right: 'month, agendaWeek'
                     },
                     timeFormat: 'HH:mm',
+                    minTime: "09:00:00",
+                    maxTime: "17:00:00",
+                    defaultView: 'agendaWeek',
                     eventLimit: true,
                     eventColor: events.ThemeColour,
                     events: events,
@@ -164,14 +167,9 @@
                         $('#myModal #pDetails').empty().html($details);
 
                         $('#myModal').modal();
-                    },
-                    editable: true,
-                    eventDrop: function (event) {
-                        var data = {
-                            EventID: event.appointmentId
-                        };
-                        SaveEvent(data);
                     }
+                 
                 })
             }
+        })
     </script>

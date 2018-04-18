@@ -33,28 +33,31 @@
     @if ((Model != null) && (TempData["Error"] == null))
     {
     <tr>
+        <th>
+            Username
+        </th>
+
         @if(Request.IsAuthenticated && User.IsInRole("Administrator"))
         {
        <th>
-            View Details and Add Role
+            
         </th>
         }
-       <th>
-            Username
-        </th>
+      
         </tr>
             foreach (var item in Model)
             {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
                 @if(Request.IsAuthenticated && User.IsInRole("Administrator"))
                 {
                 <td>
-                    <u> @Html.ActionLink(" View Details and Add Role", "UserDetails", new { id = item.UserId }) </u>
+                    <u> @Html.ActionLink("Approve for Volunteer", "UserDetails", new { id = item.UserId }) </u>
                 </td>
                 }
-               <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-               </td>
+               
             </tr>
     }
     }

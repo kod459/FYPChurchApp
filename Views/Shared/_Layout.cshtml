@@ -14,7 +14,7 @@
     @Scripts.Render("~/bundles/multisel")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/chosen.js")
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    @Styles.Render("~/Content/bootstrap.min.css")
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -91,10 +91,12 @@
                     </div>
             </div>*@
 
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" @Html.ActionLink("Our Church", "Index", "Home")</a>
+                    <a href="@Url.Action("Index", "Home")" class="navbar-left">
+                        <img src='@Url.Content("../../Images/logo.png")' style="width: 120px" title="title" />
+                    </a>
                 </div>
                 <ul class="nav navbar-nav">
                     
@@ -123,12 +125,19 @@
                         </ul>
                     </li>
                     }
-                    else
+                    else if(Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Volunteer"))
                     {
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
-                    }
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Volunteer Hub<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Volunteer Schedule", "VolunteerHub", "Volunteers")</li>
+                            <li>@Html.ActionLink("View Ceremonies", "IndexOfCeremonies", "Appointments")</li>
+                        </ul>
+                    </li>
+            }
 
                 </ul>
 

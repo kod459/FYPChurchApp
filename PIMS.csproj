@@ -325,6 +325,10 @@
     <Compile Include="Migrations\201804171842251_fix.Designer.cs">
       <DependentUpon>201804171842251_fix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804181722352_Adding slots.cs" />
+    <Compile Include="Migrations\201804181722352_Adding slots.Designer.cs">
+      <DependentUpon>201804181722352_Adding slots.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -417,6 +421,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\logo.png" />
+    <Content Include="img\logo.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -917,6 +923,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804171842251_fix.resx">
       <DependentUpon>201804171842251_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804181722352_Adding slots.resx">
+      <DependentUpon>201804181722352_Adding slots.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

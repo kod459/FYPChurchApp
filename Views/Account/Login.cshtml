@@ -24,12 +24,17 @@
             <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
+            <li>
                 @Html.ValidationMessageFor(m => m.UserName)
+                </li>
+            <li>
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
+            <li>
                 @Html.ValidationMessageFor(m => m.Password)
+            </li>
             </li>
         </ol>
         <input type="submit" value="Log in" />

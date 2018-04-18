@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Appointment</h2>
+<div id="calendar"></div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -16,10 +17,36 @@
         @Html.HiddenFor(model => model.AppointmentId)
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.DetailsOfAppointment, "Appointment Details", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DetailsOfAppointment, "Appointment Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DetailsOfAppointment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("DetailsOfAppointment", ViewBag.Details as SelectList, new { })
                 @Html.ValidationMessageFor(model => model.DetailsOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdministrationId, "Parish Admin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AdministrationId", ViewBag.AdminId as SelectList, new { })
+                @Html.ValidationMessageFor(model => model.AdministrationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChurchId, "Church Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ChurchId", null, htmlAttributes: new { })
+                @Html.ValidationMessageFor(model => model.ChurchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfAppointment, "Date of Appointment", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfAppointment, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.DateOfAppointment, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -32,28 +59,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DateOfAppointment, "Date of Appointment", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateOfAppointment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateOfAppointment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Confirmed, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Confirmed)
-                        @Html.ValidationMessageFor(model => model.Confirmed, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>*@
-
-
-        <div class="form-group">
             @Html.LabelFor(model => model.NameOfApplicant, "Name of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.NameOfApplicant)
                 @Html.ValidationMessageFor(model => model.NameOfApplicant, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,7 +69,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ApplicantEmail, "Email of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ApplicantEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ApplicantEmail)
                 @Html.ValidationMessageFor(model => model.ApplicantEmail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,24 +77,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ApplicantPhoneNumber, "Phone Number of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ApplicantPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ApplicantPhoneNumber)
                 @Html.ValidationMessageFor(model => model.ApplicantPhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Administrator")
-            <div class="col-md-10">
-                @Html.DropDownList("AdministrationId", ViewBag.AdminId as SelectList, new { @class = "form-data" })
-                @Html.ValidationMessageFor(model => model.AdministrationId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Church Name")
-            <div class="col-md-10">
-                @Html.DropDownList("ChurchId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ChurchId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -104,23 +96,143 @@
     </u>
 </div>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+<script>
+
+    $(document).ready(function () {
+        var events = [];
+        var dateToday = new Date();
+        $.ajax({
+            type: "GET",
+            url: "/Appointments/UnAvailableSlots",
+            success: function (data) {
+                $.each(data, function (i, v) {
+                    events.push({
+                        details: v.DetailsOfAppointment,
+                        date: moment(v.DateOfAppointment),
+                        room: v.RoomType,
+                        confirmed: v.Confirmed,
+                        colour: v.ThemeColour,
+                        church: v.Church.Name,
+                        parishAdminName: v.Admins.AdministratorName,
+                        parishAdminUser: v.Admins.AdminUsername,
+                        parishAdminId: v.Admins.AdministratorId,
+                        fee: v.Fee,
+                        id: v.AppointmentId
+                    })
+
+                })
+                GenerateCalender(events);
+            },
+            error: function (error) {
+                alert("failed");
+                console.log(error);
+            }
+        })
+
+        function GenerateCalender(events) {
+            $('#calendar').fullCalendar({
+                viewRender: function (currentView) {
+                    var minDate = moment(),
+                        maxDate = moment().add(2, 'weeks');
+                    // Past
+                    if (minDate >= currentView.start && minDate <= currentView.end) {
+                        $(".fc-prev-button").prop('disabled', true);
+                        $(".fc-prev-button").addClass('fc-state-disabled');
+                    }
+                    else {
+                        $(".fc-prev-button").removeClass('fc-state-disabled');
+                        $(".fc-prev-button").prop('disabled', false);
+                    }
+                    // Future
+                    if (maxDate >= currentView.start && maxDate <= currentView.end) {
+                        $(".fc-next-button").prop('disabled', true);
+                        $(".fc-next-button").addClass('fc-state-disabled');
+                    } else {
+                        $(".fc-next-button").removeClass('fc-state-disabled');
+                        $(".fc-next-button").prop('disabled', false);
+                    }
+                },
+                contentHeight: 300,
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'basicWeek, agenda'
+                },
+                dayClick: function (date, allDay, jsEvent, view) {
+                    if (allDay) {
+                        if (date.isBefore(moment())) {
+                            alert('Appointment cannot be booked!');
+                        }
+                        else {
+                            var d = document.getElementById("DateOfAppointment");
+                            d.value = date.format("DD/MM/YYYY HH:mm");
+                            $('#calendar').fullCalendar('removeEvents');
+                            $('#calendar').fullCalendar('rerenderEvents')
+                            var eventData;
+                            eventData = {
+                                date: date
+                            };
+                            $('#calendar').fullCalendar('renderEvent', eventData, true);
+                        }
+
+                    }
+                },
+
+                eventOverlap: false,
+                slotDuration: '00:15:00',
+                defaultView: "agenda",
+                defaultDate: moment(),
+                minTime: "09:00:00",
+                maxTime: "17:00:00",
+                timeFormat: 'HH:mm',
+                eventLimit: true,
+                selectable: true,
+                unselectAuto: false,
+                defaultTimedEventDuration: '00:30:00',
+                eventColor: events.ThemeColour,
+                events: events,
+                eventRender: function (event, element) {
+                    if (event.fee == null) {
+                        if (event.confirmed == false) {
+                            element.css('background-color', '#FF0000');
+                            element.css('border-color', '#FF0000');
+                        }
+                        else {
+                            element.css('background-color', '#008000');
+                            element.css('border-color', '#008000');
+                        }
+                    }
+                    else {
+                        element.css('background-color', '#0000FF');
+                        element.css('border-color', '#0000FF');
+                    }
+
+                }
+
+            })
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            var timeNow = new Date();
 
 
-<script src="https://xdsoft.net/cache/903cd11f82fad90c9e8c4c45801eb6f2.js"></script>
+            if (dd < 10) {
+                dd = '0' + dd
+            }
 
-<script src="https://xdsoft.net/scripts/datetimepicker/build/jquery.datetimepicker.min.js"></script>
+            if (mm < 10) {
+                mm = '0' + mm
+            }
 
-<link href="https://xdsoft.net/scripts/datetimepicker/build/jquery.datetimepicker.min.css" rel="stylesheet" />
+            today = mm + '/' + dd + '/' + yyyy;
+            $('#calendar').fullCalendar('gotoDate', today);
 
- <div>   
+        }
+    })
+</script>
 
-    <script>
-        $('#DateOfAppointment').datetimepicker({
-            format: 'd/m/Y H:i',
-            minDate: 0,
-            inline: false,
-            allowTimes: ['9:00', '9:30', '11:30', '12:00', '12:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
-        });
-    </script>
-
-</div>

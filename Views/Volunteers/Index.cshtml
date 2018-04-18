@@ -22,6 +22,7 @@
         </th>
         <th>@Html.DisplayName("Upcoming Ceremonies")</th>
         <th></th>
+        <th></th>
     </tr>
   
 
@@ -59,9 +60,11 @@
             }
         </td>
         <td>
-            @if(item.GardaVetted == true)
+            @if (item.GardaVetted == true)
             {
-                @Html.ActionLink("Join Ceremony", "VolunteerCeremony", new { id = item.VolunteerId })
+                <u>
+                    @Html.ActionLink("Join Ceremony", "VolunteerCeremony", new { id = item.VolunteerId })
+                </u>
             }
             else
             {

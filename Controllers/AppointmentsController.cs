@@ -35,16 +35,45 @@ namespace PIMS.Controllers
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Index()
         {
-            var appointments = db.Appointments.Include(a => a.Church);
-            return View(appointments.ToList());
+            string username = Membership.GetUser().UserName;
+
+
+           
+
+            var getAdmin = (from a in db.Admins
+                            where username == a.AdminUsername
+                            select a.AdministrationId).SingleOrDefault();
+
+
+            var apps = (from a in db.Appointments
+                          where getAdmin == a.AdministrationId
+                          select a).Include(a=> a.Church).ToList().OrderByDescending(a=> a.DateOfAppointment);
+
+
+
+            //var appointments = db.Appointments.Include(a => a.Church);
+            return View(apps);
         }
 
         // GET: Appointments
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult IndexOfCeremonies()
         {
-            var appointments = db.Appointments.Include(a => a.Church);
-            return View(appointments.ToList());
+
+            string username = Membership.GetUser().UserName;
+
+            var getAdmin = (from a in db.Admins
+                            where username == a.AdminUsername
+                            select a.AdministrationId).SingleOrDefault();
+
+
+            var apps = (from a in db.Appointments
+                        where getAdmin == a.AdministrationId
+                        select a).Include(a => a.Church).ToList().OrderByDescending(a => a.DateOfAppointment);
+
+
+            //var appointments = db.Appointments.Include(a => a.Church);
+            return View(apps);
         }
 
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
@@ -82,6 +111,22 @@ namespace PIMS.Controllers
             
 
         }
+
+        [HttpPost]
+        public JsonResult SaveAppointment(Appointments a)
+        {
+            var status = false;
+            using (ChurchDBContext db = new ChurchDBContext())
+            {
+
+                db.Appointments.Add(a);
+                db.SaveChanges();
+                status = true;
+
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
 
         public JsonResult UnAvailableSlots()
         {

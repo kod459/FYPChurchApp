@@ -411,3 +411,4 @@ C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingDatetoDonationa
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddedEndofAppointment.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.DeletedEndofAppointment.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.fix.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Addingslots.resources
