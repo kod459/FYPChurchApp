@@ -40,9 +40,6 @@ namespace PIMS.Entities
         [ForeignKey("Church")]
         public int ChurchId { get; set; }
 
-        //[ForeignKey("Volunteers")]
-        //public int VolunteerId { get; set; }
-
         public virtual Church Church { get; set; }
 
         public virtual Administration Admins { get; set; }

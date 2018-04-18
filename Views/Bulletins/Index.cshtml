@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PIMS.Entities.Bulletins>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.AdministratorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DetailsOfBulletin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DetailsOfBulletin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BulletinsID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -248,6 +248,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationsController.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
+    <Compile Include="Controllers\BulletinsController.cs" />
     <Compile Include="Controllers\ChurchesController.cs" />
     <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Entities\Ceremonies.cs" />
     <Compile Include="Entities\Church.cs" />
     <Compile Include="Entities\Class.cs" />
+    <Compile Include="Entities\Bulletins.cs" />
     <Compile Include="Entities\Donation.cs" />
     <Compile Include="Entities\House.cs" />
     <Compile Include="Entities\Invoice.cs" />
@@ -328,6 +330,10 @@
     <Compile Include="Migrations\201804181722352_Adding slots.cs" />
     <Compile Include="Migrations\201804181722352_Adding slots.Designer.cs">
       <DependentUpon>201804181722352_Adding slots.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804182043205_Adding Bulletins.cs" />
+    <Compile Include="Migrations\201804182043205_Adding Bulletins.Designer.cs">
+      <DependentUpon>201804182043205_Adding Bulletins.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -876,6 +882,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Volunteers\ViewAvailableCeremonies.cshtml" />
+    <Content Include="Views\Bulletins\Create.cshtml" />
+    <Content Include="Views\Bulletins\Edit.cshtml" />
+    <Content Include="Views\Bulletins\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -926,6 +936,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804181722352_Adding slots.resx">
       <DependentUpon>201804181722352_Adding slots.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804182043205_Adding Bulletins.resx">
+      <DependentUpon>201804182043205_Adding Bulletins.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

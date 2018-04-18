@@ -1,9 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-
-    
-
     <meta charset="utf-8" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,8 +16,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-
-
 </head>
 <body>
     <header>
@@ -137,7 +132,13 @@
                             <li>@Html.ActionLink("View Ceremonies", "IndexOfCeremonies", "Appointments")</li>
                         </ul>
                     </li>
-            }
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
+                    }
 
                 </ul>
 

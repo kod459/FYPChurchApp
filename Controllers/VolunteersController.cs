@@ -126,6 +126,37 @@ namespace PIMS.Controllers
 
         }
 
+        public ActionResult AvailableCeremonies()
+        {
+            var ceremonies = (from a in db.Appointments
+                              where a.Fee != null && a.Slots != 0
+                              select a).ToList();
+
+            return View(ceremonies);
+        }
+
+        public ActionResult VolunteerCeremonies(Appointments apps)
+        {
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteer = (from vol in db.Volunteers
+                                where username == vol.Username
+                                select vol).SingleOrDefault();
+
+
+            //List of Volunteers in the Ceremonies
+            apps.Volunteers = new List<Volunteer>();
+
+
+
+
+            db.SaveChanges();
+
+            return View(apps);
+
+        }
+
+
 
         // GET: Volunteers/Details/5
         public ActionResult Details(int? id)

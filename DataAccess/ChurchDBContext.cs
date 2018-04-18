@@ -20,6 +20,7 @@ namespace PIMS.DataAccess
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<PriestLeave> PriestLeave { get; set; }
         public DbSet<House> Houses { get; set; }
+        public DbSet<Bulletins> Bulletins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

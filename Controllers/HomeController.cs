@@ -16,7 +16,7 @@ namespace PIMS.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Welcome to Our Church for Kilnamanagh Castleview!";
 
             return View();
         }
@@ -28,11 +28,6 @@ namespace PIMS.Controllers
             return View();
         }
 
-        public JsonResult GetEvents()
-        {
-            ChurchDBContext db = new ChurchDBContext();
-            var events = db.Appointments.ToList();
-            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
+
     }
 }
