@@ -42,7 +42,7 @@
             @Html.LabelFor(model => model.GardaVetted, "Garda Vetted?", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.GardaVetted)
+                    @Html.EditorFor(model => model.GardaVetted, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
                     @Html.ValidationMessageFor(model => model.GardaVetted, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerRole, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-               @Html.DropDownList("VolunteerRole", ViewBag.Role as SelectList, htmlAttributes: new { @class = "form-control", style = "width:20em;" }))
+               @Html.DropDownList("VolunteerRole", ViewBag.Role as SelectList, htmlAttributes: new { @class = "form-control", style = "width:20em;" })
                 @Html.ValidationMessageFor(model => model.VolunteerRole, "", new { @class = "text-danger" })
             </div>
         </div>

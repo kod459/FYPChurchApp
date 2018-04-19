@@ -144,17 +144,27 @@ namespace PIMS.Controllers
                                 select vol).SingleOrDefault();
 
 
-            //List of Volunteers in the Ceremonies
-            apps.Volunteers = new List<Volunteer>();
+            var ceremonies = (from a in getVolunteer.Appointments
+                              where a.Fee != null && a.Slots != 0
+                              select a).ToList();
 
-            db.SaveChanges();
-
-            return View(apps);
+            return View(ceremonies);
 
         }
 
+        public ActionResult ViewSpecificDetails()
+        {
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteerId = (from u in db.Volunteers
+                                  where username == u.Username
+                                  select u).ToList();
+
+            return View(getVolunteerId);
+        }
 
 
+    
         // GET: Volunteers/Details/5
         public ActionResult Details(int? id)
         {
@@ -165,21 +175,16 @@ namespace PIMS.Controllers
 
             string username = Membership.GetUser().UserName;
 
-            var getVolunteerId = (from u in db.Volunteers
+            Volunteer getVolunteerId = (from u in db.Volunteers
                                   where username == u.Username
-                                  select u.VolunteerId).SingleOrDefault();
-
-            if (getVolunteerId == id)
-            {
-                id = getVolunteerId;
-            }
+                                  select u).SingleOrDefault();
 
             Volunteer volunteer = db.Volunteers.Find(id);
-            if (volunteer == null)
+            if (getVolunteerId == null)
             {
                 return HttpNotFound();
             }
-            return View(volunteer);
+            return View(getVolunteerId);
         }
 
         // GET: Volunteers/Create
@@ -200,7 +205,7 @@ namespace PIMS.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerId,Name,Email,GardaVetted,VolunteerRole,VolunteerPhoneNumber,ChurchId")] Volunteer volunteer, string email, string name, string phone, string username)
+        public ActionResult Create([Bind(Include = "VolunteerId,Name,Email,GardaVetted,VolunteerRole,Username,VolunteerPhoneNumber,ChurchId")] Volunteer volunteer, string email, string name, string phone, string username)
         {
             if (ModelState.IsValid)
             {
@@ -258,6 +263,7 @@ namespace PIMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team", });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", volunteer.ChurchId);
             return View(volunteer);
         }
@@ -275,6 +281,7 @@ namespace PIMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team", });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", volunteer.ChurchId);
             return View(volunteer);
         }

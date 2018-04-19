@@ -900,6 +900,8 @@
     <Content Include="Views\Bulletins\Index.cshtml" />
     <Content Include="Views\Roles\AddToParishAdmin.cshtml" />
     <Content Include="Views\Roles\AllUsers.cshtml" />
+    <Content Include="Views\Volunteers\VolunteerCeremonies.cshtml" />
+    <Content Include="Views\Volunteers\ViewSpecificDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
