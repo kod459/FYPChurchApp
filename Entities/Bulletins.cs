@@ -12,12 +12,14 @@ namespace PIMS.Entities
         [Key]
         public int BulletinsID { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string DetailsOfBulletin { get; set; }
 
-        [ForeignKey("Admins")]
-        public int AdministrationId { get; set; }
+        public string AdminPosting { get; set; }
 
-        public virtual Administration Admins { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        public DateTime DateOfBulletin { get; set; }
 
     }
 }

@@ -413,3 +413,6 @@ C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.DeletedEndofAppointme
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.fix.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Addingslots.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingBulletins.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Gotridofrelationshipforbulletin.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.DateaddedtoBulletin.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Passwordgonefromadmin.resources

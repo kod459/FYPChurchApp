@@ -24,5 +24,15 @@ namespace PIMS
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
+
+        void Application_EndRequest(object sender, System.EventArgs e)
+        {
+            if (((Response.StatusCode == 401)
+            && (Request.IsAuthenticated == true)))
+            {
+                Response.ClearContent();
+                Response.Redirect("~/Views/Home/Index.cshtml");
+            }
+        }
     }
 }

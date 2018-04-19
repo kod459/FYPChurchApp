@@ -43,9 +43,14 @@ namespace PIMS.Controllers
         }
 
         // GET: Administrations/Create
-        public ActionResult Create()
+        public ActionResult Create(string email, string name, string phone, string username)
         {
+            ViewBag.Role = new SelectList(new[] { "Secretary", "Parish Admin", "Priest", "Catechist"});
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
+            ViewBag.email = email;
+            ViewBag.name = name;
+            ViewBag.phone = phone;
+            ViewBag.username = username;
             return View();
         }
 
@@ -54,15 +59,20 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdministrationId,AdministratorName,AdminUsername,Password,Position,PhoneNumber,EmailAddress,ChurchId")] Administration administration)
+        public ActionResult Create([Bind(Include = "AdministrationId,AdministratorName,AdminUsername,Password,Position,PhoneNumber,EmailAddress,ChurchId")]string email, string name, string phone, string username, Administration administration)
         {
             if (ModelState.IsValid)
             {
+                ViewBag.email = email;
+                ViewBag.name = name;
+                ViewBag.phone = phone;
+                ViewBag.username = username;
+
                 db.Admins.Add(administration);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Role = new SelectList(new[] { "Secretary", "Parish Admin", "Priest", "Catechist" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", administration.ChurchId);
             return View(administration);
         }
@@ -79,6 +89,7 @@ namespace PIMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Role = new SelectList(new[] { "Secretary", "Parish Admin", "Priest", "Catechist" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", administration.ChurchId);
             return View(administration);
         }
@@ -96,6 +107,7 @@ namespace PIMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Role = new SelectList(new[] { "Secretary", "Parish Admin", "Priest", "Catechist" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", administration.ChurchId);
             return View(administration);
         }

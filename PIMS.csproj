@@ -335,6 +335,18 @@
     <Compile Include="Migrations\201804182043205_Adding Bulletins.Designer.cs">
       <DependentUpon>201804182043205_Adding Bulletins.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804190914043_Got rid of relationship for bulletin.cs" />
+    <Compile Include="Migrations\201804190914043_Got rid of relationship for bulletin.Designer.cs">
+      <DependentUpon>201804190914043_Got rid of relationship for bulletin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804191049372_Date added to Bulletin.cs" />
+    <Compile Include="Migrations\201804191049372_Date added to Bulletin.Designer.cs">
+      <DependentUpon>201804191049372_Date added to Bulletin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804191244089_Password gone from admin.cs" />
+    <Compile Include="Migrations\201804191244089_Password gone from admin.Designer.cs">
+      <DependentUpon>201804191244089_Password gone from admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -886,6 +898,8 @@
     <Content Include="Views\Bulletins\Create.cshtml" />
     <Content Include="Views\Bulletins\Edit.cshtml" />
     <Content Include="Views\Bulletins\Index.cshtml" />
+    <Content Include="Views\Roles\AddToParishAdmin.cshtml" />
+    <Content Include="Views\Roles\AllUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -939,6 +953,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804182043205_Adding Bulletins.resx">
       <DependentUpon>201804182043205_Adding Bulletins.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804190914043_Got rid of relationship for bulletin.resx">
+      <DependentUpon>201804190914043_Got rid of relationship for bulletin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804191049372_Date added to Bulletin.resx">
+      <DependentUpon>201804191049372_Date added to Bulletin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804191244089_Password gone from admin.resx">
+      <DependentUpon>201804191244089_Password gone from admin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

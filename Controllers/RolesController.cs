@@ -49,6 +49,29 @@ namespace PIMS.Controllers
             return View(usersNoRoles);
         }
 
+        public ActionResult AllUsers()
+        {
+            var allUsers = new SelectList(Roles.GetUsersInRole("Lay User"));
+            var allUsersWithRole = allUsers.ToList();
+            var usersInLayUser = new List<UserAndRoles>();
+
+            foreach (var ur in allUsersWithRole)
+            {
+                var userDetails = (from u in db.UserProfiles
+                                   where u.UserName == ur.Text
+                                   select u);
+                UserAndRoles userAndRoles = new UserAndRoles();
+                userAndRoles.LayUser = "X";
+
+                userAndRoles.UserId = userDetails.FirstOrDefault().UserId;
+                userAndRoles.UserName = userDetails.FirstOrDefault().UserName.ToString();
+                usersInLayUser.Add(userAndRoles);
+            }
+
+            return View(usersInLayUser.ToList());
+
+        }
+
         ////GET
         //public ActionResult UsersInAdmin()
         //{
@@ -411,6 +434,69 @@ namespace PIMS.Controllers
             }
 
         }
+
+        //GET
+        public ActionResult AddToParishAdmin(int id = 0)
+        {
+            UserProfile userProfile = db.UserProfiles.Find(id);
+            ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
+
+            if (userProfile == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                ViewBag.Role = "Parish Admin";
+            }
+
+
+            return View(userProfile);
+        }
+
+        //POST
+        [Authorize(Roles = "Administrator, Parish Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToParishAdmin(string RoleName, string UserName, int id)
+        {
+            UserProfile userProfile = db.UserProfiles.Find(id);
+            ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
+
+            var checkIfParishAdminExists = db.Admins
+                    .Any(b => (userProfile.Email == b.EmailAddress));
+
+
+            if (Roles.IsUserInRole(UserName, RoleName))
+            {
+                ViewBag.ResultMessage = "This user already has the role specified!";
+            }
+            else
+            {
+                Roles.AddUserToRole(UserName, RoleName);
+                ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
+                ViewBag.ResultMessage = "Username added to the role succesfully!";
+
+
+            }
+            if (RoleName.Equals("Parish Admin") && !checkIfParishAdminExists)
+            {
+                string email = userProfile.Email;
+                string name = userProfile.Name;
+                string phone = userProfile.PhoneNumber;
+                string username = userProfile.UserName;
+                Roles.RemoveUserFromRole(UserName, "Lay User");
+
+
+                return RedirectToAction("Create", "Administrations", new { email = email, name = name, phone = phone, username = username });
+            }
+            else
+            {
+                return View(userProfile);
+            }
+
+        }
+
 
         public void RedirectToDetails(int id)
         {

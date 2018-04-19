@@ -15,8 +15,6 @@ namespace PIMS.Entities
         public string AdministratorName { get; set; }
 
         public string AdminUsername { get; set; }
-
-        public string Password { get; set; }
         
         public string Position { get; set; }
 

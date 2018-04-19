@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PIMS.DataAccess;
 using PIMS.Entities;
+using System.Web.Security;
 
 namespace PIMS.Controllers
 {
@@ -18,8 +19,8 @@ namespace PIMS.Controllers
         // GET: Bulletins
         public ActionResult Index()
         {
-            var bulletins = db.Bulletins.Include(b => b.Admins);
-            return View(bulletins.ToList());
+            var bulletins = db.Bulletins.OrderByDescending(a => a.DateOfBulletin).ToList();
+            return View(bulletins);
         }
 
         // GET: Bulletins/Details/5
@@ -40,8 +41,20 @@ namespace PIMS.Controllers
         // GET: Bulletins/Create
         public ActionResult Create()
         {
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName");
-            return View();
+            string username = Membership.GetUser().UserName;
+
+            var getAdmin = (from a in db.Admins
+                            where username == a.AdminUsername
+                            select a.AdministratorName).SingleOrDefault();
+
+            ViewBag.AdminName = getAdmin;
+            Bulletins model = new Bulletins();
+            model.DateOfBulletin = DateTime.Now;
+
+            return View(model);
+
+            //ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName");
+            
         }
 
         // POST: Bulletins/Create
@@ -49,16 +62,25 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BulletinsID,DetailsOfBulletin,AdministrationId")] Bulletins bulletins)
+        public ActionResult Create([Bind(Include = "BulletinsID,DetailsOfBulletin,AdminPosting, DateOfBulletin")] Bulletins bulletins)
         {
             if (ModelState.IsValid)
             {
+                string username = Membership.GetUser().UserName;
+
+
+                var getAdmin = (from a in db.Admins
+                                where username == a.AdminUsername
+                                select a.AdministratorName).SingleOrDefault();
+
+                ViewBag.AdminName = getAdmin;
+
                 db.Bulletins.Add(bulletins);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", bulletins.AdministrationId);
+            //ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", bulletins.AdministrationId);
             return View(bulletins);
         }
 
@@ -74,7 +96,7 @@ namespace PIMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", bulletins.AdministrationId);
+            //ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", bulletins.AdministrationId);
             return View(bulletins);
         }
 
@@ -83,7 +105,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BulletinsID,DetailsOfBulletin,AdministrationId")] Bulletins bulletins)
+        public ActionResult Edit([Bind(Include = "BulletinsID,DetailsOfBulletin,AdminPosting,DateOfBulletin")] Bulletins bulletins)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +113,7 @@ namespace PIMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", bulletins.AdministrationId);
+            //ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", bulletins.AdministrationId);
             return View(bulletins);
         }
 

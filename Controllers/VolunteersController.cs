@@ -147,9 +147,6 @@ namespace PIMS.Controllers
             //List of Volunteers in the Ceremonies
             apps.Volunteers = new List<Volunteer>();
 
-
-
-
             db.SaveChanges();
 
             return View(apps);

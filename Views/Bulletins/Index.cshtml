@@ -5,34 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Bulletins</h2>
 
+
+@if (Request.IsAuthenticated && User.IsInRole("Parish Admin"))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Admins.AdministratorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DetailsOfBulletin)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DetailsOfBulletin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BulletinsID })
-        </td>
-    </tr>
 }
 
-</table>
+@foreach (var item in Model)
+{
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(modelItem => item.AdminPosting, "Parish Admin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(modelItem => item.AdminPosting, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(modelItem => item.DateOfBulletin, "Date Posted", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(modelItem => item.DateOfBulletin, "{0:dd/MM/yyyy HH:mm}", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(modelItem => item.DetailsOfBulletin, "Details of Bulletin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(modelItem => item.DetailsOfBulletin, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+        </div>
+        }

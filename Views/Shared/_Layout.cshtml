@@ -99,13 +99,23 @@
             @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Parish Admin") || Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Priest") || Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
             {
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Donations", "Index", "Donations")</li>
                             <li>@Html.ActionLink("Invoices", "Index", "Invoices")</li>
+                            <li>@Html.ActionLink("Add Bulletin", "Create", "Bulletins")</li>
                             <li>@Html.ActionLink("Approve Volunteers", "UsersInLayUserRole", "Roles")</li>
+                            @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                            {
+                                <li>@Html.ActionLink("Add a new Parish Admin", "AllUsers", "Roles")</li>
+                            }
                         </ul>
                     </li>
 
@@ -123,7 +133,12 @@
                     else if(Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Volunteer"))
                     {
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Volunteer Hub<span class="caret"></span></a>
@@ -136,7 +151,12 @@
                     else
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                        </ul>
+                    </li>
                         <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
                     }
 
