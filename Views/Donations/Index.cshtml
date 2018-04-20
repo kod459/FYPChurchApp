@@ -57,9 +57,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Amount)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayName("TOTAL")
-                </th>
+                </th>*@
                
             </tr>
 
@@ -89,34 +89,35 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
-                        
-
                     </tr>
                 }
+
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th></th>
+                    <th colspan="1" align="right">
+                        <b>TOTAL: @runningTotal </b>
+                    </th>
+                </tr>
             }
-
-
         </table>
-        
-        
-        <b>TOTAL: @runningTotal </b>
 }
-
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
-
-
 <script>
-
-    //var node = document.createElement("td");
-    //var textnode = document.createTextNode("Total");
-    //node.appendChild(textnode);
-    //document.querySelector("tftable #row1").appendChild(node);
-
     $('#SearchStringAddress').autocomplete({
         source: function (request, response) {
         $.get('@Url.Action("GetAddress", "Donations")',
@@ -158,4 +159,10 @@
         
     }
     })
+
+    var node = document.createElement("td");
+    var textnode = document.createTextNode("Total");
+    node.appendChild(textnode);
+    document.querySelector("tftable #row1").appendChild(node);
+
 </script>

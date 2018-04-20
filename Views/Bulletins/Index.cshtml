@@ -11,7 +11,9 @@
 @if (Request.IsAuthenticated && User.IsInRole("Parish Admin"))
 {
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <u>
+        @Html.ActionLink("Create New Bulletin", "Create")
+    </u>
 </p>
 }
 

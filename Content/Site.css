@@ -695,6 +695,9 @@ tr.pager td {
 .tftable tr {background-color:#d4e3e5;}
 .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
 .tftable tr:hover {background-color:#ffffff;}
+.alignRight {
+    text-align: right;
+}
 
 
 /********************

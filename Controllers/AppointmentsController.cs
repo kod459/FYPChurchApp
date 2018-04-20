@@ -86,9 +86,9 @@ namespace PIMS.Controllers
                             select a.AdministrationId).SingleOrDefault();
 
 
-            var events = (from a in db.Appointments
-                          where getAdmin == a.AdministrationId
-                          select a).First();
+            //var events = (from a in db.Appointments
+            //              where getAdmin == a.AdministrationId
+            //              select a).First();
 
             return View();
         }
@@ -102,13 +102,20 @@ namespace PIMS.Controllers
                             where username == a.AdminUsername
                             select a.AdministrationId).SingleOrDefault();
 
-
+            
             var events = (from a in db.Appointments
                           where getAdmin == a.AdministrationId
                           select a).ToList();
 
+            if(events == null)
+            {
+                return new JsonResult { Data = "No Appointments or Ceremonies for User", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            { 
              return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            
+            }
+
 
         }
 

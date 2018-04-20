@@ -156,14 +156,7 @@
 
 
                         $details.append($('<p/>').html('<b>Parish Admin : </b>' + calEvent.parishAdminName));
-                        if (calEvent.confirmed == true)
-                        {
-                            $details.append($('<p/>').html('<b>Status : Confirmed </b>'));
-                        }
-                        else
-                        {
-                            $details.append($('<p/>').html('<b>Status : Not Confirmed </b>'));
-                        }
+                        $details.append($('<p/>').html('<b>Status : Confirmed </b>'));
                         $('#myModal #pDetails').empty().html($details);
 
                         $('#myModal').modal();
