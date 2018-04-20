@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace PIMS.Entities
 {
@@ -28,7 +25,6 @@ namespace PIMS.Entities
 
         [ForeignKey("Church")]
         public int ChurchId { get; set; }
-
 
         public virtual Church Church { get; set; }
         

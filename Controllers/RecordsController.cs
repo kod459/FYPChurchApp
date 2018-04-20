@@ -14,6 +14,7 @@ using System.Threading;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using Google.Apis.Drive.v3.Data;
+using System.Web.Security;
 
 namespace PIMS.Controllers
 {
@@ -24,8 +25,8 @@ namespace PIMS.Controllers
         // GET: Records
         public ActionResult Index()
         {
-            var records = db.Records.Include(r => r.Admins);
-            return View(records.ToList());
+            var records = db.Records.ToList();
+            return View(records);
         }
 
         // GET: Records/Details/5
@@ -46,8 +47,20 @@ namespace PIMS.Controllers
         // GET: Records/Create
         public ActionResult Create()
         {
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName");
-            return View();
+            string username = Membership.GetUser().UserName;
+
+            var getAdmin = (from a in db.Admins
+                            where username == a.AdminUsername
+                            select a.AdministratorName).SingleOrDefault();
+
+            ViewBag.AdminName = getAdmin;
+
+            ViewBag.DocumentType = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
+
+            Record model = new Record();
+            model.UploadDate = DateTime.Now;
+
+            return View(model);
         }
 
         // POST: Records/Create
@@ -55,16 +68,32 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecordId,DocumentType,UploadDate,Document,AdministrationId")] Record record)
+        public ActionResult Create([Bind(Include = "RecordId,NameOnRecord,DocumentType,UploadDate,Document,UploadedBy")] Record record, HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
             {
+                string username = Membership.GetUser().UserName;
+
+
+                var getAdmin = (from a in db.Admins
+                                where username == a.AdminUsername
+                                select a.AdministratorName).SingleOrDefault();
+
+                ViewBag.AdminName = getAdmin;
+                ViewBag.DocumentType = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
+
+                if (File != null && File.ContentLength > 0)
+                {
+                    record.Document = new byte[File.ContentLength];
+                    File.InputStream.Read(record.Document, 0, File.ContentLength);
+                }
+
                 db.Records.Add(record);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
+           
             return View(record);
         }
 
@@ -80,7 +109,8 @@ namespace PIMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
+            ViewBag.Type = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
+            // ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
             return View(record);
         }
 
@@ -89,7 +119,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecordId,DocumentType,UploadDate,Document,AdministrationId")] Record record)
+        public ActionResult Edit([Bind(Include = "RecordId,NameOnRecord,DocumentType,UploadDate,Document,UploadedBy")] Record record)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +127,8 @@ namespace PIMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
+            ViewBag.Type = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
+            // ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
             return View(record);
         }
 

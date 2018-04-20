@@ -416,3 +416,5 @@ C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingBulletins.resou
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Gotridofrelationshipforbulletin.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.DateaddedtoBulletin.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Passwordgonefromadmin.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingRecords.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingRecordswithoutAdminID.resources

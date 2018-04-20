@@ -347,6 +347,14 @@
     <Compile Include="Migrations\201804191244089_Password gone from admin.Designer.cs">
       <DependentUpon>201804191244089_Password gone from admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804201726450_Adding Records.cs" />
+    <Compile Include="Migrations\201804201726450_Adding Records.Designer.cs">
+      <DependentUpon>201804201726450_Adding Records.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804201752033_Adding Records without AdminID.cs" />
+    <Compile Include="Migrations\201804201752033_Adding Records without AdminID.Designer.cs">
+      <DependentUpon>201804201752033_Adding Records without AdminID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -358,7 +366,6 @@
     <Compile Include="Models\LocalPasswordModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LostPasswordModel.cs" />
-    <Compile Include="Models\RecordRepository.cs" />
     <Compile Include="Models\RegisterExternalLoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
@@ -902,6 +909,10 @@
     <Content Include="Views\Roles\AllUsers.cshtml" />
     <Content Include="Views\Volunteers\VolunteerCeremonies.cshtml" />
     <Content Include="Views\Volunteers\ViewSpecificDetails.cshtml" />
+    <Content Include="Views\Records\IndexOfBaptisms.cshtml" />
+    <Content Include="Views\Records\IndexOfConfirmations.cshtml" />
+    <Content Include="Views\Records\IndexOfFunerals.cshtml" />
+    <Content Include="Views\Records\IndexOfWeddings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -964,6 +975,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804191244089_Password gone from admin.resx">
       <DependentUpon>201804191244089_Password gone from admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804201726450_Adding Records.resx">
+      <DependentUpon>201804201726450_Adding Records.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804201752033_Adding Records without AdminID.resx">
+      <DependentUpon>201804201752033_Adding Records without AdminID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

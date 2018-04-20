@@ -51,7 +51,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,ChurchId")] Invoice invoice,HttpPostedFileBase File)
+        public ActionResult Create([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,DateReceived,ChurchId")] Invoice invoice,HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InvoiceId,Company,Description,Amount,ChurchId")] Invoice invoice, int? id)
+        public ActionResult Edit([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,DateReceived,ChurchId")] Invoice invoice, int? id)
         {
 
             if (ModelState.IsValid)

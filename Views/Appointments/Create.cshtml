@@ -168,7 +168,6 @@
                             {
                                 var d = document.getElementById("DateOfAppointment");
                                 d.value = date.format("DD/MM/YYYY HH:mm");
-                                $('#calendar').fullCalendar('removeEvents');
                                 $('#calendar').fullCalendar('rerenderEvents')
                                 var eventData;
                                 eventData = {
@@ -186,11 +185,13 @@
                     defaultDate: moment(),
                     minTime: "09:00:00",
                     maxTime: "17:00:00",
-                    timeFormat: '',
+                    timeFormat: 'H:mm',
+                    axisFormat: 'H:mm',
                     eventLimit: true,
                     selectable: true,
+                    slotLabelFormat: "HH:mm",
                     unselectAuto: false,
-                    defaultTimedEventDuration: '00:30:00',
+                    defaultTimedEventDuration: '01:0:00',
                     eventColor: events.ThemeColour,
                     events: events,
                     eventRender: function (event, element) {

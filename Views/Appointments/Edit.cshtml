@@ -211,13 +211,19 @@
                     }
 
                 },
-
-                defaultTimedEventDuration: function (event) {
-                    if (event.fee != null)
-                    {
-
+                select: function (event, start, end) {
+                    if (event.fee == null) {
+                        end = event.date;
+                        end.add(1, 'hours');
                     }
                 }
+
+                //defaultTimedEventDuration: function (event) {
+                //    if (event.fee != null)
+                //    {
+
+                //    }
+                //}
 
             })
 
