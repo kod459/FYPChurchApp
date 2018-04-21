@@ -29,6 +29,234 @@ namespace PIMS.Controllers
             return View(records);
         }
 
+        public ActionResult IndexOfBaptisms(string SearchStringName, string SearchStringYearUploaded)
+        {
+            IQueryable<Record> allBaptismRecords = (from r in db.Records
+                                                    where (r.DocumentType.Equals("Baptism Cert"))
+                                                    select r);
+            if(!String.IsNullOrEmpty(SearchStringName) && String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                                        where (r.DocumentType.Equals("Baptism Cert") && r.NameOnRecord.Contains(SearchStringName))
+                                                        select r);
+
+                if(records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+
+            else if(!String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Baptism Cert") 
+                                              && r.NameOnRecord.Contains(SearchStringName)
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+
+            else if (String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Baptism Cert")
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+
+            else
+            {
+                return View(allBaptismRecords.ToList());
+            }
+        }
+
+        public ActionResult IndexOfConfirmations(string SearchStringName, string SearchStringYearUploaded)
+        {
+            if (!String.IsNullOrEmpty(SearchStringName) && String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Confirmation Cert") && r.NameOnRecord.Contains(SearchStringName))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else if (!String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Confirmation Cert")
+                                              && r.NameOnRecord.Contains(SearchStringName)
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else if (String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Confirmation Cert")
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else
+            {
+                IQueryable<Record> allConfirmations = (from r in db.Records
+                                                       where (r.DocumentType.Equals("Confirmation Cert"))
+                                                       select r);
+                return View(allConfirmations);
+            }
+        }
+
+        public ActionResult IndexOfFunerals(string SearchStringName, string SearchStringYearUploaded)
+        {
+            if (!String.IsNullOrEmpty(SearchStringName) && String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Confirmation Cert") && r.NameOnRecord.Contains(SearchStringName))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else if (!String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Funeral Cert")
+                                              && r.NameOnRecord.Contains(SearchStringName)
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else if (String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Funeral Cert")
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else
+            {
+                IQueryable<Record> allFunerals = (from r in db.Records
+                                                       where (r.DocumentType.Equals("Funeral Cert"))
+                                                       select r);
+                return View(allFunerals);
+            }
+        }
+
+        public ActionResult IndexOfWeddings(string SearchStringName, string SearchStringYearUploaded)
+        {
+            if (!String.IsNullOrEmpty(SearchStringName) && String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Wedding Cert") && r.NameOnRecord.Contains(SearchStringName))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else if (!String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Wedding Cert")
+                                              && r.NameOnRecord.Contains(SearchStringName)
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else if (String.IsNullOrEmpty(SearchStringName) && !String.IsNullOrEmpty(SearchStringYearUploaded))
+            {
+                IQueryable<Record> records = (from r in db.Records
+                                              where (r.DocumentType.Equals("Wedding Cert")
+                                              && r.UploadDate.Year.ToString().Equals(SearchStringYearUploaded))
+                                              select r);
+
+                if (records.Count() == 0)
+                {
+                    TempData["Error"] = "No Records found";
+                    return View();
+                }
+
+                return View(records.ToList());
+            }
+            else
+            {
+                IQueryable<Record> allConfirmations = (from r in db.Records
+                                                       where (r.DocumentType.Equals("Wedding Cert"))
+                                                       select r);
+                return View(allConfirmations);
+            }
+        }
+
+
         // GET: Records/Details/5
         public ActionResult Details(int? id)
         {
@@ -55,7 +283,7 @@ namespace PIMS.Controllers
 
             ViewBag.AdminName = getAdmin;
 
-            ViewBag.DocumentType = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
+            ViewBag.DocumentType = new SelectList(new[] { "Baptism Cert", "Confirmation Cert", "Wedding Cert", "Funeral Cert" });
 
             Record model = new Record();
             model.UploadDate = DateTime.Now;
@@ -80,7 +308,7 @@ namespace PIMS.Controllers
                                 select a.AdministratorName).SingleOrDefault();
 
                 ViewBag.AdminName = getAdmin;
-                ViewBag.DocumentType = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
+                ViewBag.DocumentType = new SelectList(new[] { "Baptism Cert", "Confirmation Cert", "Wedding Cert", "Funeral Cert" });
 
                 if (File != null && File.ContentLength > 0)
                 {
@@ -110,7 +338,6 @@ namespace PIMS.Controllers
                 return HttpNotFound();
             }
             ViewBag.Type = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
-            // ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
             return View(record);
         }
 
@@ -127,8 +354,7 @@ namespace PIMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Type = new SelectList(new[] { "Wedding Cert", "Confirmation Cert", "Baptism Cert", "Funeral Cert" });
-            // ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", record.AdministrationId);
+            ViewBag.Type = new SelectList(new[] { "Baptism Cert", "Confirmation Cert", "Wedding Cert", "Funeral Cert" });
             return View(record);
         }
 

@@ -12,7 +12,7 @@
     <div class="form-horizontal">
         <hr />
         <div class="form-group">
-            @Html.LabelFor(model => model.DocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DocumentType, "Document Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("DocumentType", null, htmlAttributes: new { @class = "form-control", style = "width:20em;" })
                 @Html.ValidationMessageFor(model => model.DocumentType, "", new { @class = "text-danger" })
@@ -45,7 +45,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UploadedBy, "Administrator Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UploadedBy, "Admin Uploading", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UploadedBy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.AdminName, @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.UploadedBy, "", new { @class = "text-danger" })

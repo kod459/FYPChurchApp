@@ -4,27 +4,52 @@
     ViewBag.Title = "Index";
 }
 
-<h2>List of Funeral Certs</h2>
 
-<p>
-    <u> @Html.ActionLink("Add New Cert", "Create")</u>
-</p>
+@using (Html.BeginForm("IndexOfFunerals", "Records", FormMethod.Get))
+{ <div>
+        <fieldset>
+            <table style="border:none">
+                <tr>
+                    <td><label class="editor-label">Search Name:</label></td>
+                    <td id="searchBar1">@Html.TextBox("SearchStringName")</td>
+                    <td><label class="editor-label">Search By Year:</label></td>
+                    <td></td>
+                    <td id="searchBar2">@Html.TextBox("SearchStringYearUploaded")</td>
+                    <td>
+                        <input type="submit" value="Search" />
+
+                    </td>
+                </tr>
+            </table>
+            @if (TempData["Error"] != null)
+            {
+                <div style="color:red">@TempData["Error"]</div>
+            }
+
+
+        </fieldset>
+    </div>
+
+
+<h2>List of Funeral Certs</h2>
 <table class="tftable">
     <tr>
         <th>
-            @Html.Display("Name on Record")
+            @Html.DisplayName("Name on Record")
         </th>
         <th>
-            @Html.Display("Type of Record")
+            @Html.DisplayName("Type of Record")
         </th>
         <th>
-            @Html.Display("Upload Date")
+            @Html.DisplayName("Upload Date")
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @if (Model != null)
     {
+        foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NameOnRecord)
@@ -40,6 +65,8 @@
                 <u>@Html.ActionLink("Details", "Details", new { id = item.RecordId })</u>
             </td>
         </tr>
+        }
     }
 
 </table>
+}
