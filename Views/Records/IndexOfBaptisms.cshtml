@@ -64,7 +64,8 @@
                 </td>
                 <td>
                     <u>@Html.ActionLink("Edit", "Edit", new { id = item.RecordId })</u> |
-                    <u>@Html.ActionLink("Details", "Details", new { id = item.RecordId })</u>
+                    <u>@Html.ActionLink("Details", "Details", new { id = item.RecordId })</u> |
+                    <u>@Html.ActionLink("Download Cert", "DownloadCert", new { id = item.RecordId })</u>
                 </td>
             </tr>
         }

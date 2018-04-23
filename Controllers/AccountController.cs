@@ -327,7 +327,6 @@ namespace PIMS.Controllers
         #region Assigning Roles to Users
 
         //Get
-        [Authorize(Roles = "SuperUser")]
         public ActionResult RoleCreate()
         {
             var roles = Roles.GetAllRoles();
@@ -335,7 +334,7 @@ namespace PIMS.Controllers
         }
 
         //Post
-        [Authorize(Roles = "SuperUser")]
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RoleCreate(string RoleName)

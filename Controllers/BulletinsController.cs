@@ -24,6 +24,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Bulletins/Details/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +40,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Bulletins/Create
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create()
         {
             string username = Membership.GetUser().UserName;
@@ -61,6 +63,7 @@ namespace PIMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BulletinsID,DetailsOfBulletin,AdminPosting, DateOfBulletin")] Bulletins bulletins)
         {
@@ -85,6 +88,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Bulletins/Edit/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +109,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Edit([Bind(Include = "BulletinsID,DetailsOfBulletin,AdminPosting,DateOfBulletin")] Bulletins bulletins)
         {
             if (ModelState.IsValid)
@@ -118,6 +123,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Bulletins/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -135,6 +141,7 @@ namespace PIMS.Controllers
         // POST: Bulletins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Bulletins bulletins = db.Bulletins.Find(id);

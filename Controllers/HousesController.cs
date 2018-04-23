@@ -16,12 +16,14 @@ namespace PIMS.Controllers
         private ChurchDBContext db = new ChurchDBContext();
 
         // GET: Houses
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Index()
         {
             return View(db.Houses.ToList());
         }
 
         // GET: Houses/Details/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Houses/Create
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +50,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create([Bind(Include = "HouseId,AddressLine1,AddressLine2,AddressLine3")] House house)
         {
             if (ModelState.IsValid)
@@ -60,6 +64,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Houses/Edit/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace PIMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "HouseId,AddressLine1,AddressLine2,AddressLine3")] House house)
         {
@@ -91,6 +97,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Houses/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -106,6 +113,7 @@ namespace PIMS.Controllers
         }
 
         // POST: Houses/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

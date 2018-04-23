@@ -23,6 +23,7 @@ namespace PIMS.Controllers
         // GET: /Roles/
 
         //GET
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult UsersNoRoles()
         {
             var users = (from u in db.UserProfiles
@@ -49,6 +50,7 @@ namespace PIMS.Controllers
             return View(usersNoRoles);
         }
 
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult AllUsers()
         {
             var allUsers = new SelectList(Roles.GetUsersInRole("Lay User"));
@@ -72,94 +74,7 @@ namespace PIMS.Controllers
 
         }
 
-        ////GET
-        //public ActionResult UsersInAdmin()
-        //{
-        //    var allUser = new SelectList(Roles.GetUsersInRole("Administrator"));
-        //    var allSuperUser = new SelectList(Roles.GetUsersInRole("SuperUser"));
-        //    var allUsersWithRole = allUser.ToList();
-        //    var usersInSuperUser = new List<UserAndRoles>();
-
-        //    foreach (var ur in allUsersWithRole)
-        //    {
-        //        var userDetails = (from u in db.UserProfiles
-        //                           where u.UserName == ur.Text
-        //                           select u);
-        //        UserAndRoles userAndRoles = new UserAndRoles();
-        //        userAndRoles.UserRole = "X";
-        //        userAndRoles.AdminRole = "X";
-
-        //        userAndRoles.UserId = userDetails.FirstOrDefault().UserId;
-        //        userAndRoles.UserName = userDetails.FirstOrDefault().UserName.ToString();
-        //        foreach (var s in allSuperUser)
-        //        {
-        //            if (s.Text == userAndRoles.UserName)
-        //            { userAndRoles.SuperRole = "X"; }
-        //        }
-        //        usersInSuperUser.Add(userAndRoles);
-        //    }
-        //    return View(usersInSuperUser.ToList());
-        //}
-
-        ////GET
-        //public ActionResult UsersInSuperUser()
-        //{
-        //    var allUser = new SelectList(Roles.GetUsersInRole("SuperUser"));
-        //    var allUsersWithRole = allUser.ToList();
-        //    var usersInSuperUser = new List<UserAndRoles>();
-
-        //    foreach (var ur in allUsersWithRole)
-        //    {
-        //        var userDetails = (from u in db.UserProfiles
-        //                           where u.UserName == ur.Text
-        //                           select u);
-        //        UserAndRoles userAndRoles = new UserAndRoles();
-        //        userAndRoles.UserRole = "X";
-        //        userAndRoles.AdminRole = "X";
-        //        userAndRoles.SuperRole = "X";
-        //        userAndRoles.UserId = userDetails.FirstOrDefault().UserId;
-        //        userAndRoles.UserName = userDetails.FirstOrDefault().UserName.ToString();
-
-        //        usersInSuperUser.Add(userAndRoles);
-        //    }
-        //    return View(usersInSuperUser.ToList());
-        //}
-
-        ////GET
-        //public ActionResult UsersInUserRole()
-        //{
-        //    var allUsers = new SelectList(Roles.GetUsersInRole("User"));
-        //    var allAdminUsers = new SelectList(Roles.GetUsersInRole("Administrator"));
-        //    var allSuperUsers = new SelectList(Roles.GetUsersInRole("SuperUser"));
-        //    var allUsersWithRole = allUsers.ToList();
-        //    var usersInUser = new List<UserAndRoles>();
-
-        //    foreach (var ur in allUsersWithRole)
-        //    {
-        //        var userDetails = (from u in db.UserProfiles
-        //                           where u.UserName == ur.Text
-        //                           select u);
-        //        UserAndRoles userAndRoles = new UserAndRoles();
-        //        userAndRoles.UserRole = "X";
-
-        //        userAndRoles.UserId = userDetails.FirstOrDefault().UserId;
-        //        userAndRoles.UserName = userDetails.FirstOrDefault().UserName.ToString();
-        //        foreach (var au in allAdminUsers)
-        //        {
-        //            if (au.Text == userAndRoles.UserName)
-        //            { userAndRoles.AdminRole = "X"; }
-        //        }
-        //        foreach (var s in allSuperUsers)
-        //        {
-        //            if (s.Text == userAndRoles.UserName)
-        //            { userAndRoles.SuperRole = "X"; }
-        //        }
-        //        usersInUser.Add(userAndRoles);
-        //    }
-
-        //    return View(usersInUser.ToList());
-        //}
-
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult UsersInLayUserRole()
         {
             var allUsers = new SelectList(Roles.GetUsersInRole("Lay User"));
@@ -182,6 +97,7 @@ namespace PIMS.Controllers
             return View(usersInLayUser.ToList());
         }
 
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult UsersInVolunteer()
         {
             var allUsers = new SelectList(Roles.GetUsersInRole("Volunteer"));
@@ -204,6 +120,8 @@ namespace PIMS.Controllers
             return View(usersWithVolnteer.ToList());
         }
 
+
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult UsersInParishAdmins()
         {
             var allUsers = new SelectList(Roles.GetUsersInRole("Parish Admins"));
@@ -226,6 +144,7 @@ namespace PIMS.Controllers
             return View(usersWithParishAdmins.ToList());
         }
 
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult UsersInPriest()
         {
             var allUsers = new SelectList(Roles.GetUsersInRole("Priest"));
@@ -248,6 +167,8 @@ namespace PIMS.Controllers
             return View(usersWithPriests.ToList());
         }
 
+
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult SearchUserInUserRoles(string SearchStringName)
         {
             if (!String.IsNullOrEmpty(SearchStringName))
@@ -273,75 +194,7 @@ namespace PIMS.Controllers
         }
 
         //GET
-        //public ActionResult UserDetails(int id = 0)
-        //{
-        //    UserProfile userProfile = db.UserProfiles.Find(id);
-        //    ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
-        //    if (userProfile == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    else
-        //    {
-        //        SelectList list = new SelectList(Roles.GetRolesForUser(userProfile.UserName));
-        //        var orderList = new List<string>();
-        //        var levelOfRole = "N";
-        //        var role = "User";
-        //        foreach (var r in list.ToList())
-        //        {
-        //            if (r.Text == "SuperUser")
-        //            { levelOfRole = "S"; }
-        //            if ((r.Text == "User") && (levelOfRole == "N"))
-        //            { levelOfRole = "U"; }
-        //            if ((r.Text == "Administrator") &&
-        //                ((levelOfRole == "U") || (levelOfRole == "N")))
-        //            { levelOfRole = "A"; }
-        //        }
-        //        switch (levelOfRole)
-        //        {
-        //            case "A":
-        //                role = "SuperUser";
-        //                break;
-        //            case "U":
-        //                role = "Administrator";
-        //                break;
-        //            case "S":
-        //                role = "SuperUser";
-        //                break;
-        //            default:
-        //                break;
-        //        }
-
-        //        ViewBag.Role = role;
-        //    }
-
-        //    return View(userProfile);
-        //}
-
-        ////POST
-        //[Authorize(Roles = "Administrator, Parish Admin")]
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult UserDetails(string RoleName, string UserName, int id)
-        //{
-        //    UserProfile userProfile = db.UserProfiles.Find(id);
-        //    ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
-        //    if (Roles.IsUserInRole(UserName, RoleName))
-        //    {
-        //        ViewBag.ResultMessage = "This user already has the role specified !";
-        //    }
-        //    else
-        //    {
-        //        Roles.AddUserToRole(UserName, RoleName);
-        //        ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
-        //        ViewBag.ResultMessage = "Username added to the role succesfully !";
-
-        //    }
-
-        //    return View(userProfile);
-        //}
-
-        //GET
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult UserDetails(int id = 0)
         {
             UserProfile userProfile = db.UserProfiles.Find(id);
@@ -436,6 +289,7 @@ namespace PIMS.Controllers
         }
 
         //GET
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddToParishAdmin(int id = 0)
         {
             UserProfile userProfile = db.UserProfiles.Find(id);
@@ -502,8 +356,6 @@ namespace PIMS.Controllers
         {
             RedirectToAction("Details/" + id.ToString());
         }
-
-
     }
 }
 

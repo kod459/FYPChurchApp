@@ -913,6 +913,8 @@
     <Content Include="Views\Records\IndexOfConfirmations.cshtml" />
     <Content Include="Views\Records\IndexOfFunerals.cshtml" />
     <Content Include="Views\Records\IndexOfWeddings.cshtml" />
+    <Content Include="Views\Records\DownloadCert.cshtml" />
+    <Content Include="Views\Records\ViewRecords.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

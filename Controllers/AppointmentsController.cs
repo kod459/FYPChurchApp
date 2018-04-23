@@ -212,6 +212,7 @@ namespace PIMS.Controllers
 
         //this method receives the postback when the "Confirm Appointment" button is pressed, and updated the appointment details. Then it returns to the user to the same screen, where this time they should see the "Appointment Confirmed" message instead of the button
         [HttpPost]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult ConfirmAppointment(int? id)
         {
             var appointments = db.Appointments.Find(id);
@@ -311,6 +312,7 @@ namespace PIMS.Controllers
 
 
         // GET: Appointments/Create
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult CreateCeremony()
         {
 
@@ -332,6 +334,7 @@ namespace PIMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateCeremony([Bind(Include = "AppointmentId,DetailsOfAppointment,DateOfAppointment,Confirmed,Fee,ThemeColour,AdministrationId,ChurchId")] Appointments appointments)
         {

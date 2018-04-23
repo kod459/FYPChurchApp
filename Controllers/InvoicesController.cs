@@ -17,7 +17,9 @@ namespace PIMS.Controllers
     {
         private ChurchDBContext db = new ChurchDBContext();
 
+
         // GET: Invoices
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Index()
         {
             var invoices = db.Invoices.Include(i => i.Church);
@@ -25,6 +27,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Invoices/Details/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +43,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Invoices/Create
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create()
         {
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
@@ -51,6 +55,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,DateReceived,ChurchId")] Invoice invoice,HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
@@ -71,6 +76,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Invoices/Edit/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +96,7 @@ namespace PIMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "InvoiceId,Company,Description,Amount,PictureOfInvoice,DateReceived,ChurchId")] Invoice invoice, int? id)
         {
@@ -111,6 +118,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Invoices/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -126,6 +134,7 @@ namespace PIMS.Controllers
         }
 
         // POST: Invoices/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

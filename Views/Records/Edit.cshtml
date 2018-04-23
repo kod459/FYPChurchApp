@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Record</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Record</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.RecordId)
@@ -20,44 +19,55 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DocumentType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DocumentType, new { htmlAttributes = new { @class = "form-control", style = "width:20em;", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DocumentType, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UploadDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UploadDate, "Upload Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UploadDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UploadDate, new { htmlAttributes = new { @class = "form-control",style = "width:20em;", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.UploadDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="right">
+            @if (Model.Document != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Document);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <img src="@imgsrc" style="max-width:500px;max-height:500px" />
+            }
+        </div>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Document, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NameOnRecord, "Name on Record", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Document, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NameOnRecord, new { htmlAttributes = new { @class = "form-control", style = "width:20em;", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.NameOnRecord, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UploadedBy, "Administrator Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UploadedBy, "Uploaded By", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UploadedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UploadedBy, new { htmlAttributes = new { @class = "form-control", style = "width:20em;", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.UploadedBy, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                @Html.ActionLink("Download Record", "ViewRecords", "Records", new { id = Model.RecordId }, new { @class = "btn btn-default" })
             </div>
         </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+    </div>
+
+
+}
 

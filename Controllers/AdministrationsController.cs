@@ -15,6 +15,8 @@ namespace PIMS.Controllers
     {
         private ChurchDBContext db = new ChurchDBContext();
 
+
+        [Authorize(Roles = "Administrator, Parish Admin")]
         // GET: Administrations
         public ActionResult Index()
         {
@@ -27,6 +29,8 @@ namespace PIMS.Controllers
             return View();
         }
 
+
+        [Authorize(Roles = "Administrator, Parish Admin")]
         // GET: Administrations/Details/5
         public ActionResult Details(int? id)
         {
@@ -43,6 +47,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Administrations/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(string email, string name, string phone, string username)
         {
             ViewBag.Role = new SelectList(new[] { "Secretary", "Parish Admin", "Priest", "Catechist"});
@@ -57,6 +62,7 @@ namespace PIMS.Controllers
         // POST: Administrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AdministrationId,AdministratorName,AdminUsername,Password,Position,PhoneNumber,EmailAddress,ChurchId")]string email, string name, string phone, string username, Administration administration)
@@ -78,6 +84,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Administrations/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,6 +104,7 @@ namespace PIMS.Controllers
         // POST: Administrations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "AdministrationId,AdministratorName,AdminUsername,Password,Position,PhoneNumber,EmailAddress,ChurchId")] Administration administration)
@@ -113,6 +121,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Administrations/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -128,6 +137,7 @@ namespace PIMS.Controllers
         }
 
         // POST: Administrations/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -147,6 +157,8 @@ namespace PIMS.Controllers
             base.Dispose(disposing);
         }
 
+
+
         public Administration ValidateEmail(Administration up)
         {
             if (up.EmailAddress == null)
@@ -158,7 +170,7 @@ namespace PIMS.Controllers
                 try
                 {
                     string domain = up.EmailAddress.ToString().ToLower().Split('@').ElementAt(1);
-                    if (domain != "gmail.come" || domain != "hotmail.com")
+                    if (domain != "gmail.com" || domain != "hotmail.com")
                     {
                         TempData["ErrorEmail"] = "A valid Email address must be entered";
                     }

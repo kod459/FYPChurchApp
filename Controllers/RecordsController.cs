@@ -269,8 +269,39 @@ namespace PIMS.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (record.DocumentType.Equals("Wedding Cert"))
+            {
+                return RedirectToAction("IndexOfWeddings");
+            }
+            else if (record.DocumentType.Equals("Baptism Cert"))
+            {
+                return RedirectToAction("IndexOfBaptisms");
+            }
+            else if (record.DocumentType.Equals("Funeral Cert"))
+            {
+                return RedirectToAction("IndexOfFunerals");
+            }
+            else if (record.DocumentType.Equals("Confirmation Cert"))
+            {
+                return RedirectToAction("IndexOfConfirmations");
+            }
+
+
             return View(record);
         }
+
+
+        public FileContentResult ViewRecords(int? id)
+        {
+            if (id == 0) { return null; }
+            Record record = new Record();
+            ChurchDBContext db = new ChurchDBContext();
+            record = db.Records.Where(a => a.RecordId == id).SingleOrDefault();
+            Response.AppendHeader("content-disposition", "inline; filename="+ record.NameOnRecord + record.UploadDate.ToString() +".jpg"); //this will open in a new tab.. remove if you want to open in the same tab.
+            return File(record.Document, "application/jpg");
+        }
+
 
         // GET: Records/Create
         public ActionResult Create()
@@ -318,7 +349,23 @@ namespace PIMS.Controllers
 
                 db.Records.Add(record);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if(record.DocumentType.Equals("Wedding Cert"))
+                {
+                    return RedirectToAction("IndexOfWeddings");
+                }
+                else if(record.DocumentType.Equals("Baptism Cert"))
+                {
+                    return RedirectToAction("IndexOfBaptisms");
+                }
+                else if(record.DocumentType.Equals("Funeral Cert"))
+                {
+                    return RedirectToAction("IndexOfFunerals");
+                }
+                else if(record.DocumentType.Equals("Confirmation Cert"))
+                {
+                    return RedirectToAction("IndexOfConfirmations");
+                }
             }
 
            
@@ -333,6 +380,7 @@ namespace PIMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Record record = db.Records.Find(id);
+            ViewRecords(record.RecordId);
             if (record == null)
             {
                 return HttpNotFound();
@@ -346,14 +394,39 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecordId,NameOnRecord,DocumentType,UploadDate,Document,UploadedBy")] Record record)
+        public ActionResult Edit([Bind(Include = "RecordId,NameOnRecord,DocumentType,UploadDate,Document,UploadedBy")] Record record, int? id)
         {
             if (ModelState.IsValid)
             {
+                ViewRecords(record.RecordId);
+                Record oldRecord = db.Records.Find(id);
+                oldRecord.NameOnRecord = record.NameOnRecord;
+                oldRecord.DocumentType = record.DocumentType;
+                oldRecord.UploadDate = record.UploadDate;
+                oldRecord.UploadedBy = record.UploadedBy;
+
+
                 db.Entry(record).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewRecords(record.RecordId);
+                if (record.DocumentType.Equals("Wedding Cert"))
+                {
+                    return RedirectToAction("IndexOfWeddings");
+                }
+                else if (record.DocumentType.Equals("Baptism Cert"))
+                {
+                    return RedirectToAction("IndexOfBaptisms");
+                }
+                else if (record.DocumentType.Equals("Funeral Cert"))
+                {
+                    return RedirectToAction("IndexOfFunerals");
+                }
+                else if (record.DocumentType.Equals("Confirmation Cert"))
+                {
+                    return RedirectToAction("IndexOfConfirmations");
+                }
             }
+
             ViewBag.Type = new SelectList(new[] { "Baptism Cert", "Confirmation Cert", "Wedding Cert", "Funeral Cert" });
             return View(record);
         }
@@ -371,6 +444,34 @@ namespace PIMS.Controllers
                 return HttpNotFound();
             }
             return View(record);
+        }
+
+        public ActionResult DownloadCert(int? id)
+        {
+            Record record = db.Records.Find(id);
+
+            ViewRecords(record.RecordId);
+
+            if (record.DocumentType.Equals("Wedding Cert"))
+            {
+                return RedirectToAction("IndexOfWeddings");
+            }
+            else if (record.DocumentType.Equals("Baptism Cert"))
+            {
+                return RedirectToAction("IndexOfBaptisms");
+            }
+            else if (record.DocumentType.Equals("Funeral Cert"))
+            {
+                return RedirectToAction("IndexOfFunerals");
+            }
+            else if (record.DocumentType.Equals("Confirmation Cert"))
+            {
+                return RedirectToAction("IndexOfConfirmations");
+            }
+
+            return View();
+
+
         }
 
         // POST: Records/Delete/5

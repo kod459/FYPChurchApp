@@ -15,8 +15,9 @@ namespace PIMS.Controllers
     public class DonationsController : Controller
     {
         private ChurchDBContext db = new ChurchDBContext();
-        
+
         // GET: Donations
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Index(string SearchStringAddress, int? SearchStringHouseNumber, string sortOrder)
         {
 
@@ -126,6 +127,7 @@ namespace PIMS.Controllers
 
         }
 
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult SearchHouse(string SearchStringAddress, int? SearchStringHouseNumber)
         {
             if (!String.IsNullOrEmpty(SearchStringAddress) && SearchStringHouseNumber != null)
@@ -178,6 +180,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Donations/Details/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -193,6 +196,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Donations/Create
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create()
         {
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
@@ -205,6 +209,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Create([Bind(Include = "DonationId,HouseId,TypeOfDonation,DateRecieved,Amount,ChurchId")] Donation donation)
         {
             if (ModelState.IsValid)
@@ -230,6 +235,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Donations/Edit/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -249,6 +255,7 @@ namespace PIMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DonationId,HouseId,TypeOfDonation,DateRecievedAmount,ChurchId")] Donation donation)
         {
@@ -263,6 +270,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Donations/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -278,6 +286,7 @@ namespace PIMS.Controllers
         }
 
         // POST: Donations/Delete/5
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
