@@ -7,6 +7,11 @@
 
 <h2>Available Ceremonies</h2>
 
+@if (TempData["Error"] != null)
+{
+    <div style="color:red">@TempData["Error"]</div>
+}
+
 <table class="tftable">
     <tr>
         <th>
@@ -19,17 +24,22 @@
             @Html.DisplayName("Date Of Ceremony")
         </th>
         <th>
+            @Html.DisplayName("Slots Available")
+        </th>
+        <th>
             @Html.DisplayName("Parish Administrator")
         </th>
         <th></th>
-        <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
 
-        if (item.Fee != null)
+    @if(Model != null)
+    {
+        foreach (var item in Model)
         {
+
+            if (item.Fee != null)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.DetailsOfAppointment)
@@ -42,17 +52,18 @@
                     @Html.DisplayFor(modelItem => item.DateOfAppointment)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Slots)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NameOfApplicant)
-                </td>
-                <td>
                     <u>
-                        @Html.ActionLink("View Ceremony", "DetailsOfCeremony", new { id = item.AppointmentId })
+                        @Html.ActionLink("Join Ceremony", "JoinCeremony", new { id = item.AppointmentId })
                     </u>
                 </td>
             </tr>
+            }
         }
     }
 </table>

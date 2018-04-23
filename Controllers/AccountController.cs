@@ -590,31 +590,6 @@ namespace PIMS.Controllers
         }
         #endregion
 
-        //#region validate email
-        //public RegisterModel ValidateEmail(RegisterModel up)
-        //{
-        //    if (up.Email == null)
-        //    {
-        //        TempData["ErrorEmail"] = "A valid Department of Social Protection Email address must be entered";
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            string domain = up.Email.ToString().ToLower().Split('@').ElementAt(1);
-        //            if (domain != "welfare.ie")
-        //            {
-        //                TempData["ErrorEmail"] = "A valid Department of Social Protection Email address must be entered";
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            TempData["ErrorEmail"] = "A valid Department of Social Protection Email address must be entered";
-        //        }
-                
-        //    }
-        //    return up;
-        //}
-        //#endregion
+        
     }
 }

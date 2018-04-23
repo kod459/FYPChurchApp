@@ -12,14 +12,19 @@ namespace PIMS.Entities
         [Key]
         public int RecordId { get; set; }
 
+        [Required(ErrorMessage = "Name on Record is required")]
         public string NameOnRecord { get; set; }
-        
+
+        [Required(ErrorMessage = "Document Type is required")]
         public string DocumentType { get; set; }
 
+
+        [Required(ErrorMessage = "Upload Date is required")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime UploadDate { get; set; }
 
+        [Required(ErrorMessage = "Document is is required")]
         public byte[] Document { get; set; }
 
         public string UploadedBy { get; set; }

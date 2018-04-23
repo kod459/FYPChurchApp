@@ -30,38 +30,6 @@
         </div>
     </div>
 </div>
-
-@*<div id="myModalSave" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Save Appointment</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="col-md-12 form-horizontal">
-                        <input type="hidden" id="hdEventID" value="0" />
-                        <div class="form-group">
-                            <label>Details</label>
-                            <input type="text" id="txtSubject" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Date Of Appointment</label>
-                            <div class="input-group date" id="dtp1">
-                                <input type="text" id="txtStart" class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <button type="button" id="btnSave" class="btn btn-success">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 
@@ -108,7 +76,12 @@
                     timeFormat: 'HH:mm',
                     minTime: "09:00:00",
                     maxTime: "17:00:00",
+                    slotDuration: '00:15:00',
                     defaultView: 'agendaWeek',
+                    timeFormat: 'H:mm',
+                    axisFormat: 'H:mm',
+                    slotLabelFormat: "HH:mm",
+                    defaultTimedEventDuration: '01:0:00',
                     eventLimit: true,
                     eventColor: events.ThemeColour,
                     events: events,

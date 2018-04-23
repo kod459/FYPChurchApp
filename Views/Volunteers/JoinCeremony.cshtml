@@ -1,0 +1,79 @@
+﻿@model PIMS.Entities.Appointments
+
+@{
+    ViewBag.Title = "JoinCeremony";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.AppointmentId)
+        @Html.HiddenFor(model => model.ChurchId)
+        @Html.HiddenFor(model => model.AdministrationId)
+        @Html.HiddenFor(model => model.Fee)
+        @Html.HiddenFor(model => model.ThemeColour, new { Value = "#4286f4" })
+        @Html.HiddenFor(model => model.Confirmed, new { Value = true })
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DetailsOfAppointment, "Appointment Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DetailsOfAppointment, new { htmlAttributes = new { @class = "form-control", style = "width:20em;", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.DetailsOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdministrationId, "Parish Admin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AdministrationId", ViewBag.AdminId as SelectList, htmlAttributes: new { @class = "form-control", style = "width:20em;", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.AdministrationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChurchId, "Church Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ChurchId", null, htmlAttributes: new { @class = "form-control", style = "width:20em;", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.ChurchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfAppointment, "Date of Appointment", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfAppointment, new { htmlAttributes = new { @class = "form-control", style = "width:20em;", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.DateOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slots, "Slots Needed", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slots, new { htmlAttributes = new { @class = "form-control", style = "width:20em;", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Slots, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Apply for Ceremony" class="btn btn-default" />
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+}

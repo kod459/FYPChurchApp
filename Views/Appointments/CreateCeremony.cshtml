@@ -8,10 +8,13 @@
 <h2>Schedule a Ceremony</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
     if (TempData["Error"] != null)
     {
@@ -25,7 +28,6 @@
     <div class="form-horizontal">
         <hr />
         @Html.HiddenFor(model => model.ThemeColour, new { Value = "#4286f4" })
-        @Html.HiddenFor(model => model.ThemeColour, new { Value = 4 })
         @Html.HiddenFor(model => model.Confirmed, new { Value = true })
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -35,6 +37,8 @@
                 @Html.ValidationMessageFor(model => model.DetailsOfAppointment, "", new { @class = "text-danger" })
             </div>
         </div>
+
+       
 
         <div class="form-group">
             @Html.LabelFor(model => model.AdministrationId, "Parish Admin", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -66,6 +70,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control" , style = "width:20em;"} })
                 @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slots, "Slots Needed", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slots, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.Slots, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -106,9 +118,6 @@
                         confirmed: v.Confirmed,
                         colour: v.ThemeColour,
                         church: v.Church.Name,
-                        parishAdminName: v.Admins.AdministratorName,
-                        parishAdminUser: v.Admins.AdminUsername,
-                        parishAdminId: v.Admins.AdministratorId,
                         fee: v.Fee,
                         id: v.AppointmentId
                     })
@@ -143,7 +152,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'basicWeek, agenda'
+                    right: 'agendaWeek, agenda'
                 },
                 dayClick: function (date, allDay, jsEvent, view) {
                     if (allDay) {
@@ -153,7 +162,6 @@
                         else {
                             var d = document.getElementById("DateOfAppointment");
                             d.value = date.format("DD/MM/YYYY HH:mm");
-                            $('#calendar').fullCalendar('removeEvents');
                             $('#calendar').fullCalendar('rerenderEvents')
                             var eventData;
                             eventData = {

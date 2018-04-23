@@ -17,6 +17,7 @@ using PIMS.Mailers;
 using PIMS.ViewModel;
 using System.Web.Security;
 using System.Web.UI;
+using System.Text.RegularExpressions;
 
 namespace PIMS.Controllers
 {
@@ -37,9 +38,6 @@ namespace PIMS.Controllers
         {
             string username = Membership.GetUser().UserName;
 
-
-           
-
             var getAdmin = (from a in db.Admins
                             where username == a.AdminUsername
                             select a.AdministrationId).SingleOrDefault();
@@ -49,9 +47,6 @@ namespace PIMS.Controllers
                           where getAdmin == a.AdministrationId
                           select a).Include(a=> a.Church).ToList().OrderByDescending(a=> a.DateOfAppointment);
 
-
-
-            //var appointments = db.Appointments.Include(a => a.Church);
             return View(apps);
         }
 
@@ -179,7 +174,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Appointments/Details/5
-        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator, Volunteer")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -195,7 +190,7 @@ namespace PIMS.Controllers
         }
 
         // GET: Appointments/Details/5
-        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
+        [Authorize(Roles = "Parish Admin, Priest, Administrator,Volunteer")]
         public ActionResult DetailsOfCeremony(int? id)
         {
             if (id == null)
@@ -242,14 +237,16 @@ namespace PIMS.Controllers
         {
             if (ModelState.IsValid)
             { 
-             
-
-                bool checkUserLoggedIn = (System.Web.HttpContext.Current.User != null) 
-                    && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+              bool checkUserLoggedIn = (System.Web.HttpContext.Current.User != null) 
+                                         && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 
 
                 appointments = ValidateEmail(appointments);
-
+                appointments = ValidatePhone(appointments);
+                ValidateApplicantEmail(appointments);
+                ValidateApplicantName(appointments);
+                ValidateApplicantPhoneNumber(appointments);
+               
 
                 var currentBooking = db.Appointments
                     .Any(b => (appointments.DateOfAppointment == b.DateOfAppointment
@@ -266,6 +263,22 @@ namespace PIMS.Controllers
                 {
                     TempData["Error"] = "Priest on Leave";
                 }
+                //else if(appointments.ApplicantPhoneNumber == null)
+                //{
+                //    TempData["Error"] = "Phone Number Required for Applicant";
+                //}
+                //else if(appointments.ApplicantEmail == null)
+                //{
+                //    TempData["Error"] = "Email Required for Applicant";
+                //}
+                //else if (appointments.NameOfApplicant == null)
+                //{
+                //    TempData["Error"] = "Name Required for Applicant";
+                //}
+                //else if (appointments.DateOfAppointment == null)
+                //{
+                //    TempData["Error"] = "Date Required for Appointment";
+                //}
                 else
                 {
                     db.Appointments.Add(appointments);
@@ -336,14 +349,10 @@ namespace PIMS.Controllers
         [HttpPost]
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCeremony([Bind(Include = "AppointmentId,DetailsOfAppointment,DateOfAppointment,Confirmed,Fee,ThemeColour,AdministrationId,ChurchId")] Appointments appointments)
+        public ActionResult CreateCeremony([Bind(Include = "AppointmentId,DetailsOfAppointment,DateOfAppointment,Confirmed,Fee,ThemeColour,AdministrationId,ChurchId, Slots")] Appointments appointments)
         {
             if (ModelState.IsValid)
             {
-                //Pick Time
-                //Show Calender to Priest
-                //Pick slot to be not available - Could do a LINQ query to a new table called Priest Holidays????
-
                 bool checkUserLoggedIn = (System.Web.HttpContext.Current.User != null)
                     && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 
@@ -446,6 +455,76 @@ namespace PIMS.Controllers
             
             if (ModelState.IsValid)
             {
+                appointments = ValidateEmail(appointments);
+                appointments = ValidatePhone(appointments);
+                ValidateApplicantEmail(appointments);
+                ValidateApplicantName(appointments);
+                ValidateApplicantPhoneNumber(appointments);
+
+                db.Entry(appointments).State = EntityState.Modified;
+                db.SaveChanges();
+
+                var app = (from a in db.Appointments
+                           where appointments.AppointmentId == a.AppointmentId
+                           select a).FirstOrDefault();
+
+                string churchName = (from c in db.Churches
+                                     where c.ChurchId == appointments.ChurchId
+                                     select c.Name).FirstOrDefault();
+
+                string adminName = (from a in db.Admins
+                                    where a.AdministrationId == appointments.AdministrationId
+                                    select a.AdministratorName).FirstOrDefault();
+
+                string adminEmail = (from a in db.Admins
+                                     where a.AdministrationId == appointments.AdministrationId
+                                     select a.EmailAddress).FirstOrDefault();
+
+
+
+                UserMailer.AppointmentUpdate(app, churchName, adminName, adminEmail).Send(); //Send() extension method: using Mvc.Mailer
+                return RedirectToAction("Details", new { id = appointments.AppointmentId });
+            }
+
+            ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
+            ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
+            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
+            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);
+            return View(appointments);
+        }
+
+
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
+        // GET: Appointments/Edit/5
+        public ActionResult EditCeremony(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointments appointments = db.Appointments.Find(id);
+            if (appointments == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
+            ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
+            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
+            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);
+            return View(appointments);
+        }
+
+        // POST: Appointments/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Parish Admin, Priest, Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCeremony([Bind(Include = "AppointmentId,DetailsOfAppointment,RoomType,DateOfAppointment,Confirmed,NameOfApplicant, ApplicantPhoneNumber, ApplicantEmail,AdministrationId,ChurchId, Slots")] Appointments appointments)
+        {
+
+            if (ModelState.IsValid)
+            {
                 db.Entry(appointments).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -538,6 +617,76 @@ namespace PIMS.Controllers
 
             }
             return up;
+        }
+
+        public Appointments ValidatePhone(Appointments up)
+        {
+            if (up.ApplicantPhoneNumber == null)
+            {
+                TempData["ErrorPhone"] = "A valid phone number must be entered";
+            }
+            else
+            {
+                try
+                {
+
+                    if (!IsPhoneNumber(up.ApplicantPhoneNumber))
+                    {
+                        TempData["ErrorPhone"] = "A valid phone number must be entered";
+                    }
+                }
+                catch (Exception e)
+                {
+                    TempData["ErrorEmail"] = "A valid phone number must be entered";
+                }
+
+            }
+            return up;
+        }
+
+        public void ValidateApplicantName(Appointments apps)
+        {
+            if(apps.NameOfApplicant == null)
+            {
+                TempData["ErrorName"] = "The Applicant Name must be entered";
+            }
+
+        }
+
+        public void ValidateApplicantEmail(Appointments apps)
+        {
+            if (apps.ApplicantEmail == null)
+            {
+                TempData["ErrorEmail"] = "The Applicant Email must be entered";
+            }
+
+        }
+
+        public void ValidateApplicantPhoneNumber(Appointments apps)
+        {
+            if (apps.NameOfApplicant == null)
+            {
+                TempData["ErrorPhone"] = "The Applicant Phone Number must be entered";
+            }
+            else if(!(IsPhoneNumber(apps.ApplicantPhoneNumber)))
+            {
+                TempData["ErrorPhone"] = "The Applicant Phone Number must be a number";
+            }
+        }
+
+
+        public static bool IsPhoneNumber(string number)
+        {
+            if (number == null)
+            {
+                Console.WriteLine("Hi");
+                return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+            }
+            else
+            {
+                return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+            }
+
         }
 
 

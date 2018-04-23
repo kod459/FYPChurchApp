@@ -14,6 +14,7 @@ namespace PIMS.Entities
 
         public string TypeOfDonation { get; set; }
 
+        [Required(ErrorMessage = "Amount is required")]
         public decimal Amount { get; set; }
 
         [ForeignKey("Church")]

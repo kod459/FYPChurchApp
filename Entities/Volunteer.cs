@@ -12,16 +12,21 @@ namespace PIMS.Entities
         [Key]
         public int VolunteerId { get; set; }
 
+        [Required(ErrorMessage = "Volunteer Name is required")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Volunteer Username is required")]
         public string Username { get; set; }
 
+        [Required(ErrorMessage = "Volunteer Email is required")]
         public string Email { get; set; }
 
         public bool GardaVetted { get; set; }
 
+        
         public string VolunteerRole { get; set; }
 
+        [Required(ErrorMessage = "Volunteer Phone Number is required")]
         public string VolunteerPhoneNumber { get; set; }
 
         [ForeignKey("Church")]

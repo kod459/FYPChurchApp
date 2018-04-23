@@ -49,6 +49,8 @@
             <u>
                 @Html.ActionLink("View Ceremony", "DetailsOfCeremony", new { id = item.AppointmentId })
             </u>
+            |
+            <u>@Html.ActionLink("Edit Ceremony", "EditCeremony", new { id = item.AppointmentId })</u>
         </td>
     </tr>
     }

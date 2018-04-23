@@ -1,0 +1,239 @@
+﻿@model PIMS.Entities.Appointments
+@{
+    ViewBag.Title = "EditCeremony";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Ceremony Details</h2>
+<div id="calendar"></div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.AppointmentId)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DetailsOfAppointment, "Ceremony Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DetailsOfAppointment", ViewBag.Details as SelectList, htmlAttributes: new { @class = "form-control", style = "width:20em;" })
+                @Html.ValidationMessageFor(model => model.DetailsOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdministrationId, "Parish Admin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AdministrationId", ViewBag.AdminId as SelectList, htmlAttributes: new { @class = "form-control", style = "width:20em;" })
+                @Html.ValidationMessageFor(model => model.AdministrationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChurchId, "Church Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ChurchId", null, htmlAttributes: new { @class = "form-control", style = "width:20em;" })
+                @Html.ValidationMessageFor(model => model.ChurchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfAppointment, "Date of Appointment", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfAppointment, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.DateOfAppointment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fee, "Fee of Ceremony", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slots, "Slots Needed", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slots, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.Slots, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update Ceremony" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <u>
+        @Html.ActionLink("Back to List", "Index")
+    </u>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+<script>
+
+    $(document).ready(function () {
+        var events = [];
+        var dateToday = new Date();
+        $.ajax({
+            type: "GET",
+            url: "/Appointments/UnAvailableSlots",
+            success: function (data) {
+                $.each(data, function (i, v) {
+                    events.push({
+                        details: v.DetailsOfAppointment,
+                        date: moment(v.DateOfAppointment),
+                        room: v.RoomType,
+                        confirmed: v.Confirmed,
+                        colour: v.ThemeColour,
+                        church: v.Church.Name,
+                        parishAdminName: v.Admins.AdministratorName,
+                        parishAdminUser: v.Admins.AdminUsername,
+                        parishAdminId: v.Admins.AdministratorId,
+                        fee: v.Fee,
+                        id: v.AppointmentId
+                    })
+
+                })
+                GenerateCalender(events);
+            },
+            error: function (error) {
+                alert("failed");
+                console.log(error);
+            }
+        })
+
+        function GenerateCalender(events) {
+            $('#calendar').fullCalendar({
+                viewRender: function (currentView) {
+                    var minDate = moment(),
+                        maxDate = moment().add(2, 'weeks');
+                    // Past
+                    if (minDate >= currentView.start && minDate <= currentView.end) {
+                        $(".fc-prev-button").prop('disabled', true);
+                        $(".fc-prev-button").addClass('fc-state-disabled');
+                    }
+                    else {
+                        $(".fc-prev-button").removeClass('fc-state-disabled');
+                        $(".fc-prev-button").prop('disabled', false);
+                    }
+                    // Future
+                    if (maxDate >= currentView.start && maxDate <= currentView.end) {
+                        $(".fc-next-button").prop('disabled', true);
+                        $(".fc-next-button").addClass('fc-state-disabled');
+                    } else {
+                        $(".fc-next-button").removeClass('fc-state-disabled');
+                        $(".fc-next-button").prop('disabled', false);
+                    }
+                },
+                contentHeight: 300,
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'agendaWeek, agenda'
+                },
+                dayClick: function (date, allDay, jsEvent, view) {
+                    if (allDay) {
+                        if (date.isBefore(moment())) {
+                            alert('Appointment cannot be booked!');
+                        }
+                        else {
+                            var d = document.getElementById("DateOfAppointment");
+                            d.value = date.format("DD/MM/YYYY HH:mm");
+                            $('#calendar').fullCalendar('refetchEvents')
+                            var eventData;
+                            eventData = {
+                                date: date
+                            };
+                            $('#calendar').fullCalendar('renderEvent', eventData, true);
+                        }
+
+                    }
+                },
+
+                eventOverlap: false,
+                slotDuration: '00:15:00',
+                defaultView: "agenda",
+                defaultDate: moment(),
+                minTime: "09:00:00",
+                maxTime: "17:00:00",
+                timeFormat: 'HH:mm',
+                editable: true,
+                eventLimit: true,
+                selectable: true,
+                unselectAuto: false,
+                defaultTimedEventDuration: '00:30:00',
+                eventColor: events.ThemeColour,
+                events: events,
+                eventRender: function (event, element) {
+                    if (event.fee == null) {
+                        if (event.confirmed == false) {
+                            element.css('background-color', '#FF0000');
+                            element.css('border-color', '#FF0000');
+                        }
+                        else {
+                            element.css('background-color', '#008000');
+                            element.css('border-color', '#008000');
+                        }
+                    }
+                    else {
+                        element.css('background-color', '#0000FF');
+                        element.css('border-color', '#0000FF');
+                    }
+
+                },
+                select: function (event, start, end) {
+                    if (event.fee == null) {
+                        end = event.date;
+                        end.add(1, 'hours');
+                    }
+                }
+
+                //defaultTimedEventDuration: function (event) {
+                //    if (event.fee != null)
+                //    {
+
+                //    }
+                //}
+
+            })
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            var timeNow = new Date();
+
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = mm + '/' + dd + '/' + yyyy;
+            $('#calendar').fullCalendar('gotoDate', today);
+
+        }
+    })
+</script>
+
+

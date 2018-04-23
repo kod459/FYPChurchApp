@@ -15,6 +15,7 @@ using System.Data.Entity.Infrastructure;
 using WebMatrix.WebData;
 using PIMS.Mailers;
 using System.Web.Security;
+using System.Text.RegularExpressions;
 
 namespace PIMS.Controllers
 {
@@ -75,37 +76,6 @@ namespace PIMS.Controllers
             return new JsonResult { Data = vEvents, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        //[HttpPost]
-        //public JsonResult AddVolunteerToCeremony(Volunteer v, Appointments a)
-        //{
-        //    string username = Membership.GetUser().UserName;
-
-        //    var getVolunteer = (from vol in db.Volunteers
-        //                        where username == vol.Username
-        //                        select vol).SingleOrDefault();
-
-        //    v.Appointments = new List<Appointments>();
-
-        //    var status = false;
-        //    using (ChurchDBContext db = new ChurchDBContext())
-        //    {
-        //        if (a.AppointmentId > 0)
-        //        {
-        //            //Update the event
-        //            var getCeremonies = db.Appointments.Where(d => d.AppointmentId == a.AppointmentId).FirstOrDefault();
-        //            if (v != null)
-        //            {
-        //                v.Appointments.Add(getVolunteer);
-
-        //            }
-        //        }
-
-        //        db.SaveChanges();
-        //        status = true;
-        //    }
-        //    return new JsonResult { Data = new { status = status } };
-        //}
-
         [HttpPost]
         public JsonResult AddVolunteerToCeremony(Volunteer v, Appointments apps)
         {
@@ -126,13 +96,34 @@ namespace PIMS.Controllers
 
         }
 
-        public ActionResult AvailableCeremonies()
+        public ActionResult ViewAvailableCeremonies()
         {
-            var ceremonies = (from a in db.Appointments
-                              where a.Fee != null && a.Slots != 0
-                              select a).ToList();
+            string username = Membership.GetUser().UserName;
 
-            return View(ceremonies);
+            var getVolunteer = (from vol in db.Volunteers
+                                where username == vol.Username
+                                select vol).SingleOrDefault();
+
+
+            var ceremonies = (from a in getVolunteer.Appointments
+                              where a.Fee != null
+                              && a.Slots != 0
+                              && !(getVolunteer.Appointments.Any(c => c.AppointmentId == a.AppointmentId))
+                              select a);
+
+            bool isEmpty = !ceremonies.Any();
+
+            if(isEmpty)
+            {
+                TempData["Error"] = "No ceremonies available";
+                return View();
+            }
+            else
+            {
+                return View(ceremonies.ToList());
+            }
+
+            
         }
 
         public ActionResult VolunteerCeremonies(Appointments apps)
@@ -164,7 +155,90 @@ namespace PIMS.Controllers
         }
 
 
-    
+        //GET Ceremony thats been clicked
+        public ActionResult JoinCeremony(int? id)
+        {
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteerName = (from u in db.Volunteers
+                                    where username == u.Username
+                                    select u.Name);
+
+            var getVolunteerRole = (from u in db.Volunteers
+                                    where username == u.Username
+                                    select u.VolunteerRole);
+
+            var getVolunteerID = (from u in db.Volunteers
+                                    where username == u.Username
+                                    select u.VolunteerId).FirstOrDefault();
+
+            ViewBag.Name = getVolunteerName;
+            ViewBag.Role = getVolunteerRole;
+            ViewBag.VolunteerID = getVolunteerID;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointments ceremonies = db.Appointments.Find(id);
+            if (ceremonies == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Details = new SelectList(new[] { "Confession", "Baptism", "Wedding", "Communion", "Confirmation" });
+            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", ceremonies.ChurchId);
+            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", ceremonies.AdministrationId);
+            return View(ceremonies);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult JoinCeremony(Appointments apps, int? id)
+        {
+            string username = Membership.GetUser().UserName;
+
+            var getVolunteerName = (from u in db.Volunteers
+                                    where username == u.Username
+                                    select u.Name);
+
+            var getVolunteerRole = (from u in db.Volunteers
+                                    where username == u.Username
+                                    select u.VolunteerRole);
+
+            var getVolunteerID = (from u in db.Volunteers
+                                  where username == u.Username
+                                  select u.VolunteerId);
+
+            var getVolunteer = (from u in db.Volunteers
+                                where username == u.Username
+                                select u).SingleOrDefault();
+
+            ViewBag.Name = getVolunteerName;
+            ViewBag.Role = getVolunteerRole;
+            ViewBag.VolunteerID = getVolunteerID;
+
+            ViewBag.Details = new SelectList(new[] { "Confession", "Baptism", "Wedding", "Communion", "Confirmation" });
+            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", apps.ChurchId);
+            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", apps.AdministrationId);
+
+
+
+
+            if (ModelState.IsValid)
+            {
+                apps.Slots = apps.Slots - 1;
+                db.Entry(apps).State = EntityState.Modified;
+
+                apps.Volunteers.Add(getVolunteer);
+                db.SaveChanges();
+                return RedirectToAction("VolunteerCeremonies");
+            }
+
+            return View(apps);
+        }
+
+
         // GET: Volunteers/Details/5
         public ActionResult Details(int? id)
         {
@@ -225,31 +299,6 @@ namespace PIMS.Controllers
             return View(volunteer);
         }
 
-        [HttpPost]
-        public JsonResult SaveEvent(Appointments appointments)
-        {
-            var status = false;
-            using (ChurchDBContext db = new ChurchDBContext())
-            {
-                if(appointments.AppointmentId > 0)
-                {
-                    var v = db.Appointments.Where(a => a.AppointmentId == appointments.AppointmentId).FirstOrDefault();
-                    if(v != null)
-                    {
-                        v.DetailsOfAppointment = appointments.DetailsOfAppointment;
-                        v.DateOfAppointment = appointments.DateOfAppointment;
-                    }
-                }
-                else
-                {
-                    db.Appointments.Add(appointments);
-                }
-                db.SaveChanges();
-                status = true;
-            }
-
-            return new JsonResult { Data = new { status = status } };
-        }
 
         // GET: Volunteers/Edit/5
         public ActionResult Edit(int? id)
@@ -473,6 +522,36 @@ namespace PIMS.Controllers
                     }
                 }
             }
+        }
+
+        public Volunteer ValidatePhone(Volunteer up)
+        {
+            if (up.VolunteerPhoneNumber == null)
+            {
+                TempData["ErrorPhone"] = "A valid phone number must be entered";
+            }
+            else
+            {
+                try
+                {
+
+                    if (!IsPhoneNumber(up.VolunteerPhoneNumber))
+                    {
+                        TempData["ErrorPhone"] = "A valid phone number must be entered";
+                    }
+                }
+                catch (Exception e)
+                {
+                    TempData["ErrorEmail"] = "A valid phone number must be entered";
+                }
+
+            }
+            return up;
+        }
+
+        public static bool IsPhoneNumber(string number)
+        {
+            return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
         }
 
     }

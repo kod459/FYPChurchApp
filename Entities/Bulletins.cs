@@ -12,6 +12,7 @@ namespace PIMS.Entities
         [Key]
         public int BulletinsID { get; set; }
 
+        [Required(ErrorMessage = "Bulletin is required")]
         [DataType(DataType.MultilineText)]
         public string DetailsOfBulletin { get; set; }
 

@@ -20,73 +20,6 @@
 </head>
 <body>
     <header>
-        @*<div class="content-wrapper">
-            <div class="center">
-                <p class="site-title">Our Church </p>
-
-            </div>
-
-            <p class="site-title">
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>*@
-        @*<nav>
-                                <ul id="menu">
-
-                                    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Parish Admin") || Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Priest") || Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
-                                    {
-                                        <div class="dropdown">
-
-                                        </div>
-
-                                        <div class="dropdown">
-                                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                                        </div>
-                                        <div class="dropdown">
-                                            <li>@Html.DisplayName("Appointments")</li>
-                                            <div class="dropdown-content">
-                                                <ul>@Html.ActionLink("Create Appointment", "Create", "Appointments")</ul>
-                                                <ul>@Html.ActionLink("Create Ceremony", "CreateCeremony", "Appointments")</ul>
-                                                <ul>@Html.ActionLink("List all Appointments", "Index", "Appointments")</ul>
-                                                <ul>@Html.ActionLink("List all Ceremonies", "IndexOfCeremonies", "Appointments")</ul>
-                                                <ul>@Html.ActionLink("Calendar", "Calendar", "Appointments")</ul>
-                                            </div>
-                                        </div>
-
-                                        <div class=" dropdown">
-                                            <li>@Html.DisplayName("Administrations")</li>
-                                            <div class="dropdown-content">
-                                                <ul>@Html.ActionLink("Donations", "Index", "Donations")</ul>
-                                                <ul>@Html.ActionLink("Invoices", "Index", "Invoices")</ul>
-                                            </div>
-                                        </div>
-
-                                        <li>@Html.ActionLink("Volunteers", "Index", "Volunteers")</li>
-                                        @*<li>@Html.ActionLink("Records", "Index", "Records")</li>
-                                        <li>@Html.ActionLink("Roles", "UsersInLayUserRole", "Roles")</li>
-
-
-                                    }
-                                    else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Volunteer"))
-                                    {
-                                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                                        <li>@Html.ActionLink("Volunteers", "VolunteerHub", "Volunteers")</li>
-                                    }
-
-                                    else
-                                    {
-                                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                                        <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
-                                    }
-
-                            </ul>
-                            </nav>
-                    </div>
-            </div>*@
-
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -109,14 +42,21 @@
                 <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Donations", "Index", "Donations")</li>
-                            <li>@Html.ActionLink("Invoices", "Index", "Invoices")</li>
                             <li>@Html.ActionLink("Add Bulletin", "Create", "Bulletins")</li>
+                            <li>@Html.ActionLink("Houses in Parish", "Index", "Houses")</li>
                             <li>@Html.ActionLink("Approve Volunteers", "UsersInLayUserRole", "Roles")</li>
                             @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
                             {
                                 <li>@Html.ActionLink("Add a new Parish Admin", "AllUsers", "Roles")</li>
                             }
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Finances<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Donations", "Index", "Donations")</li>
+                            <li>@Html.ActionLink("Invoices", "Index", "Invoices")</li>
                         </ul>
                     </li>
 
@@ -155,8 +95,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Volunteer Hub<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Volunteer Schedule", "VolunteerHub", "Volunteers")</li>
-                            <li>@Html.ActionLink("View Ceremonies", "IndexOfCeremonies", "Appointments")</li>
+                            <li>@Html.ActionLink("Volunteer Calendar", "VolunteerHub", "Volunteers")</li>
+                            <li>@Html.ActionLink("View Upcoming Ceremonies", "ViewAvailableCeremonies", "Volunteers")</li>
+                            <li>@Html.ActionLink("Volunteers' Ceremonies", "VolunteerCeremonies", "Volunteers")</li>
                         </ul>
                     </li>
                     }

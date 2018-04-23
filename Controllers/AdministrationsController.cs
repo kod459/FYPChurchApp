@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PIMS.DataAccess;
 using PIMS.Entities;
+using System.Text.RegularExpressions;
 
 namespace PIMS.Controllers
 {
@@ -182,6 +183,36 @@ namespace PIMS.Controllers
 
             }
             return up;
+        }
+
+        public Administration ValidatePhone(Administration up)
+        {
+            if (up.PhoneNumber == null)
+            {
+                TempData["ErrorPhone"] = "A valid phone number must be entered";
+            }
+            else
+            {
+                try
+                {
+                
+                    if (!IsPhoneNumber(up.PhoneNumber))
+                    {
+                        TempData["ErrorPhone"] = "A valid phone number must be entered";
+                    }
+                }
+                catch (Exception e)
+                {
+                    TempData["ErrorEmail"] = "A valid phone number must be entered";
+                }
+
+            }
+            return up;
+        }
+
+        public static bool IsPhoneNumber(string number)
+        {
+            return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
         }
     }
 }

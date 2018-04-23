@@ -18,15 +18,19 @@ namespace PIMS.Entities
 
         public string RoomType { get; set; }
 
+
+        [Required(ErrorMessage = "Name of Applicant is required")]
         public string NameOfApplicant { get; set; }
 
+        [Required(ErrorMessage = "Phone Number of Applicant is required")]
         public string ApplicantPhoneNumber { get; set; }
 
+        [Required(ErrorMessage = "Email of Applicant is required")]
         public string ApplicantEmail { get; set; }
 
         public int Slots { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Date of Appointment is required")]
         [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public DateTime DateOfAppointment { get; set; }
 
