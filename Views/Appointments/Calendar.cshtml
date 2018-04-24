@@ -6,8 +6,6 @@
 
 <div id="calendar"></div>
 
-
-
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,8 +14,10 @@
                 <h4 class="modal-title"><span id="eventTitle"></span></h4>
             </div>
             <div class="modal-body">
-               
                 <p id="pDetails"></p>
+                <a href="" id="viewDetails" class="btn btn-default" style="margin-right:5px;">
+                    View Details
+                </a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -26,9 +26,6 @@
     </div>
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
-
-
-
 
     <script>
         $(document).ready(function () {
@@ -51,10 +48,12 @@
                             parishAdminId: v.Admins.AdministratorId,
                             fee: v.Fee,
                             id: v.AppointmentId
+                            
                         });
                         
                     })
-                     GenerateCalender(events);   
+                    GenerateCalender(events);  
+                    
                 },
                 error: function (error) {
                     alert("failed");
@@ -99,7 +98,7 @@
                     eventClick: function (calEvent, jsEvent, view) {
                         $('#myModal #details').text(calEvent.details);
                         var $details = $('<div/>');
-
+                        
                         if (calEvent.fee != null) {
                             $details.append($('<p/>').html('<b>Date of Ceremony : </b>' + calEvent.date.format("DD-MMM-YYYY HH:mm a")));
                         }
@@ -119,8 +118,6 @@
                                 $details.append($('<p/>').html('<b>Room Not Confirmed'));
                             }
                         }
-                        
-                        
                         $details.append($('<p/>').html('<b>Parish Admin : </b>' + calEvent.parishAdminName));
                         if (calEvent.confirmed == true)
                         {
@@ -132,10 +129,19 @@
                         }
                         $('#myModal #pDetails').empty().html($details);
 
+                        $('#viewDetails').attr("href", '/Appointments/Edit/' + calEvent.id);
+
                         $('#myModal').modal();
+                    },
+                    
+                    eventDrop: function (event) {
+                        var data = {
+                            AppointmentID: event.id,
+                        };
                     }
 
                 })
             }
+
         })
     </script>

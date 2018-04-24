@@ -237,9 +237,6 @@ namespace PIMS.Controllers
         {
             if (ModelState.IsValid)
             { 
-              bool checkUserLoggedIn = (System.Web.HttpContext.Current.User != null) 
-                                         && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
-
 
                 appointments = ValidateEmail(appointments);
                 appointments = ValidatePhone(appointments);
@@ -320,6 +317,8 @@ namespace PIMS.Controllers
             ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
             ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);
+            
+
             return View(appointments);
         }
 
@@ -335,9 +334,9 @@ namespace PIMS.Controllers
 
             //ViewBag.Volunteer = new SelectList(db.Volunteers, "VolunteerId", "Name");
 
-            ViewBag.Details = new SelectList(new[] { "Confession", "Baptism", "Wedding", "Communion", "Confirmation"});
+            ViewBag.Details = new SelectList(new[] {"Baptism", "Wedding", "Communion", "Confirmation"});
 
-            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName");
+            ViewBag.AdminId = new SelectList(db.Admins.Where(o => o.Position == "Priest"), "AdministrationId", "AdministratorName");
 
             return View();
         }
@@ -415,10 +414,10 @@ namespace PIMS.Controllers
 
 
             ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
-            ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
+            ViewBag.Details = new SelectList(new[] { "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
             //ViewBag.VolunteerId = new SelectList(db.Volunteers, "VolunteerId", "Name", appointments.VolunteerId);
-            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);
+            ViewBag.AdminId = new SelectList(db.Admins.Where(o => o.Position == "Priest"), "AdministrationId", "AdministratorName", appointments.AdministrationId);
             return View(appointments);
         }
 
@@ -440,7 +439,7 @@ namespace PIMS.Controllers
             ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
             ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
-            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);
+            ViewBag.AdminId = new SelectList(db.Admins.Where(o => o.Position == "Priest"), "AdministrationId", "AdministratorName", appointments.AdministrationId);
             return View(appointments);
         }
 
@@ -489,7 +488,7 @@ namespace PIMS.Controllers
             ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
             ViewBag.Details = new SelectList(new[] { "Confession", "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
-            ViewBag.AdminId = new SelectList(db.Admins, "AdministrationId", "AdministratorName", appointments.AdministrationId);
+            ViewBag.AdminId = new SelectList(db.Admins.Where(o => o.Position == "Priest"), "AdministrationId", "AdministratorName", appointments.AdministrationId);
             return View(appointments);
         }
 

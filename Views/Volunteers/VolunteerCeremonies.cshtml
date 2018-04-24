@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (TempData["Error"] != null)
+{
+    <div style="color:red">@TempData["Error"]</div>
+}
 <h2>List of Ceremonies</h2>
 <table class="tftable">
     <tr>
@@ -23,31 +27,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
 
-    if (item.Fee != null)
+@if(Model !=null)
+{
+
+    foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DetailsOfAppointment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Church.Name)
-        </td>
+
+        if (item.Fee != null)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetailsOfAppointment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Church.Name)
+            </td>
         
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfAppointment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
-        </td>
-        <td>
-            <u>
-                @Html.ActionLink("View Ceremony", "DetailsOfCeremony", "Appointments", new { id = item.AppointmentId }, null)
-            </u>
-        </td>
-    </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfAppointment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Admins.AdministratorName)
+            </td>
+            <td>
+                <u>
+                    @Html.ActionLink("View Ceremony", "DetailsOfCeremony", "Appointments", new { id = item.AppointmentId }, null)
+                </u>
+            </td>
+        </tr>
+                }
+            }
     }
-}
 </table>
 

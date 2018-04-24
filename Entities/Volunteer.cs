@@ -19,6 +19,7 @@ namespace PIMS.Entities
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Volunteer Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
         public bool GardaVetted { get; set; }
@@ -27,6 +28,7 @@ namespace PIMS.Entities
         public string VolunteerRole { get; set; }
 
         [Required(ErrorMessage = "Volunteer Phone Number is required")]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Phone Number must be 10 digits")]
         public string VolunteerPhoneNumber { get; set; }
 
         [ForeignKey("Church")]

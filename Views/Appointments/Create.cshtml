@@ -65,6 +65,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NameOfApplicant, "Name of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @if (Request.IsAuthenticated && User.IsInRole("User"))
+                {
+                    @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                }
                 @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
                 @Html.ValidationMessageFor(model => model.NameOfApplicant, "", new { @class = "text-danger" })
             </div>
@@ -150,11 +154,19 @@
                             $(".fc-next-button").prop('disabled', false);
                         }
                     },
+                   
                     contentHeight: 300,
                     header: {
                         left: 'prev,next today',
                         center: 'title',
                         right: 'agenda, agendaWeek'
+                    },
+
+                    hiddenDays: [0, 6],
+                    columnHeaderFormat: {
+                        month: 'ddd',
+                        week: 'M/ddd d',
+                        day: 'dddd d/M'
                     },
                     dayClick: function (date, allDay, jsEvent, view)
                     {

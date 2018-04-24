@@ -359,6 +359,10 @@
     <Compile Include="Migrations\201804232317114_Validation.Designer.cs">
       <DependentUpon>201804232317114_Validation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804241227273_More validation, plz dont break.cs" />
+    <Compile Include="Migrations\201804241227273_More validation, plz dont break.Designer.cs">
+      <DependentUpon>201804241227273_More validation, plz dont break.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -992,6 +996,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804232317114_Validation.resx">
       <DependentUpon>201804232317114_Validation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241227273_More validation, plz dont break.resx">
+      <DependentUpon>201804241227273_More validation, plz dont break.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

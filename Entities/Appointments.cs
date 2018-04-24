@@ -23,9 +23,11 @@ namespace PIMS.Entities
         public string NameOfApplicant { get; set; }
 
         [Required(ErrorMessage = "Phone Number of Applicant is required")]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Phone Number must be 10 digits")]
         public string ApplicantPhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Email of Applicant is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string ApplicantEmail { get; set; }
 
         public int Slots { get; set; }

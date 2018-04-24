@@ -33,7 +33,18 @@ namespace PIMS.Controllers
         public ActionResult Index()
         {
             var volunteers = db.Volunteers.Include(v => v.Church);
-            return View(volunteers.ToList());
+
+            bool isEmpty = !volunteers.Any();
+
+            if (isEmpty)
+            {
+                TempData["Error"] = "No volunteers available";
+                return View();
+            }
+            else
+            {
+                return View(volunteers.ToList());
+            }
 
         }
 
@@ -113,7 +124,7 @@ namespace PIMS.Controllers
 
             bool isEmpty = !ceremonies.Any();
 
-            if(isEmpty)
+            if(!isEmpty)
             {
                 TempData["Error"] = "No ceremonies available";
                 return View();
@@ -132,14 +143,34 @@ namespace PIMS.Controllers
 
             var getVolunteer = (from vol in db.Volunteers
                                 where username == vol.Username
-                                select vol).SingleOrDefault();
+                                select vol).FirstOrDefault();
+
+            if (getVolunteer == null)
+            {
+                TempData["Error"] = "No Volunteer";
+                return View();
+            }
+            else
+            {
 
 
-            var ceremonies = (from a in getVolunteer.Appointments
-                              where a.Fee != null && a.Slots != 0
-                              select a).ToList();
+                var ceremonies = (from a in getVolunteer.Appointments
+                                  where a.Fee != null && a.Slots != 0
+                                  select a);
 
-            return View(ceremonies);
+                bool isEmpty = !ceremonies.Any();
+
+
+                if (isEmpty)
+                {
+                    TempData["Error"] = "No ceremonies for Volunteer";
+                    return View();
+                }
+                else
+                {
+                    return View(ceremonies.ToList());
+                }
+            }
 
         }
 
