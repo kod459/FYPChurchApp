@@ -420,3 +420,8 @@ C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingRecords.resourc
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingRecordswithoutAdminID.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Validation.resources
 C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.Morevalidationplzdontbreak.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.AddingChurchtoBulletin.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.phonenumberfix.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.plzfixdate.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.plzfixstuff.resources
+C:\Users\kod45\OneDrive\FYP\PIMS\obj\Debug\PIMS.Migrations.plzfixstuff1.resources

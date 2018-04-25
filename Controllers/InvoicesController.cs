@@ -62,9 +62,17 @@ namespace PIMS.Controllers
             {
                 if (File != null && File.ContentLength > 0)
                 {
-                    invoice.PictureOfInvoice = new byte[File.ContentLength];
-                    File.InputStream.Read(invoice.PictureOfInvoice, 0, File.ContentLength);
+                    using (MemoryStream ms1 = new MemoryStream())
+                    {
+                        invoice.PictureOfInvoice = new byte[File.ContentLength];
+                        File.InputStream.Read(invoice.PictureOfInvoice, 0, File.ContentLength);
+                    }
                 }
+                else
+                {
+                    TempData["Error"] = "Upload an Image";
+                }
+
 
                 db.Invoices.Add(invoice);
                 db.SaveChanges();

@@ -310,7 +310,7 @@ namespace PIMS.Controllers
 
             var getAdmin = (from a in db.Admins
                             where username == a.AdminUsername
-                            select a.AdministratorName).SingleOrDefault();
+                            select a.AdministratorName).FirstOrDefault();
 
             ViewBag.AdminName = getAdmin;
 
@@ -318,6 +318,7 @@ namespace PIMS.Controllers
 
             Record model = new Record();
             model.UploadDate = DateTime.Now;
+            model.UploadedBy = getAdmin;
 
             return View(model);
         }
@@ -336,21 +337,21 @@ namespace PIMS.Controllers
 
                 var getAdmin = (from a in db.Admins
                                 where username == a.AdminUsername
-                                select a.AdministratorName).SingleOrDefault();
+                                select a.AdministratorName).FirstOrDefault();
 
                 ViewBag.AdminName = getAdmin;
-                ViewBag.DocumentType = new SelectList(new[] { "Baptism Cert", "Confirmation Cert", "Wedding Cert", "Funeral Cert" });
 
                 if (File != null && File.ContentLength > 0)
                 {
                     record.Document = new byte[File.ContentLength];
                     File.InputStream.Read(record.Document, 0, File.ContentLength);
+                    record.UploadedBy = getAdmin;
+                    
                 }
-
                 db.Records.Add(record);
                 db.SaveChanges();
 
-                if(record.DocumentType.Equals("Wedding Cert"))
+                if (record.DocumentType.Equals("Wedding Cert"))
                 {
                     return RedirectToAction("IndexOfWeddings");
                 }
@@ -367,8 +368,8 @@ namespace PIMS.Controllers
                     return RedirectToAction("IndexOfConfirmations");
                 }
             }
+            ViewBag.DocumentType = new SelectList(new[] { "Baptism Cert", "Confirmation Cert", "Wedding Cert", "Funeral Cert" });
 
-           
             return View(record);
         }
 

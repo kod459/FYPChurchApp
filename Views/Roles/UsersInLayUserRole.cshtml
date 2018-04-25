@@ -5,7 +5,7 @@
     ViewBag.Title = "List Of Lay People";
 }
 
-<h2>List of Users</h2>
+<h2>List of LayUsers</h2>
     @using (Html.BeginForm("SearchUserInUserRoles", "Roles", FormMethod.Get))
 {
     <div>
@@ -13,13 +13,16 @@
             <legend>Lay user</legend>
             <table style="border:none">
                 <tr>
-                <td><label class="editor-label">Find by User Name:</label></td>
+                <td><label class="editor-label">Search for User Name:</label></td>
                 <td id="searchBar1">@Html.TextBox("SearchStringName")</td>
+                    <td>
+                        <input type="submit" value="Search" />
+                    </td>
             </tr>
         </table>
             <div>
-                    <input type="submit" value="Search" />
-                    <input type="button" value="Clear Search" id="backL" />
+                    
+                    
                     @if (TempData["Error"] != null) {
                         <div style="color:red">@TempData["Error"]</div>     
                     }

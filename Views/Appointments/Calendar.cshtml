@@ -1,10 +1,34 @@
 ﻿@{
     ViewBag.Title = "Calendar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var username = User.Identity.Name + "'s";
 }
 
+<h3>@username Calendar</h3>
 
-<div id="calendar"></div>
+
+<div id="calendar">
+</div>
+<table class="tftable">
+    <tr>
+        <th>Unconfirmed Appointmet</th>
+        <th>Confirmed Appointment</th>
+        <th>Wedding</th>
+        <th>Baptism</th>
+        <th>Funeral</th>
+        <th>Confirmation</th>
+        <th>Communion</th>
+    </tr>
+    <tr>
+        <td style="background-color:#FF0000"></td>
+        <td style="background-color:#0FF000"></td>
+        <td style="background-color:#FFA32A"></td>
+        <td style="background-color:#6495ed"></td>
+        <td style="background-color:#000000"></td>
+        <td style="background-color:#800080"></td>
+        <td style="background-color:#ffff00"></td>
+    </tr>
+</table>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -26,6 +50,8 @@
     </div>
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+
 
     <script>
         $(document).ready(function () {
@@ -74,6 +100,8 @@
                     eventLimit: true,
                     eventColor: events.ThemeColour,
                     events: events,
+                    axisFormat: 'H:mm',
+                    slotLabelFormat: "HH:mm",
                     aspectRatio: 2.2,
                     minTime: "09:00:00",
                     maxTime: "17:00:00",
@@ -83,17 +111,37 @@
                                 element.css('background-color', '#FF0000');
                                 element.css('border-color', '#FF0000');
                             }
-                            else {
-                                element.css('background-color', '#008000');
-                                element.css('border-color', '#008000');
+                            else
+                            {
+                                element.css('background-color', '#00FF00');
+                                element.css('border-color', '#00FF00');
+                               
                             }
                         }
-                        else
+                        else if (event.fee != null)
                         {
-                            element.css('background-color', '#0000FF');
-                            element.css('border-color', '#0000FF');
-
+                            if (event.details == "Wedding") {
+                                element.css('background-color', '#FFA32A');
+                                element.css('border-color', '#FFA32A');
+                            }
+                            else if (event.details == "Funeral") {
+                                element.css('background-color', '#000000');
+                                element.css('border-color', '#000000');
+                            }
+                            else if (event.details == "Baptism") {
+                                element.css('background-color', '#6495ed');
+                                element.css('border-color', '#6495ed');
+                            }
+                            else if (event.details == "Communion") {
+                                element.css('background-color', 'ffff00');
+                                element.css('border-color', '#ffff00');
+                            }
+                            else if (event.details == "Confirmation") {
+                                element.css('background-color', '#800080');
+                                element.css('border-color', '#800080');
+                            }
                         }
+
                     },
                     eventClick: function (calEvent, jsEvent, view) {
                         $('#myModal #details').text(calEvent.details);

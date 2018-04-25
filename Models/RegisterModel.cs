@@ -14,7 +14,7 @@ namespace PIMS.Models
 
         [Required]
         [Display(Name = "Phone Number")]
-        [StringLength(10, ErrorMessage = "The {0} must be at least {8} characters long.", MinimumLength = 9)]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 9)]
         public string PhoneNumber { get; set; }
 
         [Required]
@@ -33,7 +33,7 @@ namespace PIMS.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password)]   
         [Display(Name = "Confirm password")]
         [System.ComponentModel.DataAnnotations.CompareAttribute("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }

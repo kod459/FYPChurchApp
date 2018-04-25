@@ -348,29 +348,16 @@ namespace PIMS.Controllers
         [HttpPost]
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCeremony([Bind(Include = "AppointmentId,DetailsOfAppointment,DateOfAppointment,Confirmed,Fee,ThemeColour,AdministrationId,ChurchId, Slots")] Appointments appointments)
+        public ActionResult CreateCeremony([Bind(Include = "AppointmentId,DetailsOfAppointment,DateOfAppointment,Confirmed,Fee,ThemeColour,AdministrationId,ChurchId, Slots, RoomType, NameOfApplicant, ApplicantPhoneNumber, ApplicantEmail")] Appointments appointments)
         {
             if (ModelState.IsValid)
-            {
-                bool checkUserLoggedIn = (System.Web.HttpContext.Current.User != null)
-                    && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
-
-
-                appointments = ValidateEmail(appointments);
-
-
-                //var currentBooking = db.Appointments
-                //    .Any(b => (appointments.TimeOfAppointment == b.TimeOfAppointment
-                //     && appointments.DateOfAppointment == b.DateOfAppointment
-                //     && appointments.AdministrationId == b.AdministrationId));
+            { 
 
                 var currentBooking = db.Appointments
                     .Any(b => (appointments.DateOfAppointment == b.DateOfAppointment
                      && appointments.AdministrationId == b.AdministrationId));
 
-                //var checkCeremony = db.Ceremonies
-                //    .Any(b => (appointments.DateOfAppointment == b.DateOfCeremony
-                //    && appointments.AdministrationId == b.AdministrationId));
+
 
                 var checkPriestHolidays = db.PriestLeave
                     .Any(b => (appointments.DateOfAppointment >= b.StartDate && appointments.DateOfAppointment <= b.EndDate));
@@ -414,7 +401,7 @@ namespace PIMS.Controllers
 
 
             ViewBag.Rooms = new SelectList(new[] { "Sacristy", "Confession Room", "GP Room", "Parish Office" });
-            ViewBag.Details = new SelectList(new[] { "Baptism Meeting", "Wedding Meeting", "Personal Meeting" });
+            ViewBag.Details = new SelectList(new[] { "Baptism", "Wedding", "Communion", "Confirmation" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", appointments.ChurchId);
             //ViewBag.VolunteerId = new SelectList(db.Volunteers, "VolunteerId", "Name", appointments.VolunteerId);
             ViewBag.AdminId = new SelectList(db.Admins.Where(o => o.Position == "Priest"), "AdministrationId", "AdministratorName", appointments.AdministrationId);

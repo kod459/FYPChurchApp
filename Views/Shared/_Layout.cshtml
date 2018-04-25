@@ -37,6 +37,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                        <li>@Html.ActionLink("View our Webcam", "Webcam", "Home")</li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -49,6 +50,15 @@
                             {
                                 <li>@Html.ActionLink("Add a new Parish Admin", "AllUsers", "Roles")</li>
                             }
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Volunteers<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Approve Volunteers", "UsersInLayUserRole", "Roles")</li>
+                            <li>@Html.ActionLink("View Volunteers", "Index", "Volunteers")</li>
+                          
                         </ul>
                     </li>
 
@@ -81,6 +91,9 @@
                             <li>@Html.ActionLink("Funerals", "IndexOfFunerals", "Records")</li>
                         </ul>
                     </li>
+                    <li>
+                     @Html.ActionLink("Change Password", "Manage", "Account")
+                    </li>
             }
             else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Volunteer"))
             {
@@ -89,6 +102,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                            <li>@Html.ActionLink("View our Webcam", "Webcam", "Home")</li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
@@ -100,18 +114,34 @@
                             <li>@Html.ActionLink("Volunteers' Ceremonies", "VolunteerCeremonies", "Volunteers")</li>
                         </ul>
                     </li>
-                    }
-                    else
-                    {
+                    <li>@Html.ActionLink("Change Password", "Manage", "Account")</li>
+            }
+            else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("User"))
+            {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                            <li>@Html.ActionLink("View our Webcam", "Webcam", "Home")</li>
                         </ul>
                     </li>
                         <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
-                    }
+                        <li>@Html.ActionLink("Change Password", "Manage", "Account")</li>
+
+            }
+            else
+            {
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("View Bulletins", "Index", "Bulletins")</li>
+                        <li>@Html.ActionLink("View our Webcam", "Webcam", "Home")</li>
+                    </ul>
+                </li>
+                    <li>@Html.ActionLink("Appointments", "Create", "Appointments")</li>
+            }
 
                 </ul>
 

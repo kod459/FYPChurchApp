@@ -52,10 +52,11 @@ namespace PIMS.Controllers
             ViewBag.AdminName = getAdmin;
             Bulletins model = new Bulletins();
             model.DateOfBulletin = DateTime.Now;
+            ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
 
             return View(model);
 
-            //ViewBag.AdministrationId = new SelectList(db.Admins, "AdministrationId", "AdministratorName");
+           
             
         }
 
@@ -65,7 +66,7 @@ namespace PIMS.Controllers
         [HttpPost]
         [Authorize(Roles = "Parish Admin, Priest, Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BulletinsID,DetailsOfBulletin,AdminPosting, DateOfBulletin")] Bulletins bulletins)
+        public ActionResult Create([Bind(Include = "BulletinsID,DetailsOfBulletin,AdminPosting, DateOfBulletin, ChurchId")] Bulletins bulletins)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +78,7 @@ namespace PIMS.Controllers
                                 select a.AdministratorName).SingleOrDefault();
 
                 ViewBag.AdminName = getAdmin;
+                ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", bulletins.ChurchId);
 
                 db.Bulletins.Add(bulletins);
                 db.SaveChanges();

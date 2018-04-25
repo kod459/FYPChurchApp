@@ -111,65 +111,85 @@ namespace PIMS.Controllers
         {
             string username = Membership.GetUser().UserName;
 
-            var getVolunteer = (from vol in db.Volunteers
-                                where username == vol.Username
-                                select vol).SingleOrDefault();
+
+            var getVolunteer = (from a in db.Volunteers
+                                where username == a.Username
+                                select a.VolunteerId).SingleOrDefault();
+
+            var events = (from a in db.Appointments
+                          where a.Fee != null
+                          select a).ToList();
+
+            //var volunteersInCeremony = db.Appointments
+            //          .Where(c => c.CategoryId == categoryId)
+            //          .SelectMany(c => c.Products);
+
+            var vEvents = (from a in db.Appointments
+                           where !(a.Volunteers.Any(c => c.VolunteerId == getVolunteer) && a.Fee != null && a.DateOfAppointment > DateTime.Today)
+                           orderby a.DateOfAppointment ascending
+                           select a);
+
+            var checkGardaVetted = (from v in db.Volunteers
+                                    where v.GardaVetted == false
+                                    select v);
+
+            bool isVetted = !checkGardaVetted.Any();
 
 
-            var ceremonies = (from a in getVolunteer.Appointments
-                              where a.Fee != null
-                              && a.Slots != 0
-                              && !(getVolunteer.Appointments.Any(c => c.AppointmentId == a.AppointmentId))
-                              select a);
+            bool isEmpty = !vEvents.Any();
 
-            bool isEmpty = !ceremonies.Any();
 
-            if(!isEmpty)
+            if (isEmpty)
             {
-                TempData["Error"] = "No ceremonies available";
+                TempData["Error"] = "No ceremonies for Volunteer";
+                return View();
+            }
+            else if(isVetted)
+            {
+                TempData["Error"] = "You must be Vetted before you can participate in any Ceremonies";
                 return View();
             }
             else
             {
-                return View(ceremonies.ToList());
+                return View(vEvents.ToList());
             }
 
-            
         }
 
         public ActionResult VolunteerCeremonies(Appointments apps)
         {
             string username = Membership.GetUser().UserName;
 
-            var getVolunteer = (from vol in db.Volunteers
-                                where username == vol.Username
-                                select vol).FirstOrDefault();
 
-            if (getVolunteer == null)
+            var getVolunteer = (from a in db.Volunteers
+                                where username == a.Username
+                                select a.VolunteerId).SingleOrDefault();
+
+            var events = (from a in db.Appointments
+                          where a.Fee != null
+                          select a).ToList();
+
+            //var volunteersInCeremony = db.Appointments
+            //          .Where(c => c.CategoryId == categoryId)
+            //          .SelectMany(c => c.Products);
+
+            var vEvents = from a in db.Appointments
+                          where a.Volunteers.Any(c => c.VolunteerId == getVolunteer) && a.Fee != null && a.DateOfAppointment > DateTime.Today
+                          orderby a.DateOfAppointment ascending
+                          select a;
+
+
+            bool isEmpty = !vEvents.Any();
+
+
+            if (isEmpty)
             {
-                TempData["Error"] = "No Volunteer";
+                TempData["Error"] = "No ceremonies for Volunteer";
                 return View();
             }
             else
             {
-
-
-                var ceremonies = (from a in getVolunteer.Appointments
-                                  where a.Fee != null && a.Slots != 0
-                                  select a);
-
-                bool isEmpty = !ceremonies.Any();
-
-
-                if (isEmpty)
-                {
-                    TempData["Error"] = "No ceremonies for Volunteer";
-                    return View();
-                }
-                else
-                {
-                    return View(ceremonies.ToList());
-                }
+                return View(vEvents.ToList());
             }
 
         }
@@ -296,7 +316,7 @@ namespace PIMS.Controllers
         public ActionResult Create(string email, string name, string phone, string username)
         {
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name");
-            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team", });
+            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team" });
             ViewBag.email = email;
             ViewBag.name = name;
             ViewBag.phone = phone;
@@ -319,13 +339,13 @@ namespace PIMS.Controllers
                 ViewBag.phone = phone;
                 ViewBag.username = username;
 
-                ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team", });
+               
 
                 db.Volunteers.Add(volunteer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", volunteer.ChurchId);
             return View(volunteer);
         }
@@ -343,7 +363,7 @@ namespace PIMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team", });
+            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team" });
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", volunteer.ChurchId);
             return View(volunteer);
         }
@@ -353,7 +373,7 @@ namespace PIMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VolunteerId,Name,UserName,Email,GardaVetted,VolunteerRole,VolunteerPhoneNumber,ChurchId")] Volunteer volunteer)
+        public ActionResult Edit([Bind(Include = "VolunteerId,Name,Email,GardaVetted,VolunteerRole,Username,VolunteerPhoneNumber,ChurchId")] Volunteer volunteer)
         {
             if (ModelState.IsValid)
             {
@@ -361,7 +381,7 @@ namespace PIMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team", });
+            ViewBag.Role = new SelectList(new[] { "Cleaner", "Baptism Team", "Money Counting", "Collector", "Parish Team"});
             ViewBag.ChurchId = new SelectList(db.Churches, "ChurchId", "Name", volunteer.ChurchId);
             return View(volunteer);
         }

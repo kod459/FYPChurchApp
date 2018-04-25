@@ -61,8 +61,7 @@
                 @Html.DisplayFor(modelItem => item.UploadDate)
             </td>
             <td>
-                <u>@Html.ActionLink("Edit", "Edit", new { id = item.RecordId })</u> |
-                <u>@Html.ActionLink("Details", "Details", new { id = item.RecordId })</u>
+                <u>@Html.ActionLink("View Details of this Cert", "Edit", new { id = item.RecordId })</u>
             </td>
         </tr>
         }

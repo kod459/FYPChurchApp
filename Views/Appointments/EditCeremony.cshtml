@@ -68,6 +68,34 @@
                 @Html.ValidationMessageFor(model => model.Slots, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameOfApplicant, "Name of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Request.IsAuthenticated && User.IsInRole("User"))
+                {
+                    @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                }
+                @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.NameOfApplicant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicantEmail, "Email of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicantEmail, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.ApplicantEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicantPhoneNumber, "Phone Number of Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicantPhoneNumber, new { htmlAttributes = new { @class = "form-control", style = "width:20em;" } })
+                @Html.ValidationMessageFor(model => model.ApplicantPhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -165,11 +193,12 @@
 
                     }
                 },
-
                 eventOverlap: false,
                 slotDuration: '00:15:00',
                 defaultView: "agenda",
                 defaultDate: moment(),
+                axisFormat: 'H:mm',
+                slotLabelFormat: "HH:mm",
                 minTime: "09:00:00",
                 maxTime: "17:00:00",
                 timeFormat: 'HH:mm',
@@ -187,13 +216,32 @@
                             element.css('border-color', '#FF0000');
                         }
                         else {
-                            element.css('background-color', '#008000');
-                            element.css('border-color', '#008000');
+                            element.css('background-color', '#00FF00');
+                            element.css('border-color', '#00FF00');
+
                         }
                     }
-                    else {
-                        element.css('background-color', '#0000FF');
-                        element.css('border-color', '#0000FF');
+                    else if (event.fee != null) {
+                        if (event.details == "Wedding") {
+                            element.css('background-color', '#FFA32A');
+                            element.css('border-color', '#FFA32A');
+                        }
+                        else if (event.details == "Funeral") {
+                            element.css('background-color', '#000000');
+                            element.css('border-color', '#000000');
+                        }
+                        else if (event.details == "Baptism") {
+                            element.css('background-color', '#6495ed');
+                            element.css('border-color', '#6495ed');
+                        }
+                        else if (event.details == "Communion") {
+                            element.css('background-color', 'ffff00');
+                            element.css('border-color', '#ffff00');
+                        }
+                        else if (event.details == "Confirmation") {
+                            element.css('background-color', '#800080');
+                            element.css('border-color', '#800080');
+                        }
                     }
 
                 },

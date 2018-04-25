@@ -22,5 +22,10 @@ namespace PIMS.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public DateTime DateOfBulletin { get; set; }
 
+        [ForeignKey("Church")]
+        public int ChurchId { get; set; }
+
+        public virtual Church Church { get; set; }
+
     }
 }

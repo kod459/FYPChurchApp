@@ -25,7 +25,7 @@
         </th>
         <th>@Html.DisplayName("Upcoming Ceremonies")</th>
         <th></th>
-        <th></th>
+
     </tr>
   
 
@@ -63,20 +63,6 @@
                     }
                 }
             }
-        </td>
-        <td>
-            @if (item.GardaVetted == true)
-            {
-                <u>
-                    @Html.ActionLink("Join Ceremony", "VolunteerCeremony", new { id = item.VolunteerId })
-                </u>
-            }
-            else
-            {
-                @Html.DisplayName("Garda Vetting Required")
-            }
-            
-            
         </td>
         <td>
             <u>

@@ -18,10 +18,7 @@ namespace PIMS.Entities
         [Required(ErrorMessage = "Amount is required")]
         public decimal Amount { get; set; }
 
-        [Required(ErrorMessage = "Picture of Invoice is required")]
         public byte[] PictureOfInvoice { get; set; }
-
-        public string ImageFileName { get; set; }
 
         [Required(ErrorMessage = "Date Recieved is required")]
         [DataType(DataType.DateTime)]

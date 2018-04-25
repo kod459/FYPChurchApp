@@ -262,14 +262,14 @@ namespace PIMS.Controllers
             {
                 ViewBag.ResultMessage = "This user already has the role specified!";
             }
-            //else
-            //{
-            //    Roles.AddUserToRole(UserName, RoleName);
-            //    ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
-            //    ViewBag.ResultMessage = "Username added to the role succesfully!";
+            else
+            {
+                Roles.AddUserToRole(UserName, RoleName);
+                ViewBag.RolesForThisUser = Roles.GetRolesForUser(userProfile.UserName);
+                ViewBag.ResultMessage = "Username added to the role succesfully!";
 
-                
-            //}
+
+            }
             if (RoleName.Equals("Volunteer") && !checkIfVolunteerAlreadyExists)
             {
                 string email = userProfile.Email;

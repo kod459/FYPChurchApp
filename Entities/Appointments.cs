@@ -33,7 +33,7 @@ namespace PIMS.Entities
         public int Slots { get; set; }
 
         [Required(ErrorMessage = "Date of Appointment is required")]
-        [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public DateTime DateOfAppointment { get; set; }
 
         public string ThemeColour { get; set; }

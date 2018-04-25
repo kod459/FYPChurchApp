@@ -363,6 +363,26 @@
     <Compile Include="Migrations\201804241227273_More validation, plz dont break.Designer.cs">
       <DependentUpon>201804241227273_More validation, plz dont break.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804251045406_Adding Church to Bulletin.cs" />
+    <Compile Include="Migrations\201804251045406_Adding Church to Bulletin.Designer.cs">
+      <DependentUpon>201804251045406_Adding Church to Bulletin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804251520001_phone number fix.cs" />
+    <Compile Include="Migrations\201804251520001_phone number fix.Designer.cs">
+      <DependentUpon>201804251520001_phone number fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804251643455_plz fix date.cs" />
+    <Compile Include="Migrations\201804251643455_plz fix date.Designer.cs">
+      <DependentUpon>201804251643455_plz fix date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804251702215_plz fix stuff.cs" />
+    <Compile Include="Migrations\201804251702215_plz fix stuff.Designer.cs">
+      <DependentUpon>201804251702215_plz fix stuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804251711310_plz fix stuff1.cs" />
+    <Compile Include="Migrations\201804251711310_plz fix stuff1.Designer.cs">
+      <DependentUpon>201804251711310_plz fix stuff1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -925,6 +945,7 @@
     <Content Include="Views\Records\ViewRecords.cshtml" />
     <Content Include="Views\Appointments\EditCeremony.cshtml" />
     <Content Include="Views\Volunteers\JoinCeremony.cshtml" />
+    <Content Include="Views\Home\Webcam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -999,6 +1020,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804241227273_More validation, plz dont break.resx">
       <DependentUpon>201804241227273_More validation, plz dont break.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251045406_Adding Church to Bulletin.resx">
+      <DependentUpon>201804251045406_Adding Church to Bulletin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251520001_phone number fix.resx">
+      <DependentUpon>201804251520001_phone number fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251643455_plz fix date.resx">
+      <DependentUpon>201804251643455_plz fix date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251702215_plz fix stuff.resx">
+      <DependentUpon>201804251702215_plz fix stuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251711310_plz fix stuff1.resx">
+      <DependentUpon>201804251711310_plz fix stuff1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
